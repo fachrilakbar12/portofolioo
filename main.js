@@ -38,9 +38,34 @@ typeLoop();
 function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button[type=submit]');
-  btn.innerHTML = '<i class="fas fa-check"></i> Terkirim!';
-  btn.style.background = 'linear-gradient(135deg,#16a34a,#4ade80)';
-  setTimeout(() => { btn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pesan'; btn.style.background=''; e.target.reset(); }, 3000);
+  const originalHTML = btn.innerHTML;
+
+  // Tampilkan loading state
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+  btn.disabled = true;
+
+  // Ganti YOUR_SERVICE_ID dan YOUR_TEMPLATE_ID dari EmailJS dashboard
+  emailjs.sendForm('service_jeiisnj', 'template_xb5zm2a', e.target)
+    .then(() => {
+      btn.innerHTML = '<i class="fas fa-check"></i> Terkirim!';
+      btn.style.background = 'linear-gradient(135deg,#16a34a,#4ade80)';
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    })
+    .catch((error) => {
+      console.error('EmailJS error:', error);
+      btn.innerHTML = '<i class="fas fa-times"></i> Gagal, coba lagi';
+      btn.style.background = 'linear-gradient(135deg,#dc2626,#f87171)';
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    });
 }
 
 document.querySelectorAll('.hero-text > *').forEach((el, i) => {

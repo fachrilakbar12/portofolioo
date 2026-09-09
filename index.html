@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    // Ganti YOUR_PUBLIC_KEY dengan Public Key dari EmailJS dashboard
+    (function() { emailjs.init({ publicKey: "s5tZpghc5ogH66tUq" }); })();
+  </script>
 </head>
 <body>
 <div class="orb orb1"></div>
@@ -139,17 +145,17 @@
       <div class="contact-card reveal-left">
         <h3 class="card-title">Informasi Kontak</h3>
         <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-text"><label>Email</label><a href="mailto:fachrilakbar@gmail.com">fachrilakbar@gmail.com</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-text"><label>WhatsApp</label><a href="#">+62 8xx-xxxx-xxxx</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><div class="contact-text"><label>LinkedIn</label><a href="#">linkedin.com/in/fachrilakbar</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fab fa-github"></i></div><div class="contact-text"><label>GitHub</label><a href="#">github.com/fachrilakbar</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-text"><label>WhatsApp</label><a href="#">0812-6058-9707</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><div class="contact-text"><label>LinkedIn</label><a href="https://www.linkedin.com/in/fachrilakbar" target="_blank" rel="noopener noreferrer">linkedin.com/in/fachrilakbar</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fab fa-github"></i></div><div class="contact-text"><label>GitHub</label><a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer">github.com/fachrilakbar12</a></div></div>
         <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-text"><label>Lokasi</label><span>Lhokseumawe, Aceh, Indonesia</span></div></div>
       </div>
       <div class="contact-card reveal-right">
         <h3 class="card-title">Kirim Pesan</h3>
-        <form onsubmit="handleSubmit(event)">
-          <div class="form-group"><label>Nama</label><input type="text" placeholder="Nama kamu..." required /></div>
-          <div class="form-group"><label>Email</label><input type="email" placeholder="email@contoh.com" required /></div>
-          <div class="form-group"><label>Pesan</label><textarea placeholder="Tulis pesanmu di sini..." required></textarea></div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group"><label>Nama</label><input type="text" id="from_name" name="from_name" placeholder="Nama kamu..." required /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="reply_to" name="reply_to" placeholder="email@contoh.com" required /></div>
+          <div class="form-group"><label>Pesan</label><textarea id="message" name="message" placeholder="Tulis pesanmu di sini..." required></textarea></div>
           <button type="submit" class="btn-primary btn-full"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
         </form>
       </div>
@@ -159,10 +165,10 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-socials">
-      <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
-      <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/fachrilakbar" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:fachrilakbar@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
     </div>
     <p class="footer-copy">Dibuat dengan <span>&#9829;</span> oleh <span>Fachril Akbar</span> &nbsp;&middot;&nbsp; &copy; 2025</p>
   </div>
