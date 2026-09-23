@@ -1,0 +1,166 @@
+/* ============================================================
+   BASE.CSS – Reset, CSS Variables, Scrollbar, Body
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ── Fonts ── */
+  --font-sans:  'Outfit', sans-serif;
+  --font-body:  'Inter', sans-serif;
+  --font-mono:  'JetBrains Mono', monospace;
+
+  /* ── Accent palette (Orange original) ── */
+  --red:        #e8445a;
+  --red-lt:     #f4768a;
+  --red-dk:     #c73352;
+  --coral:      #ff7055;
+  --amber:      #f59e0b;
+  --amber-lt:   #fbbf24;
+  --teal:       #14b8a6;
+  --violet:     #8b5cf6;
+
+  /* ── Dark backgrounds ── */
+  --bg:         #050810;
+  --bg2:        #080c18;
+  --bg3:        #0b0f1e;
+  --card:       rgba(255,255,255,0.04);
+  --card2:      rgba(255,255,255,0.07);
+  --card-border: rgba(255,255,255,0.09);
+
+  /* ── Borders ── */
+  --border:     rgba(232,68,90,0.18);
+  --border-lt:  rgba(255,255,255,0.08);
+
+  /* ── Typography ── */
+  --text:       #c8d4e8;
+  --text-bright:#eef2ff;
+  --muted:      #4e5a72;
+  --muted-lt:   #7a88a4;
+
+  /* ── Gradients ── */
+  --grad:          linear-gradient(135deg, #e8445a 0%, #ff7055 50%, #f59e0b 100%);
+  --grad-cool:     linear-gradient(135deg, #8b5cf6 0%, #e8445a 50%, #f59e0b 100%);
+  --grad-subtle:   linear-gradient(135deg, rgba(232,68,90,0.08) 0%, rgba(255,112,85,0.03) 100%);
+
+  /* ── Shadows & Glows ── */
+  --shadow:     0 4px 24px rgba(0,0,0,0.4);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.5);
+  --glow:       0 0 40px rgba(232,68,90,0.20);
+  --glow-amber: 0 0 40px rgba(245,158,11,0.18);
+
+  /* ── Radius ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--red), var(--coral));
+  border-radius: 2px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(232,68,90,0.3);
+  color: var(--text-bright);
+}
+
+/* ── Background Orbs ── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.orb1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(232,68,90,0.22) 0%, transparent 70%);
+  top: -200px; left: -200px;
+  animation: orbDrift1 20s ease-in-out infinite;
+}
+.orb2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
+  bottom: -150px; right: -150px;
+  animation: orbDrift2 25s ease-in-out infinite;
+}
+.orb3 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+  top: 45%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbDrift3 18s ease-in-out infinite;
+}
+
+@keyframes orbDrift1 {
+  0%,100% { transform: translate(0, 0); }
+  33%     { transform: translate(50px, 40px); }
+  66%     { transform: translate(-30px, 60px); }
+}
+@keyframes orbDrift2 {
+  0%,100% { transform: translate(0, 0); }
+  33%     { transform: translate(-60px, -40px); }
+  66%     { transform: translate(30px, -60px); }
+}
+@keyframes orbDrift3 {
+  0%,100% { transform: translate(-50%, -50%) scale(1); }
+  50%     { transform: translate(-50%, -50%) scale(1.25); }
+}
+
+section, nav, footer { position: relative; z-index: 1; }
+
+/* ── Canvas BG ── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Cursor glow ── */
+.cursor-glow {
+  position: fixed;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,68,90,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  left: -999px; top: -999px;
+  transition: left 0.06s linear, top 0.06s linear;
+  will-change: left, top;
+}
+
+/* ── Gradient text utility ── */
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

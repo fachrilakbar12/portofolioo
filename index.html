@@ -4,175 +4,959 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio | Fachril Akbar</title>
+
+  <!-- ── External: Icons & Fonts ── -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    // Ganti YOUR_PUBLIC_KEY dengan Public Key dari EmailJS dashboard
-    (function() { emailjs.init({ publicKey: "s5tZpghc5ogH66tUq" }); })();
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ── Stylesheets ── -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- ── EmailJS SDK ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>(function () { emailjs.init({ publicKey: "s5tZpghc5ogH66tUq" }); })();</script>
 </head>
 <body>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-<nav>
-  <div class="nav-logo">&#60;Fachril /&#62;</div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge"><span></span> Available for opportunities</div>
-      <h1 class="hero-title">Hi, I'm<br /><span class="grad-text">Fachril Akbar</span></h1>
-      <p class="hero-subtitle"></p>
-      <div class="hero-info">
-        <div class="hero-info-item"><i class="fas fa-map-marker-alt"></i> Lhokseumawe, Aceh, Indonesia</div>
-        <div class="hero-info-item"><i class="fas fa-university"></i> Universitas Malikussaleh</div>
-        <div class="hero-info-item"><i class="fas fa-graduation-cap"></i> S1 Teknik Informatika</div>
-      </div>
-      <div class="hero-btns">
-        <a href="#projects" class="btn-primary"><i class="fas fa-briefcase"></i> Lihat Proyek</a>
-        <a href="#contact" class="btn-outline"><i class="fas fa-envelope"></i> Hubungi Saya</a>
-      </div>
+
+  <!-- ── Canvas particles background ── -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ── Cursor glow ── -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ── Ambient Background Orbs ── -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- ══════════════════════════════════
+       NAVIGATION
+       ══════════════════════════════════ -->
+  <nav id="mainNav">
+
+    <button class="nav-hamburger" id="navHamburger"
+            aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#timeline">Perjalanan</a></li>
+      <li><a href="#organizations">Organisasi</a></li>
+      <li><a href="#projects">Proyek</a></li>
+      <li><a href="#skills">Keahlian</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════
+       HERO
+       ══════════════════════════════════ -->
+  <section id="hero">
+    <!-- Indikator gulir -->
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">SROLL</span>
     </div>
-    <div class="hero-photo-wrap reveal-right">
-      <div style="position:relative;">
-        <div class="photo-ring">
-          <div class="photo-inner">
-            <img src="foto.jpg" alt="Fachril Akbar" />
+
+    <div class="hero-inner">
+
+      <!-- Kiri: konten teks -->
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span></span> Fresh Graduate 2026 &nbsp;·&nbsp; Angkatan 2022
+        </div>
+
+        <p class="hero-greeting">Halo, saya</p>
+        <h1 class="hero-title">
+          <span class="grad-text">Fachril Akbar</span>
+        </h1>
+
+        <div class="hero-subtitle-wrap">
+          <span class="hero-subtitle-prefix">—</span>
+          <p class="hero-subtitle"></p>
+        </div>
+
+        <div class="hero-info">
+          <div class="hero-info-item">
+            <i class="fas fa-map-marker-alt"></i> Lhokseumawe, Aceh, Indonesia
+          </div>
+          <div class="hero-info-item">
+            <i class="fas fa-university"></i> Universitas Malikussaleh
+          </div>
+          <div class="hero-info-item">
+            <i class="fas fa-graduation-cap"></i> S1 Teknik Informatika
           </div>
         </div>
-        <div class="photo-float float-1"><i class="fas fa-brain"></i> AI Researcher</div>
-        <div class="photo-float float-2"><i class="fas fa-shield-alt"></i> Deepfake Detection</div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="about">
-  <div class="section-container">
-    <div class="about-grid">
-      <div class="reveal-left">
-        <p class="section-label">Tentang Saya</p>
-        <h2 class="section-title">Siapa Saya?</h2>
-        <div class="section-divider"></div>
-        <p class="about-p1">Halo! Saya <strong class="green">Fachril Akbar</strong>, mahasiswa aktif Teknik Informatika di Universitas Malikussaleh, Lhokseumawe, Aceh. Saya memiliki ketertarikan mendalam pada bidang kecerdasan buatan, computer vision, dan keamanan digital.</p>
-        <p class="about-p2">Proyek unggulan saya adalah <strong class="green">Sistem Deteksi Deepfake Wajah</strong>, mengimplementasikan model deep learning untuk mendeteksi manipulasi wajah digital. Saya percaya teknologi harus digunakan secara bertanggung jawab dan etis.</p>
-        <div class="about-stats">
-          <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Proyek Selesai</div></div>
-          <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Bahasa Pemrograman</div></div>
-          <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Tahun Belajar</div></div>
-          <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Dedikasi</div></div>
+
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">
+            <i class="fas fa-briefcase"></i> Lihat Proyek
+          </a>
+          <a href="#contact" class="btn-outline">
+            <i class="fas fa-envelope"></i> Hubungi Saya
+          </a>
+        </div>
+
+        <!-- Social quick links -->
+        <div class="hero-socials">
+          <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener" class="hero-social-link" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/fachril-akbar-961789294" target="_blank" rel="noopener" class="hero-social-link" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener" class="hero-social-link" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="mailto:fachrilakbar@gmail.com" class="hero-social-link" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
         </div>
       </div>
-      <div class="reveal-right">
-        <div class="about-details">
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-user"></i></div><div class="detail-text"><label>Nama Lengkap</label><span>Fachril Akbar</span></div></div>
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-university"></i></div><div class="detail-text"><label>Institusi</label><span>Universitas Malikussaleh</span></div></div>
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-graduation-cap"></i></div><div class="detail-text"><label>Program Studi</label><span>S1 Teknik Informatika</span></div></div>
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div class="detail-text"><label>Alamat</label><span>Lhokseumawe, Aceh, Indonesia</span></div></div>
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-envelope"></i></div><div class="detail-text"><label>Email</label><span>fachrilakbar@gmail.com</span></div></div>
-          <div class="detail-item"><div class="detail-icon"><i class="fas fa-brain"></i></div><div class="detail-text"><label>Fokus Riset</label><span>AI, Deep Learning, Computer Vision</span></div></div>
+
+      <!-- Right: profile photo -->
+      <div class="hero-photo-wrap reveal-right">
+        <div class="photo-scene" id="photoScene">
+          <div class="photo-ring">
+            <div class="photo-ring-border"></div>
+            <div class="photo-inner">
+              <img src="foto.jpg" alt="Fachril Akbar" id="profileImg" />
+            </div>
+          </div>
+          <!-- Chip melayang -->
+          <div class="photo-float float-1">
+            <i class="fas fa-brain"></i> AI Researcher
+          </div>
+          <div class="photo-float float-2">
+            <i class="fas fa-shield-alt"></i> Deepfake Detection
+          </div>
+          <div class="photo-float float-3">
+            <i class="fas fa-code"></i> Web Developer
+          </div>
         </div>
       </div>
+
     </div>
-  </div>
-</section>
-<section id="projects">
-  <div class="section-container">
-    <p class="section-label reveal">Portofolio</p>
-    <h2 class="section-title reveal">Proyek Saya</h2>
-    <p class="section-sub reveal">Beberapa proyek yang telah saya kerjakan sebagai wujud nyata dari kemampuan teknis saya.</p>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <div class="project-icon">&#129302;</div>
-        <h3 class="project-title">Sistem Deteksi Deepfake Wajah</h3>
-        <p class="project-desc">Sistem berbasis AI untuk mendeteksi manipulasi wajah digital (deepfake) menggunakan deep learning dan computer vision. Menganalisis gambar dan video untuk mengidentifikasi keaslian wajah dengan akurasi tinggi.</p>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">Deep Learning</span><span class="tag">OpenCV</span><span class="tag">TensorFlow</span><span class="tag">CNN</span></div>
-        <div class="project-links"><a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a></div>
-      </div>
-      <div class="project-card reveal" style="transition-delay:0.1s;">
-        <div class="project-icon">&#127760;</div>
-        <h3 class="project-title">Website Portofolio Personal</h3>
-        <p class="project-desc">Website portofolio profesional dengan desain modern dan elegan menggunakan teknologi web terkini. Dilengkapi animasi smooth dan responsive design yang memukau di semua perangkat.</p>
-        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-        <div class="project-links"><a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a></div>
-      </div>
-      <div class="project-card reveal" style="transition-delay:0.2s;">
-        <div class="project-icon">&#128202;</div>
-        <h3 class="project-title">Aplikasi Manajemen Data Mahasiswa</h3>
-        <p class="project-desc">Aplikasi berbasis Java untuk mengelola data mahasiswa dengan fitur CRUD lengkap, pencarian, dan laporan. Terhubung dengan database MySQL untuk penyimpanan data yang efisien.</p>
-        <div class="project-tags"><span class="tag">Java</span><span class="tag">MySQL</span><span class="tag">OOP</span><span class="tag">JDBC</span></div>
-        <div class="project-links"><a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="skills">
-  <div class="section-container">
-    <p class="section-label reveal">Teknologi</p>
-    <h2 class="section-title reveal">Tech Stack Saya</h2>
-    <p class="section-sub reveal">Bahasa dan teknologi yang saya kuasai dan gunakan dalam proyek-proyek saya.</p>
-    <div class="skills-grid">
-      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M6 3l2.2 24.6L16 30l7.8-2.4L26 3H6z" fill="#e34f26"/><path d="M16 27.6V5h8.3l-1.9 21.1L16 27.6z" fill="#ef652a"/><path d="M9.7 8h6.3V5H6.4l.3 3h3zM9.5 11H6.7l.3 3h2.8l-.3-3zM10 14.5H6.9l.5 5.5 8.6 2.4v-3.2l-5.1-1.4L10 14.5z" fill="#ebebeb"/><path d="M22.3 8H16v3h3l-.3 3H16v3h2.7l-.3 3.6L16 21.8v3.2l8.6-2.4.5-5.5-3.1-.5.3-3H25l.3-3h-3zM22.3 8H16V5h9.6l-.3 3z" fill="#fff"/></svg></div><span class="skill-name">HTML5</span></div>
-      <div class="skill-card reveal" style="transition-delay:.05s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M6 3l2.2 24.6L16 30l7.8-2.4L26 3H6z" fill="#264de4"/><path d="M16 27.6V5h8.3l-1.9 21.1L16 27.6z" fill="#2965f1"/><path d="M9.7 8H16V5H6.4l.3 3h3zM9.5 11H6.7l.3 3h2.8l-.3-3zM10 14.5H7l.5 5.5 8.5 2.4v-3.2l-5.1-1.4L10 14.5z" fill="#ebebeb"/><path d="M22.3 8H16v3h3l-.3 3H16v3h2.7l-.3 3.6L16 21.8v3.2l8.6-2.4.5-5.5-3.1-.5.3-3H25l.3-3h-3zM22.3 8H16V5h9.6l-.3 3z" fill="#fff"/></svg></div><span class="skill-name">CSS3</span></div>
-      <div class="skill-card reveal" style="transition-delay:.10s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#f7df1e"/><path d="M20.8 22.6c.4.7.9 1.2 1.8 1.2.8 0 1.3-.4 1.3-1 0-.7-.5-1-1.4-1.4l-.5-.2c-1.4-.6-2.3-1.3-2.3-2.9 0-1.4 1.1-2.5 2.8-2.5 1.2 0 2.1.4 2.7 1.5l-1.5 1c-.3-.6-.6-.8-1.2-.8-.5 0-.9.3-.9.8 0 .6.3.8 1.2 1.2l.5.2c1.6.7 2.5 1.4 2.5 3 0 1.7-1.3 2.7-3.1 2.7-1.7 0-2.8-.8-3.4-1.9l1.5-.9zM13.5 22.8c.3.5.6.9 1.3.9.6 0 1-.3 1-1.3v-6.8h1.9V22.4c0 2.1-1.2 3.1-3 3.1-1.6 0-2.5-.8-3-1.9l1.8-.8z" fill="#000"/></svg></div><span class="skill-name">JavaScript</span></div>
-      <div class="skill-card reveal" style="transition-delay:.15s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M15.9 3C9.9 3 10.3 5.6 10.3 5.6v2.8h5.7V9H7.5S3 8.4 3 14.5s4 6.1 4 6.1h2.4v-2.9s-.1-4 3.9-4h6.8s3.8.1 3.8-3.6V6.4S24.5 3 15.9 3zm-3.7 2.2a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z" fill="url(#g1)"/><path d="M16.1 29c6 0 5.6-2.6 5.6-2.6v-2.8H16v-.6h8.5S29 23.6 29 17.5s-4-6.1-4-6.1h-2.4v2.9s.1 4-3.9 4h-6.8s-3.8-.1-3.8 3.6v5.7S7.5 29 16.1 29zm3.7-2.2a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z" fill="url(#g2)"/><defs><linearGradient id="g1" x1="3" y1="3" x2="24.5" y2="14" gradientUnits="userSpaceOnUse"><stop stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="g2" x1="7.5" y1="18" x2="29" y2="29" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient></defs></svg></div><span class="skill-name">Python</span></div>
-      <div class="skill-card reveal" style="transition-delay:.20s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M11.5 20.7s-.9.5.6.7c1.8.2 2.8.2 4.8-.2 0 0 .5.3 1.3.6-4.6 2-10.4-.1-6.7-1.1zM10.9 17.9s-1 .8.6.9c2.2.2 3.9.2 6.9-.3 0 0 .4.4 1 .6-6.1 1.8-12.9.1-8.5-1.2z" fill="#e76f00"/><path d="M15.4 12.8c1.2 1.4-.3 2.7-.3 2.7s3.1-1.6 1.7-3.6c-1.3-1.9-2.4-2.8 3.2-6 0 0-8.7 2.2-4.6 6.9z" fill="#e76f00"/><path d="M22.4 22.4s.7.6-.7 1c-2.6.8-10.9 1-13.2 0-.8-.4.7-.9.7-.9s-.9-.6-2.5-.3c-1.8.4-1.1 1.2 1.2 1.7 5.3 1.1 14.1.3 14.5-1.8l-1-.7zM12 15.1s-4.1 1-1.5 1.3c1.1.1 3.4.1 5.5-.1 1.7-.1 3.5-.4 3.5-.4s-.6.3-1 .5c-4 1-11.7.5-9.5-.5 1.9-.9 3-.8 3-.8zM20.4 19.7c4-2.1 2.2-4.1.9-3.8-.3.1-.5.2-.5.2s.1-.2.4-.3c2.8-1 5 2.9-.9 4.5 0 0 .1-.1.1-.6zM17.3 3s2.4 2.4-2.2 6c-3.6 2.8-.8 4.4 0 6.3-2.1-1.9-3.6-3.5-2.6-5 1.5-2.3 5.8-3.4 4.8-7.3z" fill="#5382a1"/><path d="M13.3 28.5c3.9.2 9.8-.1 10-1.4 0 0-.3.7-3.2 1.2-3.3.6-7.3.5-9.7.1 0 0 .5.4 2.9.1z" fill="#5382a1"/></svg></div><span class="skill-name">Java</span></div>
-      <div class="skill-card reveal" style="transition-delay:.25s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M29.5 14.7L17.3 2.5a1.8 1.8 0 00-2.5 0L12.3 5l3.2 3.2a2.1 2.1 0 012.7 2.6l3 3a2.1 2.1 0 11-1.2 1.2l-2.8-2.8v7.4a2.1 2.1 0 11-1.7 0V11.8a2.1 2.1 0 01-1.1-2.7L11.2 5.8l-8.7 8.7a1.8 1.8 0 000 2.5l12.2 12.2a1.8 1.8 0 002.5 0l12.3-12.2c.7-.7.7-1.8 0-2.5z" fill="#f05032"/></svg></div><span class="skill-name">Git</span></div>
-      <div class="skill-card reveal" style="transition-delay:.30s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M23 3.4L16.7 9.3 7.4 2.1 3 5.7l8.2 8.3L3 22.3l4.4 3.6 9.3-7.2 6.3 5.9 6-2.5V5.9L23 3.4z" fill="#007acc"/><path d="M23 9.3l-6.3 6.7 6.3 6.7V9.3z" fill="#fff" opacity=".3"/></svg></div><span class="skill-name">VS Code</span></div>
-      <div class="skill-card reveal" style="transition-delay:.35s"><div class="skill-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M3 22.6c.1.8.7 1.4 1.5 1.6h.4c.6 0 1.1-.2 1.5-.6.4-.4.6-1 .6-1.6V7.7H5.5v14.3c0 .2 0 .4-.1.6-.1.1-.2.2-.4.2-.3 0-.5-.3-.5-.8V21H3l-.1 1.6z" fill="#00758f"/><path d="M9.5 24h1.5V14.4l3 7.2h1.1l3-7.2V24h1.5V12h-2l-2.5 6-2.5-6h-2l-.1 12z" fill="#00758f"/><path d="M22.5 24c2 0 3-1 3-2.8V20h-1.5v1.2c0 .9-.5 1.3-1.5 1.3s-1.5-.4-1.5-1.3v-7.4c0-.9.5-1.3 1.5-1.3s1.5.4 1.5 1.3V15H26v-1.2c0-1.9-1-2.8-3-2.8s-3 1-3 2.8v7.4c0 1.8 1 2.8 3 2.8z" fill="#00758f"/></svg></div><span class="skill-name">MySQL</span></div>
-    </div>
-  </div>
-</section>
-<section id="contact">
-  <div class="section-container">
-    <p class="section-label reveal">Kontak</p>
-    <h2 class="section-title reveal">Hubungi Saya</h2>
-    <p class="section-sub reveal">Tertarik berkolaborasi atau ingin mengetahui lebih lanjut? Jangan ragu untuk menghubungi saya!</p>
-    <div class="contact-grid">
-      <div class="contact-card reveal-left">
-        <h3 class="card-title">Informasi Kontak</h3>
-        <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-text"><label>Email</label><a href="mailto:fachrilakbar@gmail.com">fachrilakbar@gmail.com</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-text"><label>WhatsApp</label><a href="#">0812-6058-9707</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><div class="contact-text"><label>LinkedIn</label><a href="https://www.linkedin.com/in/fachrilakbar" target="_blank" rel="noopener noreferrer">linkedin.com/in/fachrilakbar</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fab fa-github"></i></div><div class="contact-text"><label>GitHub</label><a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer">github.com/fachrilakbar12</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-text"><label>Lokasi</label><span>Lhokseumawe, Aceh, Indonesia</span></div></div>
-      </div>
-      <div class="contact-card reveal-right">
-        <h3 class="card-title">Kirim Pesan</h3>
-        <form id="contactForm" onsubmit="handleSubmit(event)">
-          <div class="form-group"><label>Nama</label><input type="text" id="from_name" name="from_name" placeholder="Nama kamu..." required /></div>
-          <div class="form-group"><label>Email</label><input type="email" id="reply_to" name="reply_to" placeholder="email@contoh.com" required /></div>
-          <div class="form-group"><label>Pesan</label><textarea id="message" name="message" placeholder="Tulis pesanmu di sini..." required></textarea></div>
-          <button type="submit" class="btn-primary btn-full"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
-        </form>
+  </section>
+
+  <!-- ══════════════════════════════════
+       MARQUEE TECH STRIP
+       ══════════════════════════════════ -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span><i class="fab fa-python"></i> Python</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-brain"></i> Deep Learning</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-eye"></i> Computer Vision</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-java"></i> Java</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-js"></i> JavaScript</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-html5"></i> HTML & CSS</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-database"></i> MySQL</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-git-alt"></i> Git</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-network-wired"></i> TensorFlow</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-cube"></i> OpenCV</span>
+        <span class="dot">✦</span>
+        <!-- duplicate for seamless loop -->
+        <span><i class="fab fa-python"></i> Python</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-brain"></i> Deep Learning</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-eye"></i> Computer Vision</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-java"></i> Java</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-js"></i> JavaScript</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-html5"></i> HTML & CSS</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-database"></i> MySQL</span>
+        <span class="dot">✦</span>
+        <span><i class="fab fa-git-alt"></i> Git</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-network-wired"></i> TensorFlow</span>
+        <span class="dot">✦</span>
+        <span><i class="fas fa-cube"></i> OpenCV</span>
+        <span class="dot">✦</span>
       </div>
     </div>
   </div>
-</section>
-<footer>
-  <div class="footer-inner">
-    <div class="footer-socials">
-      <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/fachrilakbar" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-instagram"></i></a>
-      <a href="mailto:fachrilakbar@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+
+  <!-- ══════════════════════════════════
+       ABOUT
+       ══════════════════════════════════ -->
+  <section id="about">
+    <div class="section-container">
+      <div class="about-grid">
+
+        <!-- Kiri: biografi -->
+        <div class="reveal-left">
+          <p class="section-label">Tentang Saya</p>
+          <h2 class="section-title">Siapa Saya</h2>
+          <div class="section-divider"></div>
+
+          <p class="about-p1">
+            Saya <strong class="accent-text">Fachril Akbar</strong>, lulusan Teknik Informatika 2026 dari Universitas Malikussaleh, Lhokseumawe, Aceh. Perjalanan akademis saya didorong oleh ketertarikan mendalam terhadap Kecerdasan Buatan, machine learning, dan computer vision — bidang yang saya yakini dapat memberi dampak nyata di kehidupan masyarakat.
+          </p>
+          <p class="about-p2">
+            Penelitian skripsi saya berfokus pada pembangunan <strong class="accent-text">sistem deteksi deepfake</strong> menggunakan arsitektur CNN — berhasil meraih akurasi tinggi dalam mengidentifikasi manipulasi wajah digital. Sebagai fresh graduate, saya siap mengaplikasikan keahlian saya secara profesional dan berkembang bersama tim yang solid.
+          </p>
+
+          <!-- Statistik animasi -->
+          <div class="about-stats">
+            <div class="stat-card reveal">
+              <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
+              <div class="stat-num" data-target="3">0</div>
+              <div class="stat-suffix">+</div>
+              <div class="stat-label">Proyek Dibuat</div>
+            </div>
+            <div class="stat-card reveal" style="transition-delay:.1s">
+              <div class="stat-icon"><i class="fas fa-code"></i></div>
+              <div class="stat-num" data-target="5">0</div>
+              <div class="stat-suffix"></div>
+              <div class="stat-label">Tech Stack</div>
+            </div>
+            <div class="stat-card reveal" style="transition-delay:.2s">
+              <div class="stat-icon"><i class="fas fa-university"></i></div>
+              <div class="stat-num" data-target="4">0</div>
+              <div class="stat-suffix">thn</div>
+              <div class="stat-label">Tahun Studi</div>
+            </div>
+            <div class="stat-card reveal" style="transition-delay:.3s">
+              <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+              <div class="stat-num" data-target="100">0</div>
+              <div class="stat-suffix">%</div>
+              <div class="stat-label">Komitmen</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kanan: info detail -->
+        <div class="reveal-right">
+          <div class="about-details">
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-user"></i></div>
+              <div class="detail-text">
+                <label>Nama Lengkap</label>
+                <span>Fachril Akbar</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-university"></i></div>
+              <div class="detail-text">
+                <label>Institusi</label>
+                <span>Universitas Malikussaleh</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="detail-text">
+                <label>Program Studi</label>
+                <span>S1 Teknik Informatika</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="detail-text">
+                <label>Lokasi</label>
+                <span>Lhokseumawe, Aceh, Indonesia</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+              <div class="detail-text">
+                <label>Email</label>
+                <span>fachrilakbar@gmail.com</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-brain"></i></div>
+              <div class="detail-text">
+                <label>Fokus Riset</label>
+                <span>AI, Deep Learning, Computer Vision</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-language"></i></div>
+              <div class="detail-text">
+                <label>Bahasa</label>
+                <span>Indonesia (Ibu) · Inggris (Menengah)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol unduh CV -->
+          <a href="#contact" class="btn-cv reveal" style="transition-delay:.3s">
+            <i class="fas fa-download"></i> Minta CV
+          </a>
+        </div>
+
+      </div>
     </div>
-    <p class="footer-copy">Dibuat dengan <span>&#9829;</span> oleh <span>Fachril Akbar</span> &nbsp;&middot;&nbsp; &copy; 2025</p>
+  </section>
+
+  <!-- ══════════════════════════════════
+       TIMELINE / JOURNEY
+       ══════════════════════════════════ -->
+  <section id="timeline">
+    <div class="section-container">
+      <p class="section-label reveal">Perjalanan</p>
+      <h2 class="section-title reveal">Linimasa Akademik &amp; Pengalaman</h2>
+      <p class="section-sub reveal">
+        Rekam jejak pendidikan, penelitian, dan pekerjaan teknis saya.
+      </p>
+
+      <div class="timeline-wrap">
+        <div class="timeline-line"></div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"><i class="fas fa-university"></i></div>
+          <div class="tl-content">
+            <div class="timeline-year">2022 — 2026</div>
+            <h3 class="timeline-title">S1 Teknik Informatika</h3>
+            <p class="timeline-place"><i class="fas fa-map-marker-alt"></i> Universitas Malikussaleh, Lhokseumawe</p>
+            <p class="timeline-desc">Mempelajari fundamental ilmu komputer, algoritma, kecerdasan buatan, dan pengembangan perangkat lunak. Aktif terlibat dalam penelitian AI dan pengembangan aplikasi.</p>
+            <div class="timeline-tags">
+              <span class="tag">AI</span>
+              <span class="tag">Computer Vision</span>
+              <span class="tag">Software Engineering</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" style="transition-delay:.15s">
+          <div class="tl-dot"><i class="fas fa-robot"></i></div>
+          <div class="tl-content">
+            <div class="timeline-year">2023</div>
+            <h3 class="timeline-title">Proyek Riset: Sistem Deteksi Deepfake</h3>
+            <p class="timeline-place"><i class="fas fa-flask"></i> Lab Komputer, Unimal</p>
+            <p class="timeline-desc">Membangun sistem deteksi deepfake menggunakan Convolutional Neural Networks (CNN) dan teknik computer vision. Berhasil mencapai akurasi tinggi dalam mengidentifikasi manipulasi wajah digital.</p>
+            <div class="timeline-tags">
+              <span class="tag">Deep Learning</span>
+              <span class="tag">CNN</span>
+              <span class="tag">TensorFlow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" style="transition-delay:.3s">
+          <div class="tl-dot"><i class="fas fa-laptop-code"></i></div>
+          <div class="tl-content">
+            <div class="timeline-year">2023</div>
+            <h3 class="timeline-title">Pengembangan Aplikasi Desktop Java</h3>
+            <p class="timeline-place"><i class="fas fa-desktop"></i> Proyek Mandiri</p>
+            <p class="timeline-desc">Membangun aplikasi manajemen data mahasiswa berbasis Java dengan fungsionalitas CRUD penuh dan integrasi MySQL. Menerapkan prinsip OOP dan arsitektur MVC terstruktur.</p>
+            <div class="timeline-tags">
+              <span class="tag">Java</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">OOP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" style="transition-delay:.45s">
+          <div class="tl-dot active"><i class="fas fa-star"></i></div>
+          <div class="tl-content active">
+            <div class="timeline-year">2024 — Sekarang</div>
+            <h3 class="timeline-title">Web Developer &amp; AI Enthusiast</h3>
+            <p class="timeline-place"><i class="fas fa-globe"></i> Freelance &amp; Open Source</p>
+            <p class="timeline-desc">Aktif mengembangkan proyek web modern dan penelitian AI. Membangun portofolio digital sekaligus memperluas keahlian dalam machine learning terapan dan kontribusi open-source.</p>
+            <div class="timeline-tags">
+              <span class="tag">Web Dev</span>
+              <span class="tag">ML Research</span>
+              <span class="tag">Open Source</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       ORGANIZATIONS
+       ══════════════════════════════════ -->
+  <section id="organizations">
+    <div class="section-container">
+      <p class="section-label reveal">Organisasi</p>
+      <h2 class="section-title reveal">Pengalaman Organisasi</h2>
+      <p class="section-sub reveal">
+        Keterlibatan saya dalam organisasi mahasiswa dan komunitas profesional.
+      </p>
+
+      <div class="org-grid">
+        <!-- Tambahkan kartu organisasi di sini -->
+        <div class="org-card reveal">
+          <div class="org-card-header">
+            <div class="org-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="org-meta">
+              <span class="org-period">2024 — 2025</span>
+              <span class="org-type">Organisasi Mahasiswa</span>
+            </div>
+          </div>
+          <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
+          <p class="org-role">Anggota Humas</p>
+          <p class="org-desc">
+            Aktif menjalin hubungan dengan organisasi internal kampus dan pihak eksternal, termasuk BEM, himpunan, serta PERMIKOMNAS Wilayah I Aceh-Sumatera Utara, sekaligus berkontribusi dalam berbagai kegiatan dan kepanitiaan HIMATIF.
+
+          </p>
+          <div class="org-tags">
+            <span class="tag">Komunikasi</span>
+            <span class="tag">Kerja Tim</span>
+          </div>
+        </div>
+
+        <div class="org-grid">
+        <!-- Tambahkan kartu organisasi di sini -->
+        <div class="org-card reveal">
+          <div class="org-card-header">
+            <div class="org-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="org-meta">
+              <span class="org-period">2025 — 2026</span>
+              <span class="org-type">Organisasi Mahasiswa</span>
+            </div>
+          </div>
+          <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
+          <p class="org-role">Wakil Ketua Umum</p>
+          <p class="org-desc">
+           Berperan aktif sebagai Wakil Ketua Umum HIMATIF dalam mengoordinasikan kegiatan dan kebutuhan internal organisasi, serta menjaga komunikasi dengan Program Studi Teknik Informatika. Turut merancang dan melaksanakan kegiatan yang didukung oleh program studi serta mengawal berbagai program kerja himpunan untuk mendukung pengembangan mahasiswa.
+
+          <div class="org-tags">
+            <span class="tag">Kepemimpinan</span>
+            <span class="tag">Manajemen Tim</span>
+          </div>
+        </div>
+
+
+        <!-- Duplikasi .org-card di atas untuk menambah organisasi lain -->
+
+      </div>
+
+ <div class="org-grid">
+        <!-- Tambahkan kartu organisasi di sini -->
+        <div class="org-card reveal">
+          <div class="org-card-header">
+            <div class="org-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="org-meta">
+              <span class="org-period">2025 — 2026</span>
+              <span class="org-type">Organisasi Mahasiswa</span>
+            </div>
+          </div>
+          <h3 class="org-name">BEM UNIMAL</h3>
+          <p class="org-role">Anggota KOMINFO</p>
+          <p class="org-desc">
+           Berperan aktif sebagai anggota Kominfo BEM Universitas Malikussaleh dalam merancang dan mengembangkan desain untuk kebutuhan publikasi organisasi. Terlibat dalam menyusun konsep dan skema desain, bertukar ide, serta bekerja sama dalam tim untuk menghasilkan desain yang sesuai dengan kebutuhan kegiatan dan publikasi.
+
+          <div class="org-tags">
+            <span class="tag">Kepemimpinan</span>
+            <span class="tag">Manajemen Tim</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       PROJECTS
+       ══════════════════════════════════ -->
+  <section id="projects">
+    <div class="section-container">
+      <p class="section-label reveal">Portofolio</p>
+      <h2 class="section-title reveal">Proyek Saya</h2>
+      <p class="section-sub reveal">
+        Pilihan proyek yang mencerminkan kemampuan dan minat teknis saya.
+      </p>
+
+      <div class="projects-grid">
+
+        <!-- Proyek unggulan -->
+        <div class="project-card project-featured reveal">
+          <div class="project-featured-badge">
+            <i class="fas fa-star"></i> Proyek Unggulan
+          </div>
+          <div class="project-card-top">
+            <div class="project-icon">&#129302;</div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link" title="Demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Sistem Deteksi Deepfake Wajah</h3>
+          <p class="project-desc">
+            Sistem bertenaga AI untuk mendeteksi manipulasi wajah digital (deepfake) menggunakan deep learning dan computer vision. Menganalisis gambar dan video untuk memverifikasi keaslian wajah dengan akurasi tinggi menggunakan arsitektur CNN yang dioptimalkan.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">CNN</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay: 0.1s;">
+          <div class="project-card-top">
+            <div class="project-icon">&#127760;</div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Website Portofolio Pribadi</h3>
+          <p class="project-desc">
+            Website portofolio profesional dengan estetika dark modern, animasi halus, dan layout responsif penuh di semua perangkat dan ukuran layar.
+          </p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay: 0.2s;">
+          <div class="project-card-top">
+            <div class="project-icon">&#128202;</div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Aplikasi Manajemen Data Mahasiswa</h3>
+          <p class="project-desc">
+            Aplikasi desktop Java untuk manajemen data mahasiswa dengan operasi CRUD penuh, fitur pencarian, dan laporan. Terhubung ke MySQL untuk penyimpanan data persisten.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Java</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">OOP</span>
+            <span class="tag">JDBC</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GitHub CTA -->
+      <div class="projects-cta reveal">
+        <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener" class="btn-outline">
+          <i class="fab fa-github"></i> Lihat Semua di GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SKILLS
+       ══════════════════════════════════ -->
+  <section id="skills">
+    <div class="section-container">
+      <p class="section-label reveal">Teknologi</p>
+      <h2 class="section-title reveal">Tech Stack Saya</h2>
+      <p class="section-sub reveal">
+        Bahasa dan teknologi yang aktif saya gunakan dalam proyek-proyek saya.
+      </p>
+
+      <!-- Tab kategori skill -->
+      <div class="skills-tabs reveal">
+        <button class="skill-tab active" data-tab="all">Semua</button>
+        <button class="skill-tab" data-tab="lang">Bahasa</button>
+        <button class="skill-tab" data-tab="ai">AI / ML</button>
+        <button class="skill-tab" data-tab="tools">Alat</button>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- Languages -->
+        <div class="skill-card reveal" data-category="lang">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 3l2.2 24.6L16 30l7.8-2.4L26 3H6z" fill="#e34f26"/>
+              <path d="M16 27.6V5h8.3l-1.9 21.1L16 27.6z" fill="#ef652a"/>
+              <path d="M9.7 8h6.3V5H6.4l.3 3h3zM9.5 11H6.7l.3 3h2.8l-.3-3zM10 14.5H6.9l.5 5.5 8.6 2.4v-3.2l-5.1-1.4L10 14.5z" fill="#ebebeb"/>
+              <path d="M22.3 8H16v3h3l-.3 3H16v3h2.7l-.3 3.6L16 21.8v3.2l8.6-2.4.5-5.5-3.1-.5.3-3H25l.3-3h-3zM22.3 8H16V5h9.6l-.3 3z" fill="#fff"/>
+            </svg>
+          </div>
+          <span class="skill-name">HTML5</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="90"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="lang" style="transition-delay:.05s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 3l2.2 24.6L16 30l7.8-2.4L26 3H6z" fill="#264de4"/>
+              <path d="M16 27.6V5h8.3l-1.9 21.1L16 27.6z" fill="#2965f1"/>
+              <path d="M9.7 8H16V5H6.4l.3 3h3zM9.5 11H6.7l.3 3h2.8l-.3-3zM10 14.5H7l.5 5.5 8.5 2.4v-3.2l-5.1-1.4L10 14.5z" fill="#ebebeb"/>
+              <path d="M22.3 8H16v3h3l-.3 3H16v3h2.7l-.3 3.6L16 21.8v3.2l8.6-2.4.5-5.5-3.1-.5.3-3H25l.3-3h-3zM22.3 8H16V5h9.6l-.3 3z" fill="#fff"/>
+            </svg>
+          </div>
+          <span class="skill-name">CSS3</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="85"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="lang" style="transition-delay:.10s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="4" fill="#f7df1e"/>
+              <path d="M20.8 22.6c.4.7.9 1.2 1.8 1.2.8 0 1.3-.4 1.3-1 0-.7-.5-1-1.4-1.4l-.5-.2c-1.4-.6-2.3-1.3-2.3-2.9 0-1.4 1.1-2.5 2.8-2.5 1.2 0 2.1.4 2.7 1.5l-1.5 1c-.3-.6-.6-.8-1.2-.8-.5 0-.9.3-.9.8 0 .6.3.8 1.2 1.2l.5.2c1.6.7 2.5 1.4 2.5 3 0 1.7-1.3 2.7-3.1 2.7-1.7 0-2.8-.8-3.4-1.9l1.5-.9zM13.5 22.8c.3.5.6.9 1.3.9.6 0 1-.3 1-1.3v-6.8h1.9V22.4c0 2.1-1.2 3.1-3 3.1-1.6 0-2.5-.8-3-1.9l1.8-.8z" fill="#000"/>
+            </svg>
+          </div>
+          <span class="skill-name">JavaScript</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="80"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="lang ai" style="transition-delay:.15s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M15.9 3C9.9 3 10.3 5.6 10.3 5.6v2.8h5.7V9H7.5S3 8.4 3 14.5s4 6.1 4 6.1h2.4v-2.9s-.1-4 3.9-4h6.8s3.8.1 3.8-3.6V6.4S24.5 3 15.9 3zm-3.7 2.2a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z" fill="url(#g1)"/>
+              <path d="M16.1 29c6 0 5.6-2.6 5.6-2.6v-2.8H16v-.6h8.5S29 23.6 29 17.5s-4-6.1-4-6.1h-2.4v2.9s.1 4-3.9 4h-6.8s-3.8-.1-3.8 3.6v5.7S7.5 29 16.1 29zm3.7-2.2a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z" fill="url(#g2)"/>
+              <defs>
+                <linearGradient id="g1" x1="3" y1="3" x2="24.5" y2="14" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/>
+                </linearGradient>
+                <linearGradient id="g2" x1="7.5" y1="18" x2="29" y2="29" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="skill-name">Python</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="88"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="lang" style="transition-delay:.20s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M11.5 20.7s-.9.5.6.7c1.8.2 2.8.2 4.8-.2 0 0 .5.3 1.3.6-4.6 2-10.4-.1-6.7-1.1zM10.9 17.9s-1 .8.6.9c2.2.2 3.9.2 6.9-.3 0 0 .4.4 1 .6-6.1 1.8-12.9.1-8.5-1.2z" fill="#e76f00"/>
+              <path d="M15.4 12.8c1.2 1.4-.3 2.7-.3 2.7s3.1-1.6 1.7-3.6c-1.3-1.9-2.4-2.8 3.2-6 0 0-8.7 2.2-4.6 6.9z" fill="#e76f00"/>
+              <path d="M22.4 22.4s.7.6-.7 1c-2.6.8-10.9 1-13.2 0-.8-.4.7-.9.7-.9s-.9-.6-2.5-.3c-1.8.4-1.1 1.2 1.2 1.7 5.3 1.1 14.1.3 14.5-1.8l-1-.7zM12 15.1s-4.1 1-1.5 1.3c1.1.1 3.4.1 5.5-.1 1.7-.1 3.5-.4 3.5-.4s-.6.3-1 .5c-4 1-11.7.5-9.5-.5 1.9-.9 3-.8 3-.8zM20.4 19.7c4-2.1 2.2-4.1.9-3.8-.3.1-.5.2-.5.2s.1-.2.4-.3c2.8-1 5 2.9-.9 4.5 0 0 .1-.1.1-.6zM17.3 3s2.4 2.4-2.2 6c-3.6 2.8-.8 4.4 0 6.3-2.1-1.9-3.6-3.5-2.6-5 1.5-2.3 5.8-3.4 4.8-7.3z" fill="#5382a1"/>
+              <path d="M13.3 28.5c3.9.2 9.8-.1 10-1.4 0 0-.3.7-3.2 1.2-3.3.6-7.3.5-9.7.1 0 0 .5.4 2.9.1z" fill="#5382a1"/>
+            </svg>
+          </div>
+          <span class="skill-name">Java</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="75"></div>
+          </div>
+        </div>
+
+        <!-- AI/ML -->
+        <div class="skill-card reveal" data-category="ai" style="transition-delay:.25s">
+          <div class="skill-icon skill-icon-text" style="background: linear-gradient(135deg,#ff6f00,#ffa000);">TF</div>
+          <span class="skill-name">TensorFlow</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="70"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="ai" style="transition-delay:.30s">
+          <div class="skill-icon skill-icon-text" style="background: linear-gradient(135deg,#ee4c2c,#f56300);">PT</div>
+          <span class="skill-name">PyTorch</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="60"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="ai" style="transition-delay:.35s">
+          <div class="skill-icon skill-icon-text" style="background: linear-gradient(135deg,#5c88c4,#0d6090);">CV</div>
+          <span class="skill-name">OpenCV</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="78"></div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="skill-card reveal" data-category="tools" style="transition-delay:.40s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M29.5 14.7L17.3 2.5a1.8 1.8 0 00-2.5 0L12.3 5l3.2 3.2a2.1 2.1 0 012.7 2.6l3 3a2.1 2.1 0 11-1.2 1.2l-2.8-2.8v7.4a2.1 2.1 0 11-1.7 0V11.8a2.1 2.1 0 01-1.1-2.7L11.2 5.8l-8.7 8.7a1.8 1.8 0 000 2.5l12.2 12.2a1.8 1.8 0 002.5 0l12.3-12.2c.7-.7.7-1.8 0-2.5z" fill="#f05032"/>
+            </svg>
+          </div>
+          <span class="skill-name">Git</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="82"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="tools" style="transition-delay:.45s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M23 3.4L16.7 9.3 7.4 2.1 3 5.7l8.2 8.3L3 22.3l4.4 3.6 9.3-7.2 6.3 5.9 6-2.5V5.9L23 3.4z" fill="#007acc"/>
+              <path d="M23 9.3l-6.3 6.7 6.3 6.7V9.3z" fill="#fff" opacity=".3"/>
+            </svg>
+          </div>
+          <span class="skill-name">VS Code</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="92"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="tools" style="transition-delay:.50s">
+          <div class="skill-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M3 22.6c.1.8.7 1.4 1.5 1.6h.4c.6 0 1.1-.2 1.5-.6.4-.4.6-1 .6-1.6V7.7H5.5v14.3c0 .2 0 .4-.1.6-.1.1-.2.2-.4.2-.3 0-.5-.3-.5-.8V21H3l-.1 1.6z" fill="#00758f"/>
+              <path d="M9.5 24h1.5V14.4l3 7.2h1.1l3-7.2V24h1.5V12h-2l-2.5 6-2.5-6h-2l-.1 12z" fill="#00758f"/>
+              <path d="M22.5 24c2 0 3-1 3-2.8V20h-1.5v1.2c0 .9-.5 1.3-1.5 1.3s-1.5-.4-1.5-1.3v-7.4c0-.9.5-1.3 1.5-1.3s1.5.4 1.5 1.3V15H26v-1.2c0-1.9-1-2.8-3-2.8s-3 1-3 2.8v7.4c0 1.8 1 2.8 3 2.8z" fill="#00758f"/>
+            </svg>
+          </div>
+          <span class="skill-name">MySQL</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="73"></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" data-category="tools" style="transition-delay:.55s">
+          <div class="skill-icon skill-icon-text" style="background: linear-gradient(135deg,#4078c8,#1a1e27);">GH</div>
+          <span class="skill-name">GitHub</span>
+          <div class="skill-level">
+            <div class="skill-bar" data-level="80"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       QUOTE / CTA BANNER
+       ══════════════════════════════════ -->
+  <section id="cta-banner">
+    <div class="cta-banner-inner reveal">
+      <div class="cta-banner-text">
+        <div class="cta-quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="cta-banner-quote">Setiap ahli dulunya pernah jadi pemula. Perjalanan seribu baris kode dimulai dari satu commit.</p>
+        <p class="cta-banner-author">— Prinsip seorang fresh graduate</p>
+      </div>
+      <div class="cta-banner-glow"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CONTACT
+       ══════════════════════════════════ -->
+  <section id="contact">
+    <div class="section-container">
+      <p class="section-label reveal">Kontak</p>
+      <h2 class="section-title reveal">Hubungi Saya</h2>
+      <p class="section-sub reveal">
+        Siap berkolaborasi atau bergabung dengan tim Anda? Mari terhubung dan bangun sesuatu yang bermakna.
+      </p>
+
+      <div class="contact-grid">
+
+        <!-- Info kontak -->
+        <div class="contact-card reveal-left">
+          <h3 class="card-title">Informasi Kontak</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-text">
+              <label>Email</label>
+              <a href="mailto:fachrilakbar@gmail.com">fachrilakbar@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-text">
+              <label>WhatsApp</label>
+              <a href="https://wa.me/6281260589707" target="_blank" rel="noopener">0812-6058-9707</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+            <div class="contact-text">
+              <label>LinkedIn</label>
+              <a href="https://www.linkedin.com/in/fachril-akbar-961789294" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/fachril-akbar-961789294
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-github"></i></div>
+            <div class="contact-text">
+              <label>GitHub</label>
+              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer">
+                github.com/fachrilakbar12
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+            <div class="contact-text">
+              <label>Instagram</label>
+              <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener noreferrer">
+                @fachrilakbar_
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-text">
+              <label>Lokasi</label>
+              <span>Lhokseumawe, Aceh, Indonesia</span>
+            </div>
+          </div>
+
+          <!-- Badge ketersediaan -->
+          <div class="availability-badge">
+            <span class="pulse-dot"></span>
+            <span>Tersedia untuk proyek &amp; kolaborasi</span>
+          </div>
+        </div>
+
+        <!-- Form kirim pesan -->
+        <div class="contact-card reveal-right">
+          <h3 class="card-title">Kirim Pesan</h3>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nama</label>
+                <input type="text" id="from_name" name="from_name"
+                       placeholder="Nama Anda..." required />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reply_to" name="reply_to"
+                       placeholder="email@anda.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Subjek</label>
+              <input type="text" id="subject" name="subject"
+                     placeholder="Ini tentang apa?" />
+            </div>
+            <div class="form-group">
+              <label>Pesan</label>
+              <textarea id="message" name="message"
+                        placeholder="Tulis pesan Anda di sini..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full" id="submitBtn">
+              <i class="fas fa-paper-plane"></i> Kirim Pesan
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+       ══════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">&lt;Fachril /&gt;</div>
+      <p class="footer-tagline">AI Researcher &amp; Web Developer</p>
+
+      <div class="footer-socials">
+        <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/fachril-akbar-961789294" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:fachrilakbar@gmail.com" class="social-btn" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+
+      <div class="footer-links">
+        <a href="#hero">Beranda</a>
+        <span>·</span>
+        <a href="#about">Tentang</a>
+        <span>·</span>
+        <a href="#organizations">Organisasi</a>
+        <span>·</span>
+        <a href="#projects">Proyek</a>
+        <span>·</span>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <p class="footer-copy">
+        Dibuat dengan <span>&#9829;</span> oleh <span>Fachril Akbar</span>
+        &nbsp;&middot;&nbsp; &copy; 2026
+      </p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════
+       GALLERY MODAL
+       ══════════════════════════════════ -->
+  <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-label="Galeri Foto">
+    <div class="gallery-modal-inner">
+      <button class="gallery-close" id="galleryClose" aria-label="Tutup galeri">
+        <i class="fas fa-times"></i>
+      </button>
+      <p class="gallery-label" id="galleryLabel">Foto 1</p>
+      <img class="gallery-main-img" id="galleryImg" src="foto.jpg" alt="Galeri foto" />
+      <div class="gallery-nav">
+        <button class="gallery-btn" id="galleryPrev" aria-label="Foto sebelumnya">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="gallery-counter" id="galleryCounter">1 / 1</span>
+        <button class="gallery-btn" id="galleryNext" aria-label="Foto berikutnya">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="gallery-dots" id="galleryDots"></div>
+      <p class="gallery-hint">← → untuk navigasi &nbsp;·&nbsp; ESC untuk tutup</p>
+    </div>
   </div>
-</footer>
-<script src="main.js"></script>
+
+  <!-- ══════════════════════════════════
+       BACK TO TOP
+       ══════════════════════════════════ -->
+  <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ══════════════════════════════════
+       SCRIPTS
+       ══════════════════════════════════ -->
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/typewriter.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/cursor.js"></script>
+
 </body>
 </html>
