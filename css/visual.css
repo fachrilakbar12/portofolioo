@@ -1,0 +1,5364 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+/* ============================================================
+   VISUAL.CSS — Karakter, bukan dekorasi.
+   Filosofi: setiap lapisan harus punya alasan.
+   Dark = editorial depth. Light = confident clarity.
+   ============================================================ */
+
+
+/* ══════════════════════════════════════════════
+   LIGHT MODE — Warm Ivory + Subtle Ink Texture
+   ══════════════════════════════════════════════ */
+
+/* Grain film ringan di light — memberi kedalaman organik */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] body::after {
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+
+/* ══════════════════════════════════════════════
+   DARK MODE BODY — Deep Space, bukan abu-abu
+   ══════════════════════════════════════════════ */
+
+/* Gradient radial besar yang memberi kedalaman layar penuh.
+   Tidak blur-blob biasa — ini adalah 'ruang' di belakang segalanya */
+body::before { display: none; }   /* hapus dot grid lama */
+[data-theme="dark"] body::before {
+  content: '';
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 0%,   rgba(127, 58, 237, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 100%,  rgba(107, 79,216, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 35% at 50%  50%,  rgba(198, 255, 52, 0.02) 0%, transparent 60%);
+}
+
+
+/* ── #spaceCanvas — layer astronomi ── */
+#spaceCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+/* Light mode: sangat halus, seperti langit fajar */
+:root:not([data-theme="dark"]) #spaceCanvas { opacity: 0.18; }
+
+/* Dark mode: vivid full */
+[data-theme="dark"] #spaceCanvas { opacity: 1; }
+
+/* Orbs dimatikan di dark mode — nebula canvas lebih baik */
+[data-theme="dark"] .orb1,
+[data-theme="dark"] .orb2,
+[data-theme="dark"] .orb3 { opacity: 0 !important; }
+
+/* Light mode orbs tetap tapi lebih lemah */
+:root:not([data-theme="dark"]) .orb1 { opacity: 0.45; }
+:root:not([data-theme="dark"]) .orb2 { opacity: 0.35; }
+:root:not([data-theme="dark"]) .orb3 { opacity: 0.25; }
+
+/* ═══════════════════════════════════════
+   ORBS — ukuran dan blur (tetap)
+   ═══════════════════════════════════════ */
+.orb1 {
+  width: 500px; height: 500px;
+  filter: blur(90px);
+}
+.orb2 {
+  width: 420px; height: 420px;
+  filter: blur(80px);
+}
+.orb3 {
+  width: 300px; height: 300px;
+  filter: blur(70px);
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .orb1 {
+  background: radial-gradient(circle, rgba(127,58,237,0.20) 0%, transparent 70%);
+}
+[data-theme="dark"] .orb2 {
+  background: radial-gradient(circle, rgba(107,79,216,0.15) 0%, transparent 70%);
+}
+[data-theme="dark"] .orb3 {
+  background: radial-gradient(circle, rgba(198,255,52,0.12) 0%, transparent 70%);
+}
+
+
+/* ── #bgCanvas particles — di atas space layer ── */
+#bgCanvas {
+  opacity: 0.10;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme="dark"] #bgCanvas { opacity: 0.40; }
+
+
+/* ══════════════════════════════════════════════
+   NAV — Dua karakter berbeda per tema
+   ══════════════════════════════════════════════ */
+nav {
+  /* Perbatasan bawah nav: satu garis tipis saja, cukup */
+  border-bottom: 1px solid var(--nav-border);
+}
+
+[data-theme="dark"] nav.scrolled {
+  background: rgba(9, 9, 16, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.13);
+  box-shadow:
+    0 0 0 0 transparent,
+    0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* Link aktif dark mode */
+[data-theme="dark"] .nav-links a.active {
+  color: #C6FF34;
+  background: transparent;
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  color: var(--text-bright);
+  background: rgba(255,255,255,0.05);
+}
+
+
+/* ══════════════════════════════════════════════
+   HERO — satu aksen strategis
+   ══════════════════════════════════════════════ */
+
+/* Garis merah di kiri teks dihapus */
+[data-theme="dark"] .hero-text {
+  position: relative;
+}
+
+[data-theme="dark"] .hero-text::before,
+:is(.dark, [data-theme="dark"]) .hero-text::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Nama: kontras tinggi, tidak perlu glow berlebihan */
+[data-theme="dark"] .hero-title .grad-text {
+  filter: none;
+}
+
+/* Subtitle cursor lebih vivid di dark (lime) */
+[data-theme="dark"] .hero-subtitle::after {
+  color: #C6FF34;
+}
+
+
+/* ══════════════════════════════════════════════
+   MARQUEE — batas bawah dan atas lebih tegas dark
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .marquee-section {
+  background: rgba(0,0,0,0.25);
+  border-top-color:    rgba(255, 255, 255, 0.13);
+  border-bottom-color: rgba(255, 255, 255, 0.13);
+}
+
+[data-theme="dark"] .marquee-content span i {
+  color: #C6FF34;
+}
+
+
+/* ══════════════════════════════════════════════
+   SECTION DIVIDERS — garis pembatas antar section
+   Hanya dark: berikan titik-potong visual yang tegas
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] #about,
+[data-theme="dark"] #projects,
+[data-theme="dark"] #contact {
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] #timeline,
+[data-theme="dark"] #skills {
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+
+/* ══════════════════════════════════════════════
+   CARDS — dark mode: true dark glass
+   Bukan hanya transparan — ada kedalaman
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .cert-card,
+[data-theme="dark"] .org-card {
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,0.04) 0%,
+      rgba(255,255,255,0.02) 100%);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 1px 0 rgba(0,0,0,0.5),
+    0 4px 24px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .project-card:hover,
+[data-theme="dark"] .cert-card:hover,
+[data-theme="dark"] .org-card:hover {
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,0.06) 0%,
+      rgba(255,255,255,0.03) 100%);
+  border-color: rgba(255, 255, 255, 0.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 8px 40px rgba(0,0,0,0.55);
+  transform: translateY(-5px);
+}
+
+/* Top-edge accent pada card hover */
+[data-theme="dark"] .project-card:hover::before,
+[data-theme="dark"] .cert-card:hover::before,
+[data-theme="dark"] .org-card:hover::before {
+  opacity: 0;
+  display: none !important;
+  box-shadow: none !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   STAT CARDS — dark mode
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .stat-card {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 2px 16px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .stat-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 8px 32px rgba(0,0,0,0.5);
+}
+
+
+/* ══════════════════════════════════════════════
+   DETAIL ITEMS — dark mode
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .detail-item {
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] .detail-item:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 4px 16px rgba(0,0,0,0.3);
+}
+
+
+/* ══════════════════════════════════════════════
+   TIMELINE — dark mode personality
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .tl-content {
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] .tl-content.active {
+  background:
+    linear-gradient(to right,
+      rgba(198, 255, 52, 0.06) 0%,
+      rgba(255,255,255,0.02) 100%);
+  border-left-color: #C6FF34;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    -4px 0 20px rgba(198, 255, 52, 0.12);
+}
+
+[data-theme="dark"] .tl-dot.active {
+  border-color: #C6FF34;
+  color: #000000;
+  background: #C6FF34;
+  box-shadow:
+    0 0 0 3px rgba(198, 255, 52, 0.16),
+    0 0 16px rgba(198, 255, 52, 0.28);
+}
+
+
+/* ══════════════════════════════════════════════
+   SKILLS — dark
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .skill-card {
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] .skill-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255, 255, 255, 0.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 8px 28px rgba(0,0,0,0.45);
+  transform: translateY(-5px);
+}
+
+
+/* ══════════════════════════════════════════════
+   FORM INPUTS — dark
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--text-bright);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+  background: rgba(255,255,255,0.05);
+  border-color: #C6FF34;
+  box-shadow:
+    inset 0 1px 0 rgba(0,0,0,0.3),
+    0 0 0 3px rgba(198, 255, 52, 0.15);
+}
+
+
+/* ══════════════════════════════════════════════
+   PHOTO FRAME — dark: cahaya putih presisi
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .photo-ring-border {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 20px 50px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+[data-theme="dark"] .photo-inner {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 36px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .photo-float {
+  background: rgba(10,10,18,0.92);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 8px 28px rgba(0,0,0,0.55);
+}
+
+
+/* ══════════════════════════════════════════════
+   SCROLLBAR — dark: merah-ungu, presisi
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #090910;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--dk-violet);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--dk-lime);
+}
+
+
+/* ══════════════════════════════════════════════
+   FOOTER — dark
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] footer {
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+[data-theme="dark"] footer::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   BACK TO TOP — dark glow
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .back-to-top {
+  background: var(--dk-lime);
+  color: #000000;
+  border: 1px solid var(--dk-lime);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .back-to-top:hover {
+  background: var(--dk-lime-hover);
+  border-color: var(--dk-lime-hover);
+  box-shadow: none;
+}
+
+
+/* ══════════════════════════════════════════════
+   SECTION LABEL ACCENT — dark
+   ══════════════════════════════════════════════ */
+[data-theme="dark"] .section-label {
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────── */
+
+/* ══════════════════════════════════════════════
+   PREVENT VISUAL OVERFLOW
+   ══════════════════════════════════════════════ */
+section  { isolation: isolate; }
+#bgDecoLines { display: none; }   /* Hapus deco lines lama */
+#hero .hero-glow { display: none; }  /* Hapus hero glow lama */
+
+
+/* ══════════════════════════════════════════════════
+   HERO CARD 3D — Tilt + Parallax + Glare + Depth
+   ══════════════════════════════════════════════════ */
+
+/* Perspective container */
+.hero-photo-col {
+  perspective: 900px;
+  perspective-origin: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2.5rem;  /* area hover lebih lebar dari card */
+  cursor: default;
+}
+
+.hero-card-3d {
+  position: relative;
+  width: 300px;
+  height: 380px;
+  transform-style: preserve-3d;
+  transform: rotateY(-8deg) rotateX(4deg);
+  transition: transform 0.08s linear;
+  will-change: transform;
+  cursor: default;
+  /* pointer-events tetap aktif agar mouse bisa terdeteksi */
+}
+
+/* ── Shadow lantai yang mengikuti tilt ── */
+.hc-shadow {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 40px;
+  background: radial-gradient(ellipse at center,
+    rgba(0,0,0,0.28) 0%,
+    transparent 70%);
+  filter: blur(12px);
+  border-radius: 50%;
+  transition: all 0.15s ease;
+  pointer-events: none;
+}
+
+/* ── Bingkai organik belakang ── */
+.hc-frame {
+  position: absolute;
+  inset: -16px;
+  transform: translateZ(-20px);
+  border-radius: 52% 48% 44% 56% / 48% 54% 46% 52%;
+  pointer-events: none;
+}
+
+.hc-frame-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid rgba(255,255,255,0.20);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12) 0%,
+    rgba(255,255,255,0.04) 50%,
+    rgba(255,255,255,0.08) 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 24px 60px rgba(0,0,0,0.22);
+}
+
+[data-theme="dark"] .hc-frame-ring {
+  border-color: transparent;
+  background: #C6FF34;
+  box-shadow: none;
+}
+
+/* ── Foto utama ── */
+.hc-photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px 10px 34px 14px;
+  overflow: hidden;
+  transform: translateZ(0px);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  border: 1.5px solid rgba(255,255,255,0.22);
+}
+
+[data-theme="dark"] .hc-photo {
+  box-shadow:
+    0 12px 48px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.10);
+}
+
+.hc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Glare reflection ── */
+.hc-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 65% 55% at 30% 20%,
+    rgba(255,255,255,0.14) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  transition: opacity 0.2s ease;
+}
+
+/* ── Chip-chip melayang ── */
+.hc-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-bright);
+  background: var(--card2);
+  border: 1px solid var(--border-lt);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  transform: translateZ(40px);
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .hc-chip {
+  background: rgba(14,14,22,0.90);
+  border-color: rgba(255,255,255,0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 8px 28px rgba(0,0,0,0.55);
+}
+
+.hc-chip i {
+  font-size: 0.78rem;
+  color: var(--red-lt);
+}
+
+.hc-chip-1 {
+  bottom: 28px;
+  left: -48px;
+  animation: chipFloat1 4.4s ease-in-out infinite;
+}
+
+.hc-chip-2 {
+  top: 22px;
+  right: -52px;
+  animation: chipFloat2 5.0s ease-in-out infinite 0.7s;
+}
+
+.hc-chip-3 {
+  top: 46%;
+  left: -54px;
+  transform: translateZ(40px) translateY(-50%);
+  animation: chipFloat3 4.7s ease-in-out infinite 1.4s;
+}
+
+@keyframes chipFloat1 {
+  0%,100% { translate: 0 0; }
+  50%     { translate: 0 -10px; }
+}
+@keyframes chipFloat2 {
+  0%,100% { translate: 0 0; }
+  50%     { translate: 0  10px; }
+}
+@keyframes chipFloat3 {
+  0%,100% { translate: 0 0; }
+  50%     { translate: -4px -8px; }
+}
+
+/* ── Accent dots dekoratif ── */
+.hc-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translateZ(25px);
+}
+
+.hc-dot-a {
+  width: 8px; height: 8px;
+  top: -8px; right: 40px;
+  background: var(--red);
+  box-shadow: 0 0 8px rgba(196,53,43,0.6);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+
+.hc-dot-b {
+  width: 5px; height: 5px;
+  bottom: 20px; right: -8px;
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(200,137,10,0.5);
+  animation: dotPulse 3.2s ease-in-out infinite 0.8s;
+}
+
+.hc-dot-c {
+  width: 6px; height: 6px;
+  top: 50%; left: -10px;
+  background: var(--violet);
+  box-shadow: 0 0 6px rgba(107,79,216,0.5);
+  animation: dotPulse 2.9s ease-in-out infinite 1.5s;
+}
+
+@keyframes dotPulse {
+  0%,100% { opacity: 1; transform: translateZ(25px) scale(1); }
+  50%     { opacity: 0.5; transform: translateZ(25px) scale(1.5); }
+}
+
+/* ══════════════════════════════════════════════════
+   Responsive: tablet (≤1024px)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-card-3d {
+    width: 240px;
+    height: 304px;
+  }
+
+  .hc-chip-1 { left: -36px; }
+  .hc-chip-2 { right: -36px; }
+  .hc-chip-3 { left: -40px; }
+}
+
+/* ══════════════════════════════════════════════════
+   Mobile: hapus 3D card, kembali ke flat
+   ══════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .hero-photo-col { display: none; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ████  LIGHT MODE DESIGN SYSTEM v2  ████
+   Selector: html[data-theme="light"]
+   Font: DM Serif Display (headings) + DM Sans (body)
+   Orange: #FF6A00
+   Dark mode: 100% tidak tersentuh
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   1. CSS VARIABLES (hanya aktif di light mode)
+   Nama --lm- agar tidak bentrok dengan variabel lain
+   ───────────────────────────────────────────── */
+html[data-theme="light"] {
+  /* ── Dua Warna Eksklusif Light Mode ── */
+  --whiteout:        #E9ECEF;
+  --whiteout-glass:  rgba(233, 236, 239, 0.95);
+  --whiteout-glass-scrolled: rgba(233, 236, 239, 0.98);
+  --whiteout-chip:   rgba(233, 236, 239, 0.88);
+  --whiteout-tabs:   rgba(233, 236, 239, 0.85);
+
+  --nitro:           #FB5607;
+  --nitro-dark:      #E04A00;
+  --nitro-soft:      rgba(251, 86, 7, 0.10);
+  --nitro-text:      #B83B00;
+
+  /* ── Mapping Variabel Sistem ke Whiteout & Nitro ── */
+  --lm-bg:           var(--whiteout);
+  --lm-soft:         var(--whiteout);
+  --lm-ink:          #26282A;
+  --lm-mute:         #5A5E63;
+  --lm-orange:       var(--nitro);
+  --lm-orange-dark:  var(--nitro-dark);
+  --lm-orange-light: var(--nitro);
+  --lm-char:         #3E4140;
+  --lm-char-card:    #4A4D4C;
+  --lm-line:         rgba(38, 40, 42, 0.10);
+  --lm-card-shadow:  0 18px 40px -26px rgba(38, 40, 42, 0.28);
+  --lm-btn-shadow:   0 10px 24px -10px rgba(251, 86, 7, 0.65);
+  --lm-serif:        'DM Serif Display', Georgia, serif;
+  --lm-sans:         'DM Sans', system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   2. BODY & PAGE BACKGROUND
+   ───────────────────────────────────────────── */
+html[data-theme="light"] body {
+  background-color: #FDFDF1;
+  color: var(--lm-ink);
+  font-family: var(--lm-sans);
+}
+
+html[data-theme="light"] .marquee-section {
+  background-color: var(--whiteout);
+  border-top: 1px solid var(--lm-line);
+  border-bottom: 1px solid var(--lm-line);
+}
+
+/* ─────────────────────────────────────────────
+   3. TIPOGRAFI — Serif untuk heading, Sans untuk semua lain
+   ───────────────────────────────────────────── */
+
+/* Semua heading → DM Serif Display */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--lm-ink);
+}
+
+/* H1 / H2: tracking rapat tapi tidak negatif berlebihan */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2 {
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+/* Paragraf */
+html[data-theme="light"] p {
+  font-family: var(--lm-sans);
+  font-size: 0.94rem;
+  font-weight: 400;
+  line-height: 1.72;
+  color: var(--lm-mute);
+  max-width: 65ch;
+}
+
+/* Hero title → serif, oranye pada nama */
+html[data-theme="light"] .hero-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--lm-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+
+/* Nama / kata-penekanan di hero: oranye */
+html[data-theme="light"] .hero-title .grad-text {
+  background: linear-gradient(135deg, var(--lm-orange) 0%, var(--lm-orange-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: none;
+}
+
+/* Hero greeting & subtitle */
+html[data-theme="light"] .hero-greeting {
+  font-family: var(--lm-sans);
+  color: var(--lm-mute);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+html[data-theme="light"] .hero-subtitle {
+  font-family: var(--lm-sans);
+  color: var(--lm-mute);
+  letter-spacing: 0;
+}
+html[data-theme="light"] .hero-subtitle::after {
+  color: var(--lm-orange);
+}
+html[data-theme="light"] .hero-subtitle-prefix {
+  color: var(--lm-orange);
+}
+
+/* Section titles → serif */
+html[data-theme="light"] .section-title,
+html[data-theme="light"] .projects-title,
+html[data-theme="light"] .cert-section-title,
+html[data-theme="light"] .skills-title,
+html[data-theme="light"] .contact-title,
+html[data-theme="light"] .about-section-title,
+html[data-theme="light"] .timeline-title,
+html[data-theme="light"] .org-section-title,
+html[data-theme="light"] .cta-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--lm-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+
+/* Penekanan dalam judul section → oranye */
+html[data-theme="light"] .section-title .accent-text,
+html[data-theme="light"] .projects-title .accent-text,
+html[data-theme="light"] .skills-title .accent-text,
+html[data-theme="light"] .contact-title .accent-text,
+html[data-theme="light"] .cta-title .accent-text {
+  color: var(--lm-orange);
+  -webkit-text-fill-color: var(--lm-orange);
+}
+
+/* Section label pill */
+html[data-theme="light"] .section-label {
+  font-family: var(--lm-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--nitro-text);
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+  background: var(--nitro-soft);
+  border: 1px solid rgba(251, 86, 7, 0.22);
+  padding: 0.26rem 0.88rem;
+  border-radius: 999px;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.42rem;
+}
+html[data-theme="light"] .section-label::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--nitro-text);
+  flex-shrink: 0;
+}
+
+/* Paragraf about */
+html[data-theme="light"] .about-p1,
+html[data-theme="light"] .about-p2 {
+  font-family: var(--lm-sans);
+  color: var(--lm-mute);
+  line-height: 1.75;
+  max-width: 62ch;
+}
+
+/* Accent text umum */
+html[data-theme="light"] .accent-text {
+  color: var(--nitro);
+}
+
+/* ─────────────────────────────────────────────
+   4. NAVIGASI — MILK #FDFDF1 datar, garis bawah tipis, aktif #B8430F + garis #EC5E27
+   ───────────────────────────────────────────── */
+html[data-theme="light"] nav,
+html[data-theme="light"] nav.scrolled {
+  background: #FDFDF1;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(38, 40, 42, 0.16);
+  box-shadow: none;
+}
+
+html[data-theme="light"] .nav-brand,
+html[data-theme="light"] .logo,
+html[data-theme="light"] .nav-logo {
+  font-family: var(--lm-serif);
+  color: #26282A;
+}
+
+html[data-theme="light"] .nav-logo-img {
+  border: 1px solid var(--hairline);
+  box-shadow: 0 2px 8px rgba(38, 40, 42, 0.08);
+}
+
+html[data-theme="light"] .nav-links a {
+  font-family: var(--lm-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #5A5E63;
+  text-transform: none;
+  letter-spacing: 0;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+html[data-theme="light"] .nav-links a:hover {
+  color: #26282A;
+  background: transparent;
+}
+
+/* Link aktif: oranye gelap #B8430F + garis bawah oranye #EC5E27 2px */
+html[data-theme="light"] .nav-links a.active {
+  color: #B8430F;
+  background: transparent;
+  font-weight: 600;
+}
+html[data-theme="light"] .nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #EC5E27;
+}
+
+@media (max-width: 640px) {
+  html[data-theme="light"] .nav-links {
+    background: #FDFDF1;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   5. TOMBOL UTAMA (pil, nitro orange gradient)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .btn-primary {
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--nitro) 0%, var(--nitro-dark) 100%);
+  color: #fff;
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  border: none;
+  box-shadow: 0 10px 24px -10px rgba(251, 86, 7, 0.65);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+html[data-theme="light"] .btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--nitro-dark);
+  box-shadow: 0 14px 30px -10px rgba(251, 86, 7, 0.75);
+}
+html[data-theme="light"] .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px -10px rgba(251, 86, 7, 0.65);
+}
+
+/* ─────────────────────────────────────────────
+   6. TOMBOL SEKUNDER (pil, whiteout outline)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .btn-outline {
+  border-radius: 999px;
+  background: var(--whiteout);
+  color: var(--lm-ink);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  border: 1px solid var(--lm-line);
+  box-shadow: 0 1px 4px rgba(38, 40, 42, 0.05);
+  transition: all 0.2s ease;
+}
+html[data-theme="light"] .btn-outline:hover {
+  background: var(--whiteout);
+  border-color: rgba(251, 86, 7, 0.35);
+  color: var(--nitro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 40, 42, 0.08);
+}
+
+/* Btn CV */
+html[data-theme="light"] .btn-cv {
+  border-radius: 999px;
+  background: var(--whiteout);
+  color: var(--nitro-text);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  letter-spacing: 0;
+  border: 1px solid rgba(251, 86, 7, 0.30);
+  transition: all 0.2s ease;
+}
+html[data-theme="light"] .btn-cv:hover {
+  background: var(--whiteout);
+  border-color: var(--nitro);
+  color: var(--nitro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(251, 86, 7, 0.20);
+}
+
+/* Card action buttons */
+html[data-theme="light"] .btn-card-primary {
+  border-radius: 999px;
+  background: var(--nitro-soft);
+  color: var(--nitro-text);
+  border: 1px solid rgba(251, 86, 7, 0.22);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: all 0.2s ease;
+}
+html[data-theme="light"] .btn-card-primary:hover {
+  background: var(--nitro);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(251, 86, 7, 0.35);
+}
+
+html[data-theme="light"] .btn-card-secondary {
+  border-radius: 999px;
+  background: var(--whiteout);
+  color: var(--lm-ink);
+  border: 1px solid var(--lm-line);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: all 0.2s ease;
+}
+html[data-theme="light"] .btn-card-secondary:hover {
+  color: var(--nitro);
+  border-color: rgba(251, 86, 7, 0.30);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────
+   7. HERO BADGE — "Fresh Graduate" tetap hijau
+   Hanya mengubah font/spacing, TIDAK mengubah warna
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .hero-badge {
+  font-family: var(--lm-sans);
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  /* Warna & border biarkan warisan dari components.css agar badge hijau tetap hijau */
+}
+/* Pastikan titik hijau di dalam badge tidak disentuh */
+html[data-theme="light"] .hero-badge span {
+  /* tidak diubah — biarkan nilai dari components.css */
+}
+
+/* ─────────────────────────────────────────────
+   8. IKON SOSIAL (lingkaran 44px, hover → nitro orange)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .hero-social-link {
+  background: var(--whiteout);
+  border: 1px solid var(--lm-line);
+  color: var(--lm-mute);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+html[data-theme="light"] .hero-social-link:hover {
+  background: var(--nitro);
+  border-color: var(--nitro);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(251, 86, 7, 0.35);
+}
+
+/* ─────────────────────────────────────────────
+   9. HERO INFO ITEMS
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .hero-info-item {
+  font-family: var(--lm-sans);
+  font-size: 0.82rem;
+  color: var(--lm-mute);
+}
+html[data-theme="light"] .hero-info-item i {
+  color: var(--nitro);
+}
+
+/* ─────────────────────────────────────────────
+   10. BINGKAI FOTO HERO — nitro orange solid
+   Mengubah bingkai/frame yang SUDAH ADA menjadi nitro orange,
+   tidak menambah elemen baru
+   ───────────────────────────────────────────── */
+
+/* photo-ring-border: bingkai organik di belakang foto */
+html[data-theme="light"] .photo-ring-border {
+  background: linear-gradient(145deg, var(--nitro) 0%, var(--nitro-dark) 100%);
+  border-color: rgba(251, 86, 7, 0.40);
+  box-shadow: 0 30px 60px -24px rgba(251, 86, 7, 0.55);
+}
+
+/* hc-frame-ring: bingkai 3D card hero */
+html[data-theme="light"] .hc-frame-ring {
+  background: linear-gradient(135deg, var(--nitro) 0%, var(--nitro-dark) 60%, rgba(224, 74, 0, 0.85) 100%);
+  border-color: rgba(251, 86, 7, 0.50);
+  box-shadow:
+    0 30px 60px -24px rgba(251, 86, 7, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* hc-shadow: lantai 3D card → nitro orange */
+html[data-theme="light"] .hc-shadow {
+  background: radial-gradient(ellipse at center,
+    rgba(251, 86, 7, 0.35) 0%,
+    transparent 70%);
+}
+
+/* ─────────────────────────────────────────────
+   11. CHIP MELAYANG (di sekitar foto)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .hc-chip {
+  background: var(--whiteout-glass);
+  border: 1px solid var(--lm-line);
+  color: var(--lm-ink);
+  font-family: var(--lm-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  box-shadow: 0 6px 20px rgba(251,86,7,0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 999px;
+}
+html[data-theme="light"] .hc-chip i {
+  color: var(--nitro);
+}
+
+/* photo-float chips */
+html[data-theme="light"] .photo-float {
+  background: var(--whiteout-glass);
+  border: 1px solid var(--lm-line);
+  color: var(--lm-ink);
+  font-family: var(--lm-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(251,86,7,0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 999px;
+}
+html[data-theme="light"] .photo-float i {
+  color: var(--nitro);
+}
+
+/* Accent dots */
+html[data-theme="light"] .hc-dot-a {
+  background: var(--nitro);
+  box-shadow: 0 0 8px rgba(251,86,7,0.55);
+}
+html[data-theme="light"] .hc-dot-b {
+  background: var(--nitro);
+  box-shadow: 0 0 6px rgba(251,86,7,0.45);
+}
+
+/* ─────────────────────────────────────────────
+   12. SECTION: BERANDA (#hero)
+   Grid garis sangat tipis di background
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #hero {
+  background-color: var(--lm-bg);
+  /* Own stacking context so the z-[-10] scene sits above the hero background
+     but below all content. (Grid + fade moved to ::after so the mask no longer
+     fades the content, glows and shapes at the edges.) */
+  isolation: isolate;
+}
+
+html[data-theme="light"] #hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -20;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(38,40,42,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38,40,42,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* ─────────────────────────────────────────────
+   12b. HERO ANTIGRAVITY 3D BACKGROUND — materials & motion
+   Layout / blur / timing live as Tailwind utilities in index.html;
+   visibility is controlled there with `dark:hidden`.
+   ───────────────────────────────────────────── */
+
+/* ── Glossy sphere base ── */
+.ag3d-sphere {
+  position: relative;
+  border-radius: 50%;
+}
+/* specular hotspot */
+.ag3d-sphere::before {
+  content: '';
+  position: absolute;
+  top: 9%;
+  left: 17%;
+  width: 40%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 72%);
+  transform: rotate(-32deg);
+  filter: blur(0.6px);
+}
+/* rim light (bounce from the warm glow) */
+.ag3d-sphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 72% 82%, rgba(255,226,170,0.55) 0%, rgba(255,226,170,0) 34%);
+}
+
+.ag3d-sphere--orange {
+  background:
+    radial-gradient(circle at 34% 28%, #FFE0A8 0%, #FF9A3C 22%, #FB5607 52%, #C43F00 78%, #7A2400 100%);
+  box-shadow:
+    inset -10px -14px 26px rgba(110, 30, 0, 0.50),
+    inset 8px 10px 18px rgba(255, 255, 255, 0.35),
+    0 26px 44px -16px rgba(251, 86, 7, 0.50);
+}
+
+.ag3d-sphere--gold {
+  background:
+    radial-gradient(circle at 32% 26%, #FFFBEA 0%, #FDE68A 20%, #F5B532 50%, #D98E04 76%, #8F5600 100%);
+  box-shadow:
+    inset -8px -10px 20px rgba(120, 70, 0, 0.45),
+    inset 6px 8px 14px rgba(255, 255, 255, 0.45),
+    0 22px 38px -14px rgba(217, 142, 4, 0.45);
+}
+
+.ag3d-sphere--glass {
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.14) 42%, rgba(255,190,110,0.16) 72%, rgba(251,86,7,0.26) 100%);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    inset -8px -10px 22px rgba(251, 86, 7, 0.22),
+    inset 6px 8px 16px rgba(255, 255, 255, 0.65),
+    0 22px 40px -16px rgba(251, 86, 7, 0.35);
+}
+
+/* ── Glossy torus: conic body + radial tube shading, hole cut with a mask ── */
+.ag3d-torus {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle closest-side,
+      transparent 0 46%,
+      rgba(100, 28, 0, 0.55) 47%,
+      rgba(100, 28, 0, 0) 57%,
+      rgba(255, 250, 235, 0) 60%,
+      rgba(255, 250, 235, 0.80) 68%,
+      rgba(255, 255, 255, 0) 79%,
+      rgba(100, 28, 0, 0) 86%,
+      rgba(100, 28, 0, 0.55) 99%),
+    conic-gradient(from 210deg,
+      #FFF3D1, #FFB547 16%, #FB5607 38%, #B83B00 54%, #FB5607 70%, #FFC46B 86%, #FFF3D1);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 46%, #000 47.5%, #000 98%, transparent 99.5%);
+          mask: radial-gradient(circle closest-side, transparent 46%, #000 47.5%, #000 98%, transparent 99.5%);
+  transform: perspective(700px) rotateX(48deg) rotateZ(-22deg);
+}
+
+/* ── Antigravity keyframes ── */
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(0, -15px, 0) rotate(4deg); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(14px, -12px, 0) rotate(-3deg); }
+}
+
+.ag3d-scene > * {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag3d-scene > * {
+    animation: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   13–28. MILK (#FDFDF1) & ORANGE (#EC5E27) — SECTION SETELAH BERANDA
+   Berlaku HANYA di mode terang (html[data-theme="light"]) pada:
+   #about, #timeline, #organizations, #projects, #certificates,
+   #skills, #cta-banner, #contact, footer, #projectModal.
+   Section #hero, nav, #themeToggle, #backToTop, dan mode gelap
+   TIDAK DISENTUH sama sekali.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Variabel warna khusus section sasaran (mode terang) ── */
+html[data-theme="light"] #about,
+html[data-theme="light"] #timeline,
+html[data-theme="light"] #organizations,
+html[data-theme="light"] #projects,
+html[data-theme="light"] #certificates,
+html[data-theme="light"] #skills,
+html[data-theme="light"] #cta-banner,
+html[data-theme="light"] #contact,
+html[data-theme="light"] footer,
+html[data-theme="light"] #projectModal,
+html[data-theme="light"] #certLightbox,
+html[data-theme="light"] #orgDocLightbox {
+  --milk:        #FDFDF1;
+  --milk-2:      #F4F4E4;
+  --milk-3:      #FFFFF8;
+  --orange:      #EC5E27;
+  --orange-dark: #C94A18;
+  --orange-text: #B8430F;
+  --ink:         #26282A;
+  --ink-soft:    #5A5E63;
+  --hairline:    rgba(38, 40, 42, 0.14);
+}
+
+/* ── Matikan semua pseudo-element dekoratif / glow lama pada section sasaran ── */
+html[data-theme="light"] #about::before,
+html[data-theme="light"] #timeline::before,
+html[data-theme="light"] #organizations::before,
+html[data-theme="light"] #projects::before,
+html[data-theme="light"] #certificates::before,
+html[data-theme="light"] #skills::before,
+html[data-theme="light"] #cta-banner::before,
+html[data-theme="light"] #contact::before,
+html[data-theme="light"] footer::before,
+html[data-theme="light"] #about .stat-card::before,
+html[data-theme="light"] #organizations .org-card::before,
+html[data-theme="light"] #projects .project-card::before,
+html[data-theme="light"] #certificates .cert-card::before,
+html[data-theme="light"] #certificates .cert-card::after {
+  display: none !important;
+  background: none !important;
+  content: none !important;
+}
+
+/* ── Aturan umum elemen di dalam section krem (#about, #timeline, #organizations, #certificates, #cta-banner, #contact) ── */
+html[data-theme="light"] #about,
+html[data-theme="light"] #timeline,
+html[data-theme="light"] #organizations,
+html[data-theme="light"] #certificates,
+html[data-theme="light"] #cta-banner,
+html[data-theme="light"] #contact {
+  background: var(--milk);
+  background-color: var(--milk);
+  background-image: none;
+  border-top: 1px solid var(--hairline);
+  overflow-x: clip;
+}
+
+/* Judul, subjudul, badge label, divider, dan tag umum di section krem */
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-title .accent-text {
+  color: var(--orange);
+  -webkit-text-fill-color: var(--orange);
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-sub,
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) p {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-label {
+  font-family: var(--lm-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--orange-text);
+  background: rgba(236, 94, 39, 0.12);
+  border: 1px solid rgba(236, 94, 39, 0.22);
+  padding: 0.26rem 0.88rem;
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-label::before {
+  background: var(--orange);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) .section-divider {
+  background: var(--orange);
+}
+
+/* Teks aksen kecil di dalam paragraf di atas krem memakai --orange-text agar kontras >= 4.5:1 */
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact) p .accent-text {
+  color: var(--orange-text);
+  font-weight: 600;
+}
+
+/* Tag / pil di seluruh section sasaran */
+html[data-theme="light"] :is(#about, #timeline, #organizations, #projects, #certificates, #skills, #contact, #projectModal) .tag {
+  font-family: var(--lm-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  background: rgba(236, 94, 39, 0.12);
+  border: 1px solid rgba(236, 94, 39, 0.20);
+  color: var(--orange-text);
+  border-radius: 999px;
+  padding: 0.22rem 0.70rem;
+}
+
+/* Tombol utama & sekunder di dalam section sasaran */
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact, #projectModal) .btn-primary {
+  background: var(--orange);
+  color: var(--milk);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  font-size: 0.90rem; /* >= 14px */
+  border: none;
+  border-radius: 999px;
+  box-shadow: none;
+  transition: background-color 0.22s ease, transform 0.22s ease;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact, #projectModal) .btn-primary:hover {
+  background: var(--orange-dark);
+  color: var(--milk);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact, #projectModal) .btn-outline {
+  background: var(--milk-2);
+  color: var(--ink);
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  font-size: 0.90rem; /* >= 14px */
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  box-shadow: none;
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #contact, #projectModal) .btn-outline:hover {
+  background: var(--milk-2);
+  border-color: var(--orange);
+  color: var(--orange-text);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   13. SECTION: TENTANG (#about)
+   Latar --milk, statistik serif --orange, kartu --milk-2
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #about .stat-card {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+  backdrop-filter: none;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #about .stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #about .stat-num,
+html[data-theme="light"] #about .stat-suffix {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  font-size: 2.0rem;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: var(--orange);
+  color: var(--orange);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+html[data-theme="light"] #about .stat-label {
+  font-family: var(--lm-sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-top: 0.3rem;
+  letter-spacing: 0;
+}
+
+html[data-theme="light"] #about .stat-icon,
+html[data-theme="light"] #about .detail-icon {
+  background: var(--orange);
+  border: none;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  color: var(--milk);
+  font-size: 0.88rem;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #about .stat-icon i,
+html[data-theme="light"] #about .detail-icon i {
+  color: var(--milk);
+}
+
+html[data-theme="light"] #about .detail-item {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+html[data-theme="light"] #about .detail-item:hover {
+  border-color: var(--orange);
+  box-shadow: none;
+  transform: translateX(4px);
+}
+
+html[data-theme="light"] #about .detail-text label {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-theme="light"] #about .detail-text span {
+  font-family: var(--lm-sans);
+  color: var(--ink);
+}
+
+/* Foto & tombol di kolom kanan #about (tanpa menyentuh #hero) */
+html[data-theme="light"] #about .photo-scene::before,
+html[data-theme="light"] #about .photo-scene::after {
+  display: none !important;
+}
+
+html[data-theme="light"] #about .photo-ring-border {
+  background: var(--orange);
+  border: 1px solid var(--hairline);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #about .photo-inner {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #about .photo-float {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-family: var(--lm-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 999px;
+}
+
+html[data-theme="light"] #about .photo-float i {
+  color: var(--orange);
+}
+
+html[data-theme="light"] #about .btn-cv {
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--milk);
+  font-family: var(--lm-sans);
+  font-size: 0.90rem; /* >= 14px */
+  font-weight: 600;
+  letter-spacing: 0;
+  border: none;
+  box-shadow: none;
+  transition: background-color 0.22s ease, transform 0.22s ease;
+}
+
+html[data-theme="light"] #about .btn-cv:hover {
+  background: var(--orange-dark);
+  color: var(--milk);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #about {
+  overflow: clip;
+}
+
+html[data-theme="light"] #about .lanyard-card {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 30px 50px -26px rgba(38, 40, 42, 0.55);
+}
+
+html[data-theme="light"] #about .lanyard-name {
+  font-family: var(--lm-serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 16px 0 0;
+  max-width: none;
+}
+
+html[data-theme="light"] #about .lanyard-accent-line {
+  background: var(--orange);
+}
+
+html[data-theme="light"] #about .lanyard-stitch {
+  stroke: var(--orange);
+}
+
+/* ─────────────────────────────────────────────
+   14. SECTION: PERJALANAN (#timeline)
+   Latar --milk, judul sub-bagian --orange + garis bawah --hairline,
+   chip tahun --milk-2 + border --hairline + teks --ink, titik --orange
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #timeline .tl-content,
+html[data-theme="light"] #timeline .timeline-card {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+  backdrop-filter: none;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #timeline .tl-content.active {
+  border-color: var(--hairline);
+  border-left: 3px solid var(--orange);
+}
+
+html[data-theme="light"] #timeline .tl-content:hover,
+html[data-theme="light"] #timeline .timeline-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #timeline .tl-dot,
+html[data-theme="light"] #timeline .tl-dot.active,
+html[data-theme="light"] #timeline .timeline-dot {
+  background: var(--orange);
+  border: 2px solid var(--milk);
+  color: var(--milk);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #timeline .tl-dot i {
+  color: var(--milk);
+}
+
+html[data-theme="light"] #timeline .timeline-line {
+  background: var(--hairline);
+  opacity: 1;
+}
+
+/* Judul sub-bagian berwarna --orange dengan garis bawah tipis --hairline */
+html[data-theme="light"] #timeline .timeline-title {
+  font-family: var(--lm-serif);
+  font-size: 1.25rem; /* 20px agar kontras --orange di atas krem memenuhi standar teks besar */
+  font-weight: 400;
+  color: var(--orange);
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 0.65rem;
+}
+
+/* Chip tahun: latar --milk-2, border --hairline, teks --ink */
+html[data-theme="light"] #timeline .timeline-year,
+html[data-theme="light"] #timeline .timeline-date,
+html[data-theme="light"] #timeline .timeline-period {
+  font-family: var(--lm-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  padding: 0.20rem 0.65rem;
+  border-radius: 8px;
+  display: inline-block;
+  letter-spacing: 0;
+  margin-bottom: 0.55rem;
+}
+
+html[data-theme="light"] #timeline .timeline-place {
+  font-family: var(--lm-sans);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #timeline .timeline-place i {
+  color: var(--orange);
+}
+
+html[data-theme="light"] #timeline .timeline-desc,
+html[data-theme="light"] #timeline .timeline-body {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+
+/* ─────────────────────────────────────────────
+   15. SECTION: ORGANISASI (#organizations)
+   Panel besar: latar --milk-2 (radius 36px), kartu: --milk + border --hairline,
+   kotak logo: --milk-3 + border --hairline, tag: rgba(236,94,39,0.12) + --orange-text
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #organizations {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+html[data-theme="light"] #organizations .section-container {
+  background-color: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 36px;
+  padding: 3.25rem 2.25rem;
+  position: relative;
+}
+
+html[data-theme="light"] #organizations .org-card {
+  background: var(--milk);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+  backdrop-filter: none;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #organizations .org-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #organizations .org-icon {
+  background: var(--milk-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  width: 46px;
+  height: 46px;
+  padding: 4px;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #organizations .org-period {
+  font-family: var(--lm-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--orange-text);
+  letter-spacing: 0;
+}
+
+html[data-theme="light"] #organizations .org-type {
+  font-family: var(--lm-sans);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-theme="light"] #organizations .org-title,
+html[data-theme="light"] #organizations .org-name {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #organizations .org-role {
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #organizations .org-desc {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #organizations .org-tabs {
+  background: rgba(38, 40, 42, 0.05);
+  border: 1px solid var(--hairline);
+}
+
+html[data-theme="light"] #organizations .org-tab {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  border: 1px solid transparent;
+}
+
+html[data-theme="light"] #organizations .org-tab:hover {
+  color: var(--ink);
+  background: rgba(38, 40, 42, 0.04);
+}
+
+html[data-theme="light"] #organizations .org-tab.active {
+  background: var(--milk);
+  color: var(--ink);
+  border-color: var(--hairline);
+  box-shadow: 0 2px 10px rgba(38, 40, 42, 0.08);
+}
+
+html[data-theme="light"] #organizations .org-doc-card {
+  background: var(--milk);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #organizations .org-doc-thumb {
+  border-radius: 19px 19px 0 0;
+}
+
+html[data-theme="light"] #organizations .org-doc-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #organizations .org-doc-card:hover .org-doc-zoom {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #FFFFFF;
+}
+
+html[data-theme="light"] #organizations .org-doc-body .org-name {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #organizations .org-doc-body .org-period {
+  font-family: var(--lm-sans);
+  font-weight: 600;
+  color: var(--orange-text);
+  letter-spacing: 0;
+}
+
+/* ─────────────────────────────────────────────
+   16. SECTION: PROYEK (#projects — BLOK ORANYE SOLID)
+   Blok --orange (#EC5E27) solid, judul & sub --milk (>=19px weight 500),
+   kartu --milk tanpa border, hover kartu -> --ink dengan teks --milk (0.25s)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #projects {
+  background: var(--orange);
+  background-color: var(--orange);
+  background-image: none;
+  border-radius: 36px;
+  margin: 2.5rem 14px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+/* Badge label di dalam blok Proyek: latar --milk, teks --orange-text */
+html[data-theme="light"] #projects .section-label {
+  font-family: var(--lm-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: var(--milk);
+  border: none;
+  color: var(--orange-text);
+  padding: 0.28rem 0.92rem;
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+}
+
+html[data-theme="light"] #projects .section-label::before {
+  background: var(--orange);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Judul & deskripsi section Proyek di atas latar --orange */
+html[data-theme="light"] #projects .section-title,
+html[data-theme="light"] #projects .projects-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--milk);
+}
+
+html[data-theme="light"] #projects .section-title .accent-text,
+html[data-theme="light"] #projects .projects-title .accent-text {
+  color: var(--milk);
+  -webkit-text-fill-color: var(--milk);
+}
+
+html[data-theme="light"] #projects .section-sub {
+  font-family: var(--lm-sans);
+  color: var(--milk);
+  font-size: 1.1875rem; /* 19px minimal */
+  font-weight: 500;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+/* Filter tabs di dalam blok Proyek: wadah krem agar teks kecil tidak di atas oranye */
+html[data-theme="light"] #projects .projects-tabs {
+  background: var(--milk);
+  border: none;
+  border-radius: 999px;
+  padding: 0.32rem;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="light"] #projects .project-tab {
+  font-family: var(--lm-sans);
+  font-size: 0.88rem; /* >= 14px */
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1.05rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html[data-theme="light"] #projects .project-tab:hover {
+  color: var(--ink);
+  background: var(--milk-2);
+}
+
+html[data-theme="light"] #projects .project-tab.active {
+  background: var(--orange);
+  color: var(--milk);
+  box-shadow: none;
+}
+
+/* Kartu Proyek di dalam blok oranye */
+html[data-theme="light"] #projects .project-card,
+html[data-theme="light"] #projects .project-card.project-featured {
+  background: var(--milk);
+  border: none;
+  border-radius: 22px;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+html[data-theme="light"] #projects .project-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+  transition: color 0.25s ease;
+}
+
+html[data-theme="light"] #projects .project-desc {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  transition: color 0.25s ease;
+}
+
+/* Badge featured */
+html[data-theme="light"] #projects .project-featured-badge {
+  background: rgba(236, 94, 39, 0.12);
+  border: none;
+  color: var(--orange-text);
+  font-family: var(--lm-sans);
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Kotak ikon proyek */
+html[data-theme="light"] #projects .project-icon {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Tag pada kartu proyek */
+html[data-theme="light"] #projects .tag {
+  background: rgba(236, 94, 39, 0.12);
+  border: none;
+  color: var(--orange-text);
+  border-radius: 999px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Tombol panah / link bulat pada kartu proyek */
+html[data-theme="light"] #projects .project-link {
+  background: var(--orange);
+  border: none;
+  border-radius: 50%;
+  color: var(--milk);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+html[data-theme="light"] #projects .project-link:hover {
+  background: var(--orange-dark);
+  color: var(--milk);
+  transform: scale(1.06);
+}
+
+/* Pemisah & tombol aksi di bawah kartu proyek */
+html[data-theme="light"] #projects .project-card-actions {
+  border-top: 1px solid var(--hairline);
+  transition: border-color 0.25s ease;
+}
+
+html[data-theme="light"] #projects .btn-card-primary {
+  background: var(--orange);
+  color: var(--milk);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--lm-sans);
+  font-size: 0.88rem; /* >= 14px */
+  font-weight: 600;
+  box-shadow: none;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+
+html[data-theme="light"] #projects .btn-card-primary:hover {
+  background: var(--orange-dark);
+  color: var(--milk);
+  transform: none;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #projects .btn-card-secondary {
+  background: var(--milk-2);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  font-family: var(--lm-sans);
+  font-size: 0.88rem; /* >= 14px */
+  font-weight: 600;
+  box-shadow: none;
+  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #projects .btn-card-secondary:hover {
+  background: var(--orange);
+  color: var(--milk);
+  border-color: var(--orange);
+  transform: none;
+}
+
+/* Hover kartu proyek: naik 4px, latar berubah menjadi --ink dengan teks --milk (0.25s) */
+html[data-theme="light"] #projects .project-card:hover {
+  transform: translateY(-4px);
+  background: var(--ink);
+  border: none;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-title,
+html[data-theme="light"] #projects .project-card:hover .project-desc {
+  color: var(--milk);
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-featured-badge {
+  background: rgba(253, 253, 241, 0.14);
+  color: var(--milk);
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-icon {
+  background: rgba(253, 253, 241, 0.10);
+  border-color: rgba(253, 253, 241, 0.20);
+}
+
+html[data-theme="light"] #projects .project-card:hover .tag {
+  background: rgba(253, 253, 241, 0.14);
+  color: var(--milk);
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-card-actions {
+  border-top-color: rgba(253, 253, 241, 0.16);
+}
+
+html[data-theme="light"] #projects .project-card:hover .btn-card-secondary {
+  background: rgba(253, 253, 241, 0.12);
+  color: var(--milk);
+  border-color: rgba(253, 253, 241, 0.24);
+}
+
+html[data-theme="light"] #projects .project-card:hover .btn-card-secondary:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--milk);
+}
+
+/* Tombol CTA di bawah daftar proyek (di atas latar blok --orange) */
+html[data-theme="light"] #projects .projects-cta .btn-outline {
+  background: var(--milk);
+  color: var(--ink);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--lm-sans);
+  font-size: 0.90rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #projects .projects-cta .btn-outline:hover {
+  background: var(--ink);
+  color: var(--milk);
+  transform: translateY(-2px);
+}
+
+html[data-theme="light"] #projects .projects-cta .btn-primary {
+  background: var(--ink);
+  color: var(--milk);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--lm-sans);
+  font-size: 0.90rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #projects .projects-cta .btn-primary:hover {
+  background: var(--milk);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────
+   17. SECTION: SERTIFIKAT (#certificates)
+   Latar --milk, tab wadah --milk-2 + border --hairline,
+   tab aktif --orange + --milk, kartu --milk-2 + border --hairline,
+   thumbnail --milk-3 + border tipis
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #certificates .cert-tabs {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.30rem;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="light"] #certificates .cert-tab {
+  font-family: var(--lm-sans);
+  font-size: 0.88rem; /* >= 14px */
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1.05rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html[data-theme="light"] #certificates .cert-tab:hover {
+  color: var(--ink);
+  background: transparent;
+}
+
+html[data-theme="light"] #certificates .cert-tab.active {
+  background: var(--orange);
+  color: var(--milk);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #certificates .cert-card,
+html[data-theme="light"] #certificates .cert-card-gallery {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+  backdrop-filter: none;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #certificates .cert-card:hover,
+html[data-theme="light"] #certificates .cert-card-gallery:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #certificates .cert-thumb-wrap {
+  background: var(--milk-3);
+  border: 1px solid var(--hairline);
+}
+
+html[data-theme="light"] #certificates .cert-zoom-icon {
+  background: rgba(38, 40, 42, 0.78);
+  color: var(--milk);
+  border: 1px solid rgba(253, 253, 241, 0.28);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #certificates .cert-title,
+html[data-theme="light"] #certificates .cert-name,
+html[data-theme="light"] #certificates .cert-card-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #certificates .cert-desc,
+html[data-theme="light"] #certificates .cert-body,
+html[data-theme="light"] #certificates .cert-issuer,
+html[data-theme="light"] #certificates .cert-card-meta {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #certificates .cert-load-more-btn {
+  background: var(--orange);
+  color: var(--milk);
+  font-family: var(--lm-sans);
+  font-size: 0.90rem; /* >= 14px */
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #certificates .cert-load-more-btn:hover {
+  background: var(--orange-dark);
+  color: var(--milk);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   18. SECTION: KEAHLIAN / TECH STACK (#skills — BLOK ORANYE SOLID)
+   Blok --orange (#EC5E27) solid, badge pil --milk + teks --orange-text,
+   tab wadah rgba(253,253,241,0.18), tab aktif --milk + teks --orange,
+   kartu --milk, hover/aktif kartu -> --ink + nama --milk + trek rgba(253,253,241,0.25)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #skills {
+  background: var(--orange);
+  background-color: var(--orange);
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 36px;
+  margin: 2.5rem 14px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  isolation: isolate;
+  position: relative;
+}
+
+/* Judul dan deskripsi di dalam blok Keahlian */
+html[data-theme="light"] #skills .section-title,
+html[data-theme="light"] #skills .skills-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--milk);
+}
+
+html[data-theme="light"] #skills .section-sub {
+  font-family: var(--lm-sans);
+  color: var(--milk);
+  font-size: 1.1875rem; /* 19px minimal */
+  font-weight: 500;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+/* Badge "Teknologi": pil dengan latar --milk dan teks --orange-text */
+html[data-theme="light"] #skills .section-label {
+  font-family: var(--lm-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: var(--milk);
+  border: none;
+  color: var(--orange-text);
+  padding: 0.28rem 0.92rem;
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+}
+
+html[data-theme="light"] #skills .section-label::before {
+  background: var(--orange-text);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Tombol filter (Semua, Bahasa, AI / ML, Alat) */
+html[data-theme="light"] #skills .skills-tabs {
+  background: rgba(253, 253, 241, 0.18);
+  border: none;
+  border-radius: 999px;
+  padding: 0.32rem;
+  box-shadow: none;
+}
+
+html[data-theme="light"] #skills .skill-tab {
+  font-family: var(--lm-sans);
+  font-size: 1.1875rem; /* 19px dengan weight 600 agar teks --milk di atas oranye memenuhi kontras >= 3:1 */
+  font-weight: 600;
+  color: var(--milk);
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  padding: 0.42rem 1.1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html[data-theme="light"] #skills .skill-tab:hover {
+  color: var(--milk);
+  background: rgba(253, 253, 241, 0.14);
+}
+
+html[data-theme="light"] #skills .skill-tab.active {
+  background: var(--milk);
+  color: var(--orange);
+  font-weight: 700;
+  box-shadow: none;
+}
+
+/* Kartu teknologi */
+html[data-theme="light"] #skills .skill-card {
+  background: var(--milk);
+  border: none;
+  border-radius: 20px;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: background-color 0.22s ease, transform 0.22s ease;
+}
+
+/* Nama teknologi: font sans, weight 600, --ink */
+html[data-theme="light"] #skills .skill-name {
+  font-family: var(--lm-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.22s ease;
+}
+
+/* Kotak ikon: latar --milk-3 dengan border --hairline */
+html[data-theme="light"] #skills .skill-icon {
+  background: var(--milk-3);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: background-color 0.22s ease, border-color 0.22s ease;
+}
+
+html[data-theme="light"] #skills .skill-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* Bilah progres: trek rgba(38,40,42,0.12), isi --orange solid */
+html[data-theme="light"] #skills .skill-level {
+  background: rgba(38, 40, 42, 0.12);
+  height: 3px;
+  border-radius: 3px;
+}
+
+html[data-theme="light"] #skills .skill-card:not(:has(.skill-level))::after {
+  height: 3px;
+}
+
+html[data-theme="light"] #skills .skill-bar {
+  background: var(--orange);
+  border-radius: 3px;
+}
+
+/* Hover / aktif kartu teknologi: latar --ink, nama --milk, trek rgba(253,253,241,0.25), isi --orange */
+html[data-theme="light"] #skills .skill-card:hover,
+html[data-theme="light"] #skills .skill-card.active {
+  background: var(--ink);
+  border-color: transparent;
+  box-shadow: none;
+  transform: translateY(-4px);
+}
+
+html[data-theme="light"] #skills .skill-card:hover .skill-name,
+html[data-theme="light"] #skills .skill-card.active .skill-name {
+  color: var(--milk);
+}
+
+html[data-theme="light"] #skills .skill-card:hover .skill-level,
+html[data-theme="light"] #skills .skill-card.active .skill-level {
+  background: rgba(253, 253, 241, 0.25);
+}
+
+html[data-theme="light"] #skills .skill-card:hover .skill-bar,
+html[data-theme="light"] #skills .skill-card.active .skill-bar {
+  background: var(--orange);
+}
+
+html[data-theme="light"] #skills .skill-card:hover .skill-icon,
+html[data-theme="light"] #skills .skill-card.active .skill-icon {
+  background: var(--milk-3);
+  border-color: var(--hairline);
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   19. SECTION: KONTAK (#contact)
+   Latar --milk, kotak ikon rgba(236,94,39,0.12) + ikon --orange-text,
+   panel --milk-2 + border --hairline, input --milk + fokus outline 3px rgba(236,94,39,0.35)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #contact .contact-card,
+html[data-theme="light"] #contact .contact-form-panel,
+html[data-theme="light"] #contact .contact-info-card {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  border-radius: 26px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="light"] #contact .card-title,
+html[data-theme="light"] #contact .contact-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #contact .contact-icon {
+  background: rgba(236, 94, 39, 0.12);
+  border: 1px solid rgba(236, 94, 39, 0.22);
+  border-radius: 12px;
+  color: var(--orange-text);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #contact .contact-icon i {
+  color: var(--orange-text);
+}
+
+html[data-theme="light"] #contact .contact-item:hover .contact-icon {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--milk);
+  box-shadow: none;
+}
+
+html[data-theme="light"] #contact .contact-item:hover .contact-icon i {
+  color: var(--milk);
+}
+
+html[data-theme="light"] #contact .contact-text label {
+  font-family: var(--lm-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-theme="light"] #contact .contact-text a,
+html[data-theme="light"] #contact .contact-text span {
+  font-family: var(--lm-sans);
+  color: var(--ink);
+}
+
+html[data-theme="light"] #contact .contact-text a:hover {
+  color: var(--orange-text);
+}
+
+/* Badge ketersediaan di #contact: sesuaikan teks hijau agar kontras di atas --milk-2 */
+html[data-theme="light"] #contact .availability-badge {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.32);
+  color: #15803d;
+  font-family: var(--lm-sans);
+  font-weight: 600;
+}
+
+html[data-theme="light"] #contact label {
+  font-family: var(--lm-sans);
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+html[data-theme="light"] #contact input[type="text"],
+html[data-theme="light"] #contact input[type="email"],
+html[data-theme="light"] #contact textarea {
+  background: var(--milk);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: var(--lm-sans);
+  font-size: 0.88rem;
+  box-shadow: none;
+  transition: border-color 0.2s ease, outline-color 0.2s ease;
+}
+
+html[data-theme="light"] #contact input[type="text"]::placeholder,
+html[data-theme="light"] #contact input[type="email"]::placeholder,
+html[data-theme="light"] #contact textarea::placeholder {
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #contact input[type="text"]:focus,
+html[data-theme="light"] #contact input[type="email"]:focus,
+html[data-theme="light"] #contact textarea:focus {
+  background: var(--milk);
+  border-color: var(--orange);
+  outline: 3px solid rgba(236, 94, 39, 0.35);
+  outline-offset: 0;
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   20. SECTION: CTA BANNER (#cta-banner)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #cta-banner {
+  border-bottom: 1px solid var(--hairline);
+}
+
+html[data-theme="light"] #cta-banner .cta-quote-icon {
+  color: var(--orange);
+}
+
+html[data-theme="light"] #cta-banner .cta-banner-quote {
+  font-family: var(--lm-serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: 100%;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
+
+html[data-theme="light"] #cta-banner .cta-banner-author {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  letter-spacing: 0;
+}
+
+/* ─────────────────────────────────────────────
+   21. FOOTER
+   Latar --milk-2, border atas --hairline, teks --ink-soft
+   ───────────────────────────────────────────── */
+html[data-theme="light"] footer {
+  background: var(--milk-2);
+  background-color: var(--milk-2);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] .footer-brand,
+html[data-theme="light"] .footer-logo,
+html[data-theme="light"] footer .footer-logo {
+  font-family: var(--lm-serif);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: var(--ink) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="light"] .footer-logo-img,
+html[data-theme="light"] footer .footer-logo-img {
+  border: 1px solid var(--hairline) !important;
+}
+
+html[data-theme="light"] .footer-tagline,
+html[data-theme="light"] .footer-copy {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+html[data-theme="light"] .footer-copy span {
+  color: var(--orange-text);
+}
+
+html[data-theme="light"] .footer-links a,
+html[data-theme="light"] footer a {
+  font-family: var(--lm-sans);
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+html[data-theme="light"] .footer-links a:hover,
+html[data-theme="light"] footer a:hover {
+  color: var(--orange-text);
+}
+
+html[data-theme="light"] footer .social-btn {
+  background: var(--milk);
+  border: 1px solid var(--hairline);
+  color: var(--ink-soft);
+  box-shadow: none;
+}
+
+html[data-theme="light"] footer .social-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--milk);
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   22. MODAL DETAIL PROYEK (#projectModal)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] #projectModal .custom-modal-card {
+  background: var(--milk);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 12px 28px -20px rgba(38, 40, 42, 0.25);
+}
+
+html[data-theme="light"] #projectModal .modal-header-badge {
+  background: rgba(236, 94, 39, 0.12);
+  border: 1px solid rgba(236, 94, 39, 0.22);
+  color: var(--orange-text);
+  font-family: var(--lm-sans);
+}
+
+html[data-theme="light"] #projectModal .modal-title {
+  font-family: var(--lm-serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #projectModal .modal-sub,
+html[data-theme="light"] #projectModal .modal-desc,
+html[data-theme="light"] #projectModal .modal-highlights li {
+  font-family: var(--lm-sans);
+  color: var(--ink-soft);
+}
+
+html[data-theme="light"] #projectModal .modal-highlights li i {
+  color: var(--orange);
+}
+
+html[data-theme="light"] #projectModal .custom-modal-close {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+}
+
+html[data-theme="light"] #projectModal .custom-modal-close:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--milk);
+}
+
+/* ─────────────────────────────────────────────
+   24. SCROLL INDICATOR (di dalam #hero — tetap nitro)
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .scroll-line {
+  background: linear-gradient(to bottom, var(--nitro), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   25. ORBS — matikan di light mode agar tidak bocor di sekitar blok
+   ───────────────────────────────────────────── */
+html[data-theme="light"] .orb1,
+html[data-theme="light"] .orb2,
+html[data-theme="light"] .orb3 {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────
+   26. AKSESIBILITAS — keyboard focus visible
+   ───────────────────────────────────────────── */
+html[data-theme="light"] :focus-visible {
+  outline: 3px solid var(--nitro);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+html[data-theme="light"] :is(#about, #timeline, #organizations, #certificates, #cta-banner, #contact, footer, #projectModal) :focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] :is(#projects, #skills) :focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────────
+   27. RESPONSIF — blok tidak overflow di HP (375px)
+   ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  html[data-theme="light"] #projects,
+  html[data-theme="light"] #skills {
+    border-radius: 24px;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  html[data-theme="light"] #organizations {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  html[data-theme="light"] #organizations .section-container {
+    border-radius: 24px;
+    padding: 2rem 1.25rem;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   28. PREFERS REDUCED MOTION
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] .btn-primary,
+  html[data-theme="light"] .btn-outline,
+  html[data-theme="light"] .btn-cv,
+  html[data-theme="light"] .project-card,
+  html[data-theme="light"] .cert-card,
+  html[data-theme="light"] .org-card,
+  html[data-theme="light"] .stat-card,
+  html[data-theme="light"] .skill-card,
+  html[data-theme="light"] .tl-content,
+  html[data-theme="light"] .timeline-card,
+  html[data-theme="light"] .detail-item,
+  html[data-theme="light"] .hero-social-link,
+  html[data-theme="light"] .project-link {
+    transition: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   29. LIGHT MODE — HERO ("BERANDA") ONLY: EDITORIAL CARD COMPOSITION
+   Strictly scoped to `html[data-theme="light"] #hero`.
+   Palette:
+     - MILK   #FDFDF1 (flat hero background & pill background)
+     - CARD   #FFFFF8 (photo card background)
+     - ORANGE #EC5E27 (solid curved frame, small line, small icons)
+     - INK    #26282A (name, primary text, primary button)
+     - Muted  #5A5E63, Hairline rgba(38,40,42,0.16), Dark Orange #B8430F
+   Dark Mode (`.dark` / `[data-theme="dark"]`) and other sections remain
+   100% untouched.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Scoped Variables & Flat MILK Background (#FDFDF1) ── */
+html[data-theme="light"] #hero {
+  --hero-milk:        #FDFDF1;
+  --hero-card-bg:     #FFFFF8;
+  --hero-orange:      #EC5E27;
+  --hero-orange-text: #B8430F;
+  --hero-ink:         #26282A;
+  --hero-muted:       #5A5E63;
+  --hero-hairline:    rgba(38, 40, 42, 0.16);
+  --hero-card-border: rgba(38, 40, 42, 0.12);
+  --hero-serif:       'DM Serif Display', Georgia, serif;
+  --hero-sans:        'DM Sans', system-ui, sans-serif;
+
+  background-color: var(--hero-milk) !important;
+  background-image: none !important;
+  min-height: max(100dvh, 680px) !important;
+  padding: 64px 2rem 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* ── 2. Hide Decorative Light-Mode Elements & Deactivate Previous Arch Pseudo-Element ── */
+html[data-theme="light"] #hero .ag3d-scene,
+html[data-theme="light"] #hero .ag3d-sphere,
+html[data-theme="light"] #hero .ag3d-torus,
+html[data-theme="light"] #hero::before,
+html[data-theme="light"] #hero::after,
+html[data-theme="light"] #hero .hero-text::before,
+html[data-theme="light"] #hero .hc-photo::before,
+html[data-theme="light"] #hero .hc-shadow,
+html[data-theme="light"] #hero .hc-glare,
+html[data-theme="light"] #hero .hc-dot,
+html[data-theme="light"] #hero .hc-dot-a,
+html[data-theme="light"] #hero .hc-dot-b,
+html[data-theme="light"] #hero .hc-dot-c {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+/* ── 3. Two-Column Grid Layout (1.1 : 1, gap 20px, max-width 1140px) ── */
+html[data-theme="light"] #hero .hero-inner {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  gap: 20px !important;
+  align-items: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+html[data-theme="light"] #hero .hero-text {
+  position: relative !important;
+  z-index: 3 !important;
+  padding: 20px 0 !important;
+  align-self: center !important;
+  text-align: left !important;
+}
+
+html[data-theme="light"] #hero .hero-photo-col {
+  position: relative !important;
+  z-index: 2 !important;
+  perspective: 900px !important;
+  perspective-origin: center center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: 3rem 2.5rem !important;
+  cursor: default !important;
+  width: 100% !important;
+}
+
+/* ── 4. Card Wrapper, Curved Solid Orange Frame & Photo Card (3D style matching Dark Mode) ── */
+html[data-theme="light"] #hero .hero-card-3d {
+  position: relative !important;
+  width: 300px !important;
+  height: 380px !important;
+  transform-style: preserve-3d !important;
+  transform: rotateY(-8deg) rotateX(4deg);
+  transition: transform 0.08s linear !important;
+  will-change: transform !important;
+  cursor: default !important;
+  display: block !important;
+  aspect-ratio: auto !important;
+  margin: 0 !important;
+}
+
+/* Shadow lantai yang mengikuti tilt */
+html[data-theme="light"] #hero .hc-shadow {
+  display: block !important;
+  position: absolute !important;
+  bottom: -36px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 220px !important;
+  height: 40px !important;
+  background: radial-gradient(ellipse at center, rgba(38, 40, 42, 0.24) 0%, transparent 70%) !important;
+  filter: blur(12px) !important;
+  border-radius: 50% !important;
+  pointer-events: none !important;
+}
+
+/* Curved Orange Frame (.hc-frame & .hc-frame-ring) */
+html[data-theme="light"] #hero .hc-frame {
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  inset: -16px !important;
+  border-radius: 52% 48% 44% 56% / 48% 54% 46% 52% !important;
+  transform: translateZ(-20px) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] #hero .hc-frame-ring {
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background-color: var(--hero-orange) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Photo Card (.hc-photo): radius 28px 10px 34px 14px, translateZ(0px) */
+html[data-theme="light"] #hero .hc-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: 28px 10px 34px 14px !important;
+  overflow: hidden !important;
+  transform: translateZ(0px) !important;
+  background-color: var(--hero-card-bg) !important;
+  border: 1px solid var(--hero-card-border) !important;
+  box-shadow: 0 8px 32px rgba(38, 40, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+html[data-theme="light"] #hero .hc-photo img {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* Glare reflection */
+html[data-theme="light"] #hero .hc-glare {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 60%) !important;
+  pointer-events: none !important;
+  mix-blend-mode: overlay !important;
+}
+
+/* ── 5. Three Skill Pills (Floating at translateZ(40px)) ── */
+html[data-theme="light"] #hero .hc-chip {
+  position: absolute !important;
+  z-index: 4 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 9px 16px !important;
+  margin: 0 !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  background-color: var(--hero-milk) !important;
+  background-image: none !important;
+  border: 1px solid var(--hero-hairline) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 16px -12px rgba(38, 40, 42, 0.28) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  font-family: var(--hero-sans) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  color: var(--hero-ink) !important;
+  transform: translateZ(40px) !important;
+  pointer-events: none !important;
+}
+
+html[data-theme="light"] #hero .hc-chip::before,
+html[data-theme="light"] #hero .hc-chip::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme="light"] #hero .hc-chip i {
+  color: var(--hero-orange) !important;
+  font-size: 14px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* 1. "Deepfake Detection" (.hc-chip-2): top-right (~12% from top, ~35% of pill width protruding right) */
+html[data-theme="light"] #hero .hc-chip-2 {
+  top: 12% !important;
+  right: -18% !important;
+  left: auto !important;
+  bottom: auto !important;
+}
+
+/* 2. "Web Developer" (.hc-chip-3): mid-left (~48% from top, ~35% of pill width protruding left) */
+html[data-theme="light"] #hero .hc-chip-3 {
+  top: 48% !important;
+  left: -16% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* 3. "Machine Learning" (.hc-chip-1): bottom-left (~76% from top, ~35% of pill width protruding left) */
+html[data-theme="light"] #hero .hc-chip-1 {
+  top: 76% !important;
+  left: -17% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* ── 6. Left-Column Typography: Name ("Fachril" / "Akbar"), Role & Info ── */
+html[data-theme="light"] #hero h1,
+html[data-theme="light"] #hero .hero-title {
+  position: relative !important;
+  z-index: 3 !important;
+  font-family: var(--hero-serif) !important;
+  font-weight: 400 !important;
+  font-size: clamp(60px, min(9vw, 15vh), 132px) !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.025em !important;
+  color: var(--hero-ink) !important;
+  max-width: 7ch !important;
+  text-wrap: balance;
+  margin-top: 0 !important;
+  margin-bottom: 18px !important;
+  margin-right: 0 !important;
+}
+
+html[data-theme="light"] #hero .hero-title .grad-text {
+  display: inline !important;
+  color: var(--hero-ink) !important;
+  -webkit-text-fill-color: var(--hero-ink) !important;
+  background: none !important;
+  background-image: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] #hero .hero-badge {
+  margin-bottom: 14px !important;
+}
+
+/* "Halo, saya": #5A5E63, 15px */
+html[data-theme="light"] #hero .hero-greeting {
+  font-family: var(--hero-sans) !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: var(--hero-muted) !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Role (typing animation): #5A5E63, 18px; prefix dash becomes 22×2px orange line */
+html[data-theme="light"] #hero .hero-subtitle-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 16px !important;
+  min-height: 28px !important;
+}
+
+html[data-theme="light"] #hero .hero-subtitle-prefix {
+  display: inline-block !important;
+  width: 22px !important;
+  height: 2px !important;
+  background-color: var(--hero-orange) !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+}
+
+html[data-theme="light"] #hero .hero-subtitle {
+  font-family: var(--hero-sans) !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: var(--hero-muted) !important;
+  letter-spacing: 0 !important;
+  margin: 0 !important;
+}
+
+html[data-theme="light"] #hero .hero-subtitle::after {
+  color: var(--hero-orange) !important;
+}
+
+/* Info row (location, university, major): #5A5E63, 14px, gap + flex-wrap without dangling divider lines */
+html[data-theme="light"] #hero .hero-info {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px 20px !important;
+  margin-bottom: 22px !important;
+}
+
+html[data-theme="light"] #hero .hero-info-item {
+  font-family: var(--hero-sans) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--hero-muted) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+html[data-theme="light"] #hero .hero-info-item i {
+  color: var(--hero-orange) !important;
+  font-size: 13px !important;
+}
+
+/* ── 7. Buttons & Social Icons (0.2s Transitions) ── */
+html[data-theme="light"] #hero .hero-btns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 22px !important;
+}
+
+/* Primary button ("Lihat Proyek"): pill, INK bg, MILK text, weight 600, no shadow */
+html[data-theme="light"] #hero .btn-primary {
+  font-family: var(--hero-sans) !important;
+  font-weight: 600 !important;
+  background-color: var(--hero-ink) !important;
+  background-image: none !important;
+  color: var(--hero-milk) !important;
+  border: 1px solid var(--hero-ink) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+}
+
+html[data-theme="light"] #hero .btn-primary i {
+  color: inherit !important;
+}
+
+html[data-theme="light"] #hero .btn-primary:hover {
+  background-color: var(--hero-orange) !important;
+  background-image: none !important;
+  border-color: var(--hero-orange) !important;
+  color: var(--hero-milk) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
+}
+
+/* Secondary & tertiary buttons ("Lihat Sertifikat", "Hubungi Saya"): pill, transparent bg, 1px solid INK, INK text */
+html[data-theme="light"] #hero .btn-outline {
+  font-family: var(--hero-sans) !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--hero-ink) !important;
+  border: 1px solid var(--hero-ink) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+html[data-theme="light"] #hero .btn-outline i {
+  color: inherit !important;
+}
+
+html[data-theme="light"] #hero .btn-outline:hover {
+  background-color: transparent !important;
+  border-color: var(--hero-orange) !important;
+  color: var(--hero-ink) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
+}
+
+/* Social icons: 44px circle, 1px solid hairline, INK icon; hover -> INK bg + MILK icon */
+html[data-theme="light"] #hero .hero-socials {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+}
+
+html[data-theme="light"] #hero .hero-social-link {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--hero-hairline) !important;
+  color: var(--hero-ink) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+}
+
+html[data-theme="light"] #hero .hero-social-link i {
+  color: inherit !important;
+}
+
+html[data-theme="light"] #hero .hero-social-link:hover {
+  background-color: var(--hero-ink) !important;
+  border-color: var(--hero-ink) !important;
+  color: var(--hero-milk) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Keyboard focus-visible: 3px solid orange outline */
+html[data-theme="light"] #hero a:focus-visible,
+html[data-theme="light"] #hero button:focus-visible {
+  outline: 3px solid var(--hero-orange) !important;
+  outline-offset: 3px !important;
+}
+
+/* ── 8. Narrow Desktop (901px – 1150px): Adjust Left Pill Offset to Prevent Collision ── */
+@media (max-width: 1150px) and (min-width: 901px) {
+  html[data-theme="light"] #hero .hero-photo-col {
+    padding-right: 48px !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-3 {
+    left: -12% !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-1 {
+    left: -12% !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-2 {
+    right: -14% !important;
+  }
+}
+
+/* ── 9. Responsive ≤ 860px (1 Column: Text on Top, Card min(86vw, 340px) Centered Below, Pills Wrapped Below Card) ── */
+@media (max-width: 860px) {
+  html[data-theme="light"] #hero {
+    min-height: auto !important;
+    padding: 76px 1.5rem 40px !important;
+  }
+
+  html[data-theme="light"] #hero .hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+    align-items: start !important;
+    text-align: left !important;
+  }
+
+  html[data-theme="light"] #hero .hero-text {
+    padding: 12px 0 0 0 !important;
+    width: 100% !important;
+  }
+
+  html[data-theme="light"] #hero h1,
+  html[data-theme="light"] #hero .hero-title {
+    font-size: clamp(56px, 14vw, 92px) !important;
+    margin-right: 0 !important;
+    max-width: 7ch !important;
+  }
+
+  html[data-theme="light"] #hero .hero-photo-col {
+    order: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    justify-self: center !important;
+    width: 100% !important;
+    padding: 16px 0 0 0 !important;
+  }
+
+  html[data-theme="light"] #hero .hero-card-3d {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transform: none !important;
+    transform-style: flat !important;
+    margin: 0 auto !important;
+    position: relative !important;
+  }
+
+  html[data-theme="light"] #hero .hc-frame {
+    position: absolute !important;
+    width: 268px !important;
+    height: 332px !important;
+    top: -14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    inset: auto !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  html[data-theme="light"] #hero .hc-photo {
+    position: relative !important;
+    width: 240px !important;
+    height: 304px !important;
+    flex: 0 0 100% !important;
+    margin: 0 auto 16px !important;
+    inset: auto !important;
+    transform: none !important;
+    z-index: 2 !important;
+  }
+
+  /* Single wrapped row of small pills centered directly below the card */
+  html[data-theme="light"] #hero .hc-chip,
+  html[data-theme="light"] #hero .hc-chip-1,
+  html[data-theme="light"] #hero .hc-chip-2,
+  html[data-theme="light"] #hero .hc-chip-3 {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+    background-color: var(--hero-milk) !important;
+    border: 1px solid var(--hero-hairline) !important;
+    border-radius: 999px !important;
+    box-shadow: 0 8px 16px -12px rgba(38, 40, 42, 0.28) !important;
+    flex: 0 0 auto !important;
+    z-index: 3 !important;
+  }
+}
+
+/* ── 10. Responsive ≤ 480px (Small Mobile: Prevent Clipping & Horizontal Scroll) ── */
+@media (max-width: 480px) {
+  html[data-theme="light"] #hero {
+    padding: 68px 1.25rem 32px !important;
+  }
+
+  html[data-theme="light"] #hero h1,
+  html[data-theme="light"] #hero .hero-title {
+    font-size: clamp(50px, 14vw, 72px) !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html[data-theme="light"] #hero .hero-subtitle {
+    font-size: 16px !important;
+  }
+
+  html[data-theme="light"] #hero .hero-info {
+    gap: 6px 14px !important;
+  }
+
+  html[data-theme="light"] #hero .hero-info-item {
+    font-size: 13px !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip,
+  html[data-theme="light"] #hero .hc-chip-1,
+  html[data-theme="light"] #hero .hc-chip-2,
+  html[data-theme="light"] #hero .hc-chip-3 {
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+  }
+}
+
+/* ── 11. Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] #hero .btn-primary,
+  html[data-theme="light"] #hero .btn-outline,
+  html[data-theme="light"] #hero .hero-social-link {
+    transition: none !important;
+  }
+}
+
+/* ══ END HERO-ONLY LIGHT MODE OVERRIDES ══ */
+
+
+/* ══════════════════════════════════════════════════════════════════
+   DARK MODE PALETTE — "BLACK, LIME & VIOLET"
+   Applies ONLY when `.dark` or `[data-theme="dark"]` is active.
+   Light mode ("Milk & Orange") and HTML remain 100% untouched.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 0. Dark Mode Color Variables ── */
+:is(.dark, [data-theme="dark"]) {
+  /* Scoped Palette Tokens */
+  --dk-black:        #000000;
+  --dk-s1:           #0C0C10;
+  --dk-s2:           #15151B;
+  --dk-violet:       #7F3AED;
+  --dk-violet-soft:  rgba(127, 58, 237, 0.16);
+  --dk-lime:         #C6FF34;
+  --dk-lime-hover:   #B2E82C;
+  --dk-lime-soft:    rgba(198, 255, 52, 0.10);
+  --dk-lime-border:  rgba(198, 255, 52, 0.28);
+  --dk-text:         #F3F3EE;
+  --dk-muted:        #A9A9B6;
+  --dk-line:         rgba(255, 255, 255, 0.13);
+  --dk-line-light:   rgba(255, 255, 255, 0.35);
+
+  /* Typography Tokens (Arahkan ke variabel font mode terang yang sudah ada) */
+  --font-serif:      'DM Serif Display', Georgia, serif;
+  --font-sans:       'DM Sans', system-ui, sans-serif;
+  --font-heading:    var(--font-serif);
+  --font-body:       var(--font-sans);
+  --font-mono:       var(--font-sans);
+  --lm-serif:        var(--font-serif);
+  --lm-sans:         var(--font-sans);
+  --hero-serif:      var(--font-serif);
+  --hero-sans:       var(--font-sans);
+
+  /* Legacy Global Token Remapping */
+  --bg:              var(--dk-black);
+  --bg2:             var(--dk-s1);
+  --bg3:             var(--dk-s2);
+  --card:            var(--dk-s2);
+  --card2:           var(--dk-s1);
+  --card-border:     var(--dk-line);
+  --border:          var(--dk-line);
+  --border-lt:       var(--dk-line);
+  --text:            var(--dk-text);
+  --text-bright:     var(--dk-text);
+  --muted:           var(--dk-muted);
+  --muted-lt:        var(--dk-muted);
+  --red:             var(--dk-lime);
+  --red-lt:          var(--dk-lime);
+  --red-dk:          var(--dk-lime);
+  --coral:           var(--dk-violet);
+  --amber:           var(--dk-lime);
+  --amber-lt:        var(--dk-lime);
+  --teal:            var(--dk-lime);
+  --violet:          var(--dk-violet);
+  --primary-color:   var(--dk-violet);
+  --accent-color:    var(--dk-lime);
+  --grad:            linear-gradient(135deg, var(--dk-lime) 0%, var(--dk-violet) 100%);
+  --grad-cool:       linear-gradient(135deg, var(--dk-violet) 0%, var(--dk-lime) 100%);
+  --grad-subtle:     var(--dk-lime-soft);
+  --glow:            0 0 48px rgba(198, 255, 52, 0.22);
+  --orange:          var(--dk-lime);
+  --orange-text:     var(--dk-lime);
+  --hero-orange:     var(--dk-lime);
+  --hero-orange-text:var(--dk-lime);
+  --nitro:           var(--dk-lime);
+  --orange-deep:     var(--dk-lime);
+  --orange-subtle:   var(--dk-lime-soft);
+  --orange-glow:     0 0 24px rgba(198, 255, 52, 0.28);
+  --hero-hairline:   var(--dk-line);
+  --hero-muted:      var(--dk-muted);
+  --hero-ink:        var(--dk-text);
+  --hero-milk:       var(--dk-black);
+  --hero-card-bg:    var(--dk-s2);
+  --hero-card-border:var(--dk-line);
+  --surface-card:    var(--dk-s2);
+}
+
+/* ── 1. Global & Body ── */
+:is(.dark, [data-theme="dark"]) body {
+  background-color: var(--dk-black) !important;
+  color: var(--dk-text) !important;
+  font-family: var(--lm-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:is(.dark, [data-theme="dark"]) body::before,
+:is(.dark, [data-theme="dark"]) body::after,
+:is(.dark, [data-theme="dark"]) :is(#hero, #about, #timeline, #organizations, #projects, #certificates, #skills, #cta-banner, #contact)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Neutralize marquee red dots and icons */
+:is(.dark, [data-theme="dark"]) .marquee-content .dot {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .marquee-content span i {
+  color: var(--dk-lime) !important;
+}
+
+/* CTA Quote Banner */
+:is(.dark, [data-theme="dark"]) #cta-banner {
+  background-color: var(--dk-s1) !important;
+  border-top: 1px solid var(--dk-line) !important;
+  border-bottom: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #cta-banner::before {
+  display: none !important;
+  content: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #cta-banner .cta-quote-icon {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #cta-banner .cta-banner-quote {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #cta-banner .cta-banner-author {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) p,
+:is(.dark, [data-theme="dark"]) .section-sub,
+:is(.dark, [data-theme="dark"]) .about-p1,
+:is(.dark, [data-theme="dark"]) .about-p2,
+:is(.dark, [data-theme="dark"]) .timeline-desc,
+:is(.dark, [data-theme="dark"]) .org-desc,
+:is(.dark, [data-theme="dark"]) .project-desc,
+:is(.dark, [data-theme="dark"]) .cert-card-meta,
+:is(.dark, [data-theme="dark"]) .modal-desc,
+:is(.dark, [data-theme="dark"]) .footer-tagline,
+:is(.dark, [data-theme="dark"]) .footer-copy {
+  font-family: var(--lm-sans) !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+
+:is(.dark, [data-theme="dark"]) ::selection {
+  background: rgba(198, 255, 52, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
+:is(.dark, [data-theme="dark"]) :focus-visible {
+  outline: 3px solid var(--dk-lime) !important;
+  outline-offset: 2px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects :focus-visible {
+  outline: 3px solid #000000 !important;
+}
+
+/* Fresh Graduate Badge - WCAG AAA contrast */
+:is(.dark, [data-theme="dark"]) .hero-badge {
+  background: rgba(34, 197, 94, 0.15) !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+  color: #4ade80 !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── Typography (DM Serif Display for headings, DM Sans for body/UI) ── */
+:is(.dark, [data-theme="dark"]) .section-title,
+:is(.dark, [data-theme="dark"]) h2,
+:is(.dark, [data-theme="dark"]) h3.card-title,
+:is(.dark, [data-theme="dark"]) .card-title,
+:is(.dark, [data-theme="dark"]) .project-title,
+:is(.dark, [data-theme="dark"]) .cert-card-title,
+:is(.dark, [data-theme="dark"]) .cert-title,
+:is(.dark, [data-theme="dark"]) .cert-name,
+:is(.dark, [data-theme="dark"]) .org-name,
+:is(.dark, [data-theme="dark"]) .org-title,
+:is(.dark, [data-theme="dark"]) .timeline-title,
+:is(.dark, [data-theme="dark"]) .modal-title,
+:is(.dark, [data-theme="dark"]) .nav-brand,
+:is(.dark, [data-theme="dark"]) .footer-logo,
+:is(.dark, [data-theme="dark"]) .stat-num,
+:is(.dark, [data-theme="dark"]) .stat-suffix {
+  font-family: var(--lm-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+}
+
+:is(.dark, [data-theme="dark"]) .section-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 7px 14px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-shadow: none !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+  margin-bottom: 0.8rem !important;
+}
+
+:is(.dark, [data-theme="dark"]) .section-label::before {
+  content: '' !important;
+  display: inline-block !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--dk-lime) !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) .tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .timeline-tags,
+:is(.dark, [data-theme="dark"]) .org-tags,
+:is(.dark, [data-theme="dark"]) .project-tags,
+:is(.dark, [data-theme="dark"]) .cert-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: flex-start !important;
+}
+
+:is(.dark, [data-theme="dark"]) .btn-primary,
+:is(.dark, [data-theme="dark"]) .btn-outline,
+:is(.dark, [data-theme="dark"]) .btn-card-action,
+:is(.dark, [data-theme="dark"]) .btn-card-primary,
+:is(.dark, [data-theme="dark"]) .btn-card-secondary,
+:is(.dark, [data-theme="dark"]) .btn-cv,
+:is(.dark, [data-theme="dark"]) .btn-full,
+:is(.dark, [data-theme="dark"]) .cert-load-more-btn,
+:is(.dark, [data-theme="dark"]) .project-tab,
+:is(.dark, [data-theme="dark"]) .cert-tab,
+:is(.dark, [data-theme="dark"]) .skill-tab,
+:is(.dark, [data-theme="dark"]) .org-tab,
+:is(.dark, [data-theme="dark"]) .tag,
+:is(.dark, [data-theme="dark"]) .timeline-year,
+:is(.dark, [data-theme="dark"]) .timeline-place,
+:is(.dark, [data-theme="dark"]) .org-role,
+:is(.dark, [data-theme="dark"]) .org-period,
+:is(.dark, [data-theme="dark"]) .skill-name,
+:is(.dark, [data-theme="dark"]) .stat-label,
+:is(.dark, [data-theme="dark"]) .contact-item,
+:is(.dark, [data-theme="dark"]) .contact-text,
+:is(.dark, [data-theme="dark"]) input,
+:is(.dark, [data-theme="dark"]) textarea,
+:is(.dark, [data-theme="dark"]) select,
+:is(.dark, [data-theme="dark"]) label {
+  font-family: var(--lm-sans) !important;
+}
+
+/* ── 2. Navbar ── */
+:is(.dark, [data-theme="dark"]) #mainNav {
+  background: var(--dk-black) !important;
+  border-bottom: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) .nav-logo-img {
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-links a {
+  font-family: var(--lm-sans) !important;
+  letter-spacing: 0 !important;
+  color: var(--dk-muted) !important;
+  transition: color 0.2s ease;
+}
+
+@media (min-width: 901px) {
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a {
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+  }
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-links a:hover {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-links a.active {
+  color: var(--dk-lime) !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-links a::after {
+  background: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .theme-toggle {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  color: var(--dk-text) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .theme-toggle:hover {
+  border-color: var(--dk-lime) !important;
+  background: var(--dk-lime-soft) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-hamburger {
+  border-color: var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-hamburger:hover {
+  background: var(--dk-lime-soft) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #mainNav .nav-hamburger span {
+  background: var(--dk-text) !important;
+}
+
+/* Navbar responsive (≤ 860px solid dark card below top bar) */
+@media (max-width: 860px) {
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links {
+    background: #0D1117 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 44px -8px rgba(0, 0, 0, 0.75),
+                0 4px 16px -2px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  }
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a {
+    font-family: var(--font-title, "DM Serif Display", Georgia, serif) !important;
+    font-size: 22px !important;
+    color: #e6edf3 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links li:last-child a,
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links li:last-of-type a {
+    border-bottom: none !important;
+  }
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a.active,
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a:hover {
+    color: var(--dk-lime, #C6FF34) !important;
+    border-left-color: var(--dk-lime, #C6FF34) !important;
+  }
+}
+
+/* ── 3. Beranda (#hero) ── */
+:is(.dark, [data-theme="dark"]) #hero {
+  background-color: var(--dk-black) !important;
+  background-image: none !important;
+  min-height: max(100dvh, 680px) !important;
+  padding: 64px 2rem 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero::before,
+:is(.dark, [data-theme="dark"]) #hero::after,
+:is(.dark, [data-theme="dark"]) #hero .hero-text::before {
+  background: transparent !important;
+  display: none !important;
+  content: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-inner {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  gap: 20px !important;
+  align-items: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-text {
+  position: relative !important;
+  z-index: 3 !important;
+  padding: 20px 0 !important;
+  align-self: center !important;
+  text-align: left !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-badge {
+  margin-bottom: 14px !important;
+}
+
+/* Hero text & greetings */
+:is(.dark, [data-theme="dark"]) #hero .hero-greeting {
+  font-family: var(--lm-sans) !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  color: var(--dk-muted) !important;
+  margin-bottom: 8px !important;
+}
+
+/* Hero name ("Fachril" di atas, "Akbar" di bawah, dua baris — font, ukuran, & ketebalan persis mode terang) */
+:is(.dark, [data-theme="dark"]) #hero h1,
+:is(.dark, [data-theme="dark"]) #hero .hero-title {
+  position: relative !important;
+  z-index: 3 !important;
+  font-family: var(--hero-serif) !important;
+  font-weight: 400 !important;
+  font-size: clamp(60px, min(9vw, 15vh), 132px) !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.025em !important;
+  color: var(--dk-text) !important;
+  max-width: 7ch !important;
+  text-wrap: balance !important;
+  margin-top: 0 !important;
+  margin-bottom: 18px !important;
+  margin-right: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-title .grad-text {
+  display: inline !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: var(--dk-text) !important;
+  color: var(--dk-text) !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-subtitle-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 16px !important;
+  min-height: 28px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-subtitle-prefix {
+  display: inline-block !important;
+  width: 22px !important;
+  height: 2px !important;
+  background-color: var(--dk-lime) !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-subtitle {
+  font-family: var(--lm-sans) !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: var(--dk-muted) !important;
+  letter-spacing: 0 !important;
+  margin: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-subtitle::after {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-desc {
+  font-family: var(--lm-sans) !important;
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-info {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px 20px !important;
+  margin-bottom: 22px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-info-item {
+  font-family: var(--lm-sans) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--dk-muted) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-info-item i,
+:is(.dark, [data-theme="dark"]) #hero .hero-info i,
+:is(.dark, [data-theme="dark"]) #hero .typed-cursor {
+  color: var(--dk-lime) !important;
+  font-size: 13px !important;
+}
+
+/* Buttons */
+:is(.dark, [data-theme="dark"]) #hero .hero-btns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 22px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-primary,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-primary {
+  font-family: var(--lm-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  padding: 0.85rem 1.6rem !important;
+  border-radius: 999px !important;
+  background-color: var(--dk-lime) !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-primary i,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-primary i {
+  color: inherit !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-primary:hover,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-primary:hover {
+  background-color: var(--dk-lime-hover) !important;
+  border-color: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-outline,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-secondary {
+  font-family: var(--lm-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  padding: 0.85rem 1.6rem !important;
+  border-radius: 999px !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--dk-line-light) !important;
+  color: var(--dk-text) !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-outline i,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-secondary i {
+  color: inherit !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .btn-outline:hover,
+:is(.dark, [data-theme="dark"]) #hero .hero-btn-secondary:hover {
+  background-color: transparent !important;
+  border-color: var(--dk-lime) !important;
+  color: var(--dk-lime) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
+}
+
+/* Social links */
+:is(.dark, [data-theme="dark"]) #hero .hero-socials {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-social-link {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--dk-line) !important;
+  color: var(--dk-text) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-social-link i {
+  color: inherit !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-social-link:hover {
+  background-color: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Hero photo column & 3D Card */
+:is(.dark, [data-theme="dark"]) #hero .hero-photo-col {
+  position: relative !important;
+  z-index: 2 !important;
+  perspective: 900px !important;
+  perspective-origin: center center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: 3rem 2.5rem !important;
+  cursor: default !important;
+  width: 100% !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hero-card-3d {
+  position: relative !important;
+  width: 300px !important;
+  height: 380px !important;
+  transform-style: preserve-3d !important;
+  transform: rotateY(-8deg) rotateX(4deg);
+  transition: transform 0.08s linear !important;
+  will-change: transform !important;
+  cursor: default !important;
+  display: block !important;
+  aspect-ratio: auto !important;
+  margin: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-shadow {
+  display: block !important;
+  position: absolute !important;
+  bottom: -36px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 220px !important;
+  height: 40px !important;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45) 0%, transparent 70%) !important;
+  filter: blur(12px) !important;
+  border-radius: 50% !important;
+  pointer-events: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-frame {
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  inset: -16px !important;
+  border-radius: 52% 48% 44% 56% / 48% 54% 46% 52% !important;
+  transform: translateZ(-20px) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-frame-ring {
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background-color: var(--dk-lime) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: 28px 10px 34px 14px !important;
+  overflow: hidden !important;
+  transform: translateZ(0px) !important;
+  background-color: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line-light) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-photo img {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-glare {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 60%) !important;
+  pointer-events: none !important;
+  mix-blend-mode: overlay !important;
+}
+
+/* Skill pills (.hc-chip) */
+:is(.dark, [data-theme="dark"]) #hero .hc-chip {
+  position: absolute !important;
+  z-index: 4 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 9px 16px !important;
+  margin: 0 !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  background-color: var(--dk-s2) !important;
+  background-image: none !important;
+  border: 1px solid var(--dk-line) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 16px -12px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  color: var(--dk-text) !important;
+  transform: translateZ(40px) !important;
+  pointer-events: none !important;
+  animation: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-chip::before,
+:is(.dark, [data-theme="dark"]) #hero .hc-chip::after {
+  display: none !important;
+  content: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-chip i {
+  color: var(--dk-lime) !important;
+  font-size: 14px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-chip span {
+  font-family: var(--lm-sans) !important;
+  color: var(--dk-text) !important;
+}
+
+/* 1. "Deepfake Detection" (.hc-chip-2) */
+:is(.dark, [data-theme="dark"]) #hero .hc-chip-2 {
+  top: 12% !important;
+  right: -18% !important;
+  left: auto !important;
+  bottom: auto !important;
+  animation: none !important;
+}
+
+/* 2. "Web Developer" (.hc-chip-3) */
+:is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
+  top: 48% !important;
+  left: -16% !important;
+  right: auto !important;
+  bottom: auto !important;
+  animation: none !important;
+}
+
+/* 3. "Machine Learning" (.hc-chip-1) */
+:is(.dark, [data-theme="dark"]) #hero .hc-chip-1 {
+  top: 76% !important;
+  left: -17% !important;
+  right: auto !important;
+  bottom: auto !important;
+  animation: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .hc-dot,
+:is(.dark, [data-theme="dark"]) #hero .hc-dot-a,
+:is(.dark, [data-theme="dark"]) #hero .hc-dot-b,
+:is(.dark, [data-theme="dark"]) #hero .hc-dot-c {
+  display: none !important;
+  background: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+/* Scroll indicator */
+:is(.dark, [data-theme="dark"]) #hero .scroll-indicator,
+:is(.dark, [data-theme="dark"]) #hero .scroll-text,
+:is(.dark, [data-theme="dark"]) #hero .scroll-line {
+  font-family: var(--lm-sans) !important;
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #hero .scroll-line::before,
+:is(.dark, [data-theme="dark"]) #hero .scroll-line::after {
+  background: var(--dk-muted) !important;
+}
+
+/* ── Hero Responsive Breakpoints (Matching Light Mode) ── */
+@media (max-width: 1150px) and (min-width: 901px) {
+  :is(.dark, [data-theme="dark"]) #hero .hero-photo-col {
+    padding-right: 48px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
+    left: -12% !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1 {
+    left: -12% !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2 {
+    right: -14% !important;
+  }
+}
+
+@media (max-width: 860px) {
+  :is(.dark, [data-theme="dark"]) #hero {
+    min-height: auto !important;
+    padding: 76px 1.5rem 40px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+    align-items: start !important;
+    text-align: left !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-text {
+    padding: 12px 0 0 0 !important;
+    width: 100% !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero h1,
+  :is(.dark, [data-theme="dark"]) #hero .hero-title {
+    font-size: clamp(56px, 14vw, 92px) !important;
+    margin-right: 0 !important;
+    max-width: 7ch !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-photo-col {
+    order: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    justify-self: center !important;
+    width: 100% !important;
+    padding: 16px 0 0 0 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-card-3d {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transform: none !important;
+    transform-style: flat !important;
+    margin: 0 auto !important;
+    position: relative !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-frame {
+    position: absolute !important;
+    width: 268px !important;
+    height: 332px !important;
+    top: -14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    inset: auto !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-photo {
+    position: relative !important;
+    width: 240px !important;
+    height: 304px !important;
+    flex: 0 0 100% !important;
+    margin: 0 auto 16px !important;
+    inset: auto !important;
+    transform: none !important;
+    z-index: 2 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+    background: #11151c !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 999px !important;
+    box-shadow: 0 8px 16px -12px rgba(0, 0, 0, 0.5) !important;
+    color: #f0f6fc !important;
+    flex: 0 0 auto !important;
+    z-index: 3 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :is(.dark, [data-theme="dark"]) #hero {
+    padding: 68px 1.25rem 32px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero h1,
+  :is(.dark, [data-theme="dark"]) #hero .hero-title {
+    font-size: clamp(50px, 14vw, 72px) !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-subtitle {
+    font-size: 16px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-info {
+    gap: 6px 14px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hero-info-item {
+    font-size: 13px !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2,
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+  }
+}
+
+/* ── 4. Tentang (#about) ── */
+:is(.dark, [data-theme="dark"]) #about {
+  background-color: var(--dk-black) !important;
+  color: var(--dk-text) !important;
+  overflow: clip;
+}
+
+:is(.dark, [data-theme="dark"]) #about .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .section-label::before {
+  background: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .section-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .section-divider,
+:is(.dark, [data-theme="dark"]) #about .section-title::after {
+  background: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about p,
+:is(.dark, [data-theme="dark"]) #about .about-p1,
+:is(.dark, [data-theme="dark"]) #about .about-p2 {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about strong,
+:is(.dark, [data-theme="dark"]) #about b,
+:is(.dark, [data-theme="dark"]) #about .accent-text {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .stat-card {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .stat-num,
+:is(.dark, [data-theme="dark"]) #about .stat-suffix,
+:is(.dark, [data-theme="dark"]) #about .stat-icon i {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .stat-label {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .detail-item {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .detail-icon {
+  background: var(--dk-lime-soft) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .detail-text {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .btn-cv {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #about .btn-cv:hover {
+  background: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+}
+
+/* ── 5. Perjalanan (#timeline) ── */
+:is(.dark, [data-theme="dark"]) #timeline {
+  background-color: var(--dk-s1) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .section-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .section-sub {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-line {
+  background: var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .tl-dot {
+  background: var(--dk-violet) !important;
+  border-color: var(--dk-s1) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .tl-content {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-title {
+  color: var(--dk-lime) !important;
+  border-bottom: 1px solid var(--dk-line) !important;
+  padding-bottom: 6px;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-year {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-violet-soft) !important;
+  border: 1px solid var(--dk-violet) !important;
+  color: var(--dk-text) !important;
+  margin-bottom: 0.55rem !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-place {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-desc {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #timeline .timeline-tags .tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+/* ── 6. Organisasi (#organizations) ── */
+:is(.dark, [data-theme="dark"]) #organizations {
+  background-color: var(--dk-violet) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .section-title {
+  color: #FFFFFF !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .section-sub {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-card {
+  background: var(--dk-black) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-card:hover {
+  background: var(--dk-s2) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-name {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-role,
+:is(.dark, [data-theme="dark"]) #organizations .org-desc {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  align-items: flex-start !important;
+  flex: 1 !important;
+  margin-left: 14px !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-period {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-violet-soft) !important;
+  border: 1px solid var(--dk-violet) !important;
+  color: var(--dk-text) !important;
+  margin-bottom: 0.35rem !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-type {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-tags .tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-icon {
+  background: #FFFFFF !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-tabs {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-tab {
+  color: var(--dk-muted) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-tab:hover {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-tab.active {
+  background: var(--dk-black) !important;
+  color: var(--dk-text) !important;
+  border-color: var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-doc-card {
+  background: var(--dk-black) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-doc-card:hover {
+  background: var(--dk-s2) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #organizations .org-doc-card:hover .org-doc-zoom {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+}
+
+/* ── 7. Proyek (#projects) ── */
+:is(.dark, [data-theme="dark"]) #projects {
+  background-color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .section-title,
+:is(.dark, [data-theme="dark"]) #projects .section-sub {
+  color: #000000 !important;
+}
+
+/* Category Tabs */
+:is(.dark, [data-theme="dark"]) #projects .projects-tabs {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-tab {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-tab:hover {
+  background: rgba(0, 0, 0, 0.12) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-tab.active {
+  background: #000000 !important;
+  color: var(--dk-lime) !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-icon {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-icon i {
+  color: var(--dk-lime) !important;
+}
+
+/* Project Cards */
+:is(.dark, [data-theme="dark"]) #projects .project-card {
+  background: var(--dk-black) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-card:hover {
+  background: var(--dk-s2) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-card-top:not(:has(img)),
+:is(.dark, [data-theme="dark"]) #projects .project-thumb:not(:has(img)) {
+  background: var(--dk-violet) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-desc {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-tags .tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .btn-card-action,
+:is(.dark, [data-theme="dark"]) #projects .btn-card-primary,
+:is(.dark, [data-theme="dark"]) #projects .project-links a,
+:is(.dark, [data-theme="dark"]) #projects .project-link {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .btn-card-action i,
+:is(.dark, [data-theme="dark"]) #projects .btn-card-primary i,
+:is(.dark, [data-theme="dark"]) #projects .project-links a i,
+:is(.dark, [data-theme="dark"]) #projects .project-link i {
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .btn-card-action:hover,
+:is(.dark, [data-theme="dark"]) #projects .btn-card-primary:hover,
+:is(.dark, [data-theme="dark"]) #projects .project-links a:hover,
+:is(.dark, [data-theme="dark"]) #projects .project-link:hover {
+  background: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime-hover) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .btn-card-action:hover i,
+:is(.dark, [data-theme="dark"]) #projects .btn-card-primary:hover i,
+:is(.dark, [data-theme="dark"]) #projects .project-links a:hover i,
+:is(.dark, [data-theme="dark"]) #projects .project-link:hover i {
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-featured-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-violet-soft) !important;
+  border: 1px solid var(--dk-violet) !important;
+  color: var(--dk-text) !important;
+}
+
+/* Project Modal */
+:is(.dark, [data-theme="dark"]) .custom-modal-card {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .custom-modal-close {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) .modal-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .modal-sub,
+:is(.dark, [data-theme="dark"]) .modal-desc {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .modal-header-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+/* ── 8. Sertifikat (#certificates) ── */
+:is(.dark, [data-theme="dark"]) #certificates {
+  background-color: var(--dk-black) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .section-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .section-sub {
+  color: var(--dk-muted) !important;
+}
+
+/* Filter container */
+:is(.dark, [data-theme="dark"]) #certificates .cert-tabs {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-tab {
+  color: var(--dk-muted) !important;
+  background: transparent !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-tab:hover {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-tab.active {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+/* Certificate cards */
+:is(.dark, [data-theme="dark"]) #certificates .cert-card,
+:is(.dark, [data-theme="dark"]) #certificates .cert-card-gallery {
+  background-color: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-card:hover,
+:is(.dark, [data-theme="dark"]) #certificates .cert-card-gallery:hover {
+  background-color: var(--dk-s2) !important;
+  border-color: var(--dk-line-light) !important;
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.7) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-card-title,
+:is(.dark, [data-theme="dark"]) #certificates .cert-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-card-meta,
+:is(.dark, [data-theme="dark"]) #certificates .cert-meta,
+:is(.dark, [data-theme="dark"]) #certificates .cert-issuer,
+:is(.dark, [data-theme="dark"]) #certificates .cert-desc {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-thumb-wrap {
+  background: #FFFFFF !important;
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-zoom-icon {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-zoom-icon i {
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-tag,
+:is(.dark, [data-theme="dark"]) #certificates .cert-tags .tag,
+:is(.dark, [data-theme="dark"]) .cert-card-tag,
+:is(.dark, [data-theme="dark"]) .cert-icon-ai {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-family: var(--lm-sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  background: var(--dk-lime-soft) !important;
+  color: var(--dk-lime) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-load-more-btn {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #certificates .cert-load-more-btn:hover {
+  background: var(--dk-lime-hover) !important;
+  border-color: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-loading-spinner,
+:is(.dark, [data-theme="dark"]) .cl-spinner-icon {
+  border: 3px solid rgba(255, 255, 255, 0.15) !important;
+  border-top-color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-error-msg i {
+  color: var(--dk-lime) !important;
+}
+
+/* Lightbox */
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-backdrop {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-close-btn,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-nav-btn,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-open-btn {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-close-btn:hover,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-nav-btn:hover,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-open-btn:hover {
+  background: var(--dk-lime-hover) !important;
+  border-color: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-close-btn i,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-nav-btn i,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-open-btn i {
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-close-btn:focus-visible,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-nav-btn:focus-visible,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-open-btn:focus-visible {
+  outline: 3px solid var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-meta,
+:is(.dark, [data-theme="dark"]) .cert-lightbox .cl-counter {
+  color: var(--dk-muted) !important;
+}
+
+/* ── 9. Keahlian / Tech Stack (#skills) ── */
+:is(.dark, [data-theme="dark"]) #skills {
+  background-color: var(--dk-s1) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .section-title {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .section-sub {
+  color: var(--dk-muted) !important;
+}
+
+/* Tabs */
+:is(.dark, [data-theme="dark"]) #skills .skills-tabs {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-tab {
+  color: var(--dk-muted) !important;
+  background: transparent !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-tab:hover {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-tab.active {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+}
+
+/* Tech Cards */
+:is(.dark, [data-theme="dark"]) #skills .skill-card {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-name {
+  color: var(--dk-text) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon:not(.skill-icon-text) {
+  background: #FFFFFF !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon.skill-icon-text {
+  border: 1px solid var(--dk-line) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon.skill-icon-text[style*="#ff6f00"] {
+  background: linear-gradient(135deg, #ff6f00, #ffa000) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon.skill-icon-text[style*="#ee4c2c"] {
+  background: linear-gradient(135deg, #ee4c2c, #f56300) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon.skill-icon-text[style*="#5c88c4"] {
+  background: linear-gradient(135deg, #5c88c4, #0d6090) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-icon.skill-icon-text[style*="#4078c8"] {
+  background: linear-gradient(135deg, #4078c8, #1a1e27) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-fill {
+  background: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-level {
+  color: var(--dk-muted) !important;
+}
+
+/* Hover / Active */
+:is(.dark, [data-theme="dark"]) #skills .skill-card:hover,
+:is(.dark, [data-theme="dark"]) #skills .skill-card.active {
+  background: var(--dk-violet) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-name,
+:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-name {
+  color: #FFFFFF !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-bar,
+:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-bar {
+  background: rgba(255, 255, 255, 0.30) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-fill,
+:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-fill {
+  background: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-level,
+:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-level {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Kontras ikon SVG Office & Desain */
+:is(.dark, [data-theme="dark"]) #skills .skill-card[data-category="office"] .skill-icon svg,
+:is(.dark, [data-theme="dark"]) #skills .skill-card[data-category="desain"] .skill-icon svg {
+  filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.14));
+}
+
+/* ── 10. Kontak (#contact) & Footer ── */
+:is(.dark, [data-theme="dark"]) #contact {
+  background-color: var(--dk-violet) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .section-title {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .section-sub,
+:is(.dark, [data-theme="dark"]) #contact .card-title,
+:is(.dark, [data-theme="dark"]) #contact .contact-text,
+:is(.dark, [data-theme="dark"]) #contact .contact-label {
+  color: #FFFFFF !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .section-label {
+  background: var(--dk-lime-soft) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .contact-card:first-child {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .contact-icon {
+  background: var(--dk-lime-soft) !important;
+  color: var(--dk-lime) !important;
+  border: 1px solid var(--dk-lime-border) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .contact-icon i {
+  color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .availability-badge {
+  background: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+
+/* Contact Form Panel */
+:is(.dark, [data-theme="dark"]) #contact .contact-card:last-child {
+  background: var(--dk-black) !important;
+  border: 1px solid var(--dk-line) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact input,
+:is(.dark, [data-theme="dark"]) #contact textarea,
+:is(.dark, [data-theme="dark"]) #contact select {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  color: var(--dk-text) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact input::placeholder,
+:is(.dark, [data-theme="dark"]) #contact textarea::placeholder {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact input:focus,
+:is(.dark, [data-theme="dark"]) #contact textarea:focus,
+:is(.dark, [data-theme="dark"]) #contact select:focus {
+  border-color: var(--dk-lime) !important;
+  outline: 3px solid rgba(198, 255, 52, 0.45) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .btn-primary,
+:is(.dark, [data-theme="dark"]) #contact .btn-full {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #contact .btn-primary:hover,
+:is(.dark, [data-theme="dark"]) #contact .btn-full:hover {
+  background: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+}
+
+/* Footer */
+:is(.dark, [data-theme="dark"]) footer {
+  background-color: var(--dk-black) !important;
+  border-top: 1px solid var(--dk-line) !important;
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) footer .footer-logo {
+  color: var(--dk-lime) !important;
+  -webkit-text-fill-color: var(--dk-lime) !important;
+}
+
+:is(.dark, [data-theme="dark"]) footer .footer-logo-img {
+  border: 1px solid var(--dk-line) !important;
+}
+
+:is(.dark, [data-theme="dark"]) footer .footer-tagline,
+:is(.dark, [data-theme="dark"]) footer .footer-copy,
+:is(.dark, [data-theme="dark"]) footer p {
+  color: var(--dk-muted) !important;
+}
+
+:is(.dark, [data-theme="dark"]) footer .social-btn {
+  background: var(--dk-s2) !important;
+  border: 1px solid var(--dk-line) !important;
+  color: var(--dk-text) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) footer .social-btn:hover {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+}
+
+/* ── 11. Global Back-to-Top Button ── */
+:is(.dark, [data-theme="dark"]) .back-to-top {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border: 1px solid var(--dk-lime) !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) .back-to-top:hover {
+  background: var(--dk-lime-hover) !important;
+  color: #000000 !important;
+}
+
+:is(.dark, [data-theme="dark"]) .back-to-top i {
+  color: #000000 !important;
+}
+
+/* ── 12. 3D Elements Exclusion Safeguard ── */
+/* Objek 3D (#spaceCanvas, #bgCanvas, .ag3d-scene, .lanyard-scene)
+   semua dipertahankan tanpa perubahan filter, bayangan, atau warna. */
+:is(.dark, [data-theme="dark"]) #about .lanyard-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dk-text) !important;
+  margin: 16px 0 0;
+  max-width: none;
+}

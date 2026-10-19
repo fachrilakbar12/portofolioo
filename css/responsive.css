@@ -3,157 +3,622 @@
    ============================================================ */
 
 /* ─────────────────────────────────
-   ≤ 1024px (tablets / small laptops)
+   ≤ 1024px  (tablets / small laptops)
    ───────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
     text-align: center;
   }
 
-  .hero-text { order: 2; }
-  .hero-photo-wrap { order: 1; }
+  /* Photo above text on tablet */
+  .hero-photo-col { order: -1; }
+  .hero-photo-col .photo-scene { width: clamp(200px, 48vw, 280px); }
 
-  .hero-info { justify-content: center; }
-  .hero-btns { justify-content: center; }
+  .hero-info    { justify-content: center; }
+  .hero-btns    { justify-content: center; }
   .hero-socials { justify-content: center; }
 
-  .photo-scene, .photo-ring { width: 300px; height: 300px; }
-
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-
-  .projects-grid { grid-template-columns: 1fr 1fr; }
-  .org-grid { grid-template-columns: 1fr 1fr; }
-
-  .float-1 { bottom: 16px; left: -16px; }
-  .float-2 { top: 16px; right: -16px; }
-  .float-3 { display: none; }
+  .projects-grid       { grid-template-columns: 1fr 1fr; }
+  .certificates-grid   { grid-template-columns: 1fr 1fr; }
+  .org-grid            { grid-template-columns: 1fr 1fr; }
 }
 
 /* ─────────────────────────────────
-   ≤ 768px (tablets)
+   ≤ 900px  (about section single-column)
    ───────────────────────────────── */
-@media (max-width: 768px) {
-
-  /* Timeline: single column */
-  .timeline-item {
-    grid-template-columns: 36px 1fr;
-    gap: 1rem;
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
+  .about-photo-col {
+    position: relative;
+    top: auto;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .lanyard-scene {
+    transform: scale(0.88);
+    transform-origin: top center;
+    margin-bottom: -64px;
+  }
+
+  .about-content-col {
+    padding-top: 0;
+  }
+}
+
+/* ─────────────────────────────────
+   ≤ 768px  (tablets portrait)
+   ───────────────────────────────── */
+@media (max-width: 768px) {
+  /* Timeline: single column */
+  .timeline-item { grid-template-columns: 36px 1fr; gap: 1rem; }
   .timeline-line { left: 17px; }
 
   .timeline-item[data-side="left"] .timeline-card,
   .timeline-item[data-side="right"] .timeline-card {
-    grid-column: 2;
-    grid-row: 1;
-    order: 2;
+    grid-column: 2; grid-row: 1; order: 2;
   }
 
   .timeline-item[data-side="left"] .timeline-dot,
   .timeline-item[data-side="right"] .timeline-dot {
-    grid-column: 1;
-    grid-row: 1;
-    order: 1;
+    grid-column: 1; grid-row: 1; order: 1;
   }
 
   .timeline-item > :last-child { display: none; }
 
-  /* Contact: single column */
-  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  /* Single-column grids */
+  .contact-grid      { grid-template-columns: 1fr; gap: 1.5rem; }
+  .org-grid          { grid-template-columns: 1fr; }
+  .projects-grid     { grid-template-columns: 1fr; }
+  .certificates-grid { grid-template-columns: 1fr; }
+  .about-details     { grid-template-columns: 1fr; }
+  .about-stats       { grid-template-columns: 1fr 1fr; }
+  .form-row          { grid-template-columns: 1fr; }
 
-  /* Organizations: single column */
-  .org-grid { grid-template-columns: 1fr; }
+  /* Horizontal-scroll tabs */
+  .skills-tabs,
+  .projects-tabs,
+  .cert-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .skills-tabs::-webkit-scrollbar,
+  .projects-tabs::-webkit-scrollbar,
+  .cert-tabs::-webkit-scrollbar { display: none; }
+}
 
-  /* Projects: single column */
-  .projects-grid { grid-template-columns: 1fr; }
-
-  /* About stats: 2 cols */
-  .about-stats { grid-template-columns: 1fr 1fr; }
-
-  /* Form row: single col */
-  .form-row { grid-template-columns: 1fr; }
-
-  /* Skills tabs: scroll */
-  .skills-tabs { overflow-x: auto; }
+.nav-backdrop {
+  display: none;
 }
 
 /* ─────────────────────────────────
-   ≤ 640px (mobile)
+   ≤ 860px  (Mobile & Tablet Navigation & Hero Card)
    ───────────────────────────────── */
-@media (max-width: 640px) {
-
-  /* Navigation */
-  nav { height: 60px; padding: 0 1.25rem; }
-
-  .nav-hamburger { display: flex; }
-
-  .nav-links {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(5,8,16,0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-    z-index: 99;
-    list-style: none;
+@media (max-width: 860px) {
+  /* 1. Hilangkan teks ganda & nonaktifkan rolling text pada mobile */
+  #mainNav .nav-links .mx-roll {
+    display: block !important;
+    height: auto !important;
+    line-height: inherit !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
   }
 
-  .nav-links.open { transform: translateX(0); }
-  .nav-links a { font-size: 1.2rem; font-weight: 700; color: var(--text-bright); white-space: normal; }
-  .nav-links a.active, .nav-links a:hover { color: var(--red-lt); }
+  #mainNav .nav-links .mx-roll-inner {
+    display: block !important;
+    transform: none !important;
+    transition: none !important;
+  }
 
-  /* Orbs smaller */
-  .orb1 { width: 260px; height: 260px; }
-  .orb2 { width: 220px; height: 220px; }
-  .orb3 { width: 180px; height: 180px; }
+  #mainNav .nav-links .mx-roll-item {
+    display: block !important;
+    height: auto !important;
+    line-height: inherit !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+  }
 
-  /* Hero */
-  #hero { padding: 5rem 1.25rem 3rem; }
-  .hero-inner { gap: 2rem; }
-  .hero-title { font-size: clamp(2.1rem, 9vw, 2.8rem); }
+  #mainNav .nav-links .mx-roll-item:nth-child(2) {
+    display: none !important;
+  }
 
-  .photo-scene, .photo-ring { width: 240px; height: 240px; }
-  .photo-float { display: none; }
+  #mainNav .nav-links a::after,
+  #mainNav .nav-links li::after,
+  #mainNav .nav-links .mx-nav-pill {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* 2. Bar Atas Tetap (Fixed Top Bar) */
+  #mainNav {
+    height: 60px !important;
+    padding: 0 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  html[data-theme="light"] #mainNav {
+    background: #FDFDF1 !important;
+    border-bottom: 1px solid rgba(38, 40, 42, 0.14) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav {
+    background: #000000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  #mainNav .nav-logo {
+    position: static !important;
+    transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1002 !important;
+  }
+
+  #mainNav .nav-controls {
+    position: static !important;
+    transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    z-index: 1002 !important;
+  }
+
+  #mainNav .nav-hamburger {
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    border-radius: var(--radius-sm, 8px) !important;
+    z-index: 1003 !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-hamburger {
+    border: 1px solid rgba(38, 40, 42, 0.14) !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-hamburger span {
+    background: #26282A !important;
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    border-radius: 2px !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-hamburger {
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-hamburger span {
+    background: #FFFFFF !important;
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    border-radius: 2px !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
+  }
+
+  /* Hamburger to X icon transformation */
+  #mainNav .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+
+  #mainNav .nav-hamburger.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+
+  #mainNav .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg) !important;
+  }
+
+  /* 3. Mobile Dark Semi-Transparent Backdrop (tap to close) */
+  .nav-backdrop {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 998 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.26s !important;
+  }
+
+  .nav-backdrop.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  html[data-theme="light"] .nav-backdrop {
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) .nav-backdrop {
+    background: rgba(0, 0, 0, 0.65) !important;
+  }
+
+  /* 4. Panel Menu Mobile: Kartu Turun Dari Bawah Bar Atas */
+  #mainNav .nav-links {
+    position: fixed !important;
+    top: 72px !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: auto !important;
+    width: calc(100% - 24px) !important;
+    height: auto !important;
+    max-height: calc(100dvh - 84px) !important;
+    z-index: 1001 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 8px 12px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    border-radius: 24px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-16px) scale(0.98) !important;
+    transform-origin: top center !important;
+    transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.26s !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-links {
+    background: #FDFDF1 !important;
+    border: 1px solid rgba(38, 40, 42, 0.08) !important;
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.16),
+                0 4px 12px -2px rgba(0, 0, 0, 0.06),
+                0 0 0 1px rgba(38, 40, 42, 0.04) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links {
+    background: #0D1117 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 20px 44px -8px rgba(0, 0, 0, 0.75),
+                0 4px 16px -2px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  #mainNav .nav-links.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  #mainNav .nav-links li {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* Animasi muncul bergantian (staggered) */
+  #mainNav .nav-links.open li {
+    animation: mobileLinkEntrance 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  #mainNav .nav-links.open li:nth-child(1) { animation-delay: 0.03s; }
+  #mainNav .nav-links.open li:nth-child(2) { animation-delay: 0.06s; }
+  #mainNav .nav-links.open li:nth-child(3) { animation-delay: 0.09s; }
+  #mainNav .nav-links.open li:nth-child(4) { animation-delay: 0.12s; }
+  #mainNav .nav-links.open li:nth-child(5) { animation-delay: 0.15s; }
+  #mainNav .nav-links.open li:nth-child(6) { animation-delay: 0.18s; }
+  #mainNav .nav-links.open li:nth-child(7) { animation-delay: 0.21s; }
+  #mainNav .nav-links.open li:nth-child(8) { animation-delay: 0.24s; }
+
+  @keyframes mobileLinkEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #mainNav .nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    font-family: var(--lm-serif, 'DM Serif Display', serif) !important;
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+    text-decoration: none !important;
+    position: relative !important;
+    padding: 10px 18px !important;
+    border-radius: 14px !important;
+    background: transparent !important;
+    white-space: normal !important;
+    transition: color 0.2s ease, background 0.2s ease !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-links a {
+    color: #26282A !important;
+    border-bottom: 1px solid rgba(38, 40, 42, 0.06) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a {
+    color: #FFFFFF !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  #mainNav .nav-links li:last-child a,
+  #mainNav .nav-links li:last-of-type a,
+  html[data-theme="light"] #mainNav .nav-links li:last-of-type a,
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links li:last-of-type a {
+    border-bottom: none !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-links a:hover,
+  html[data-theme="light"] #mainNav .nav-links a:focus-visible {
+    background: rgba(38, 40, 42, 0.04) !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a:hover,
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a:focus-visible {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-links a.active {
+    color: #B8430F !important;
+    background: rgba(184, 67, 15, 0.06) !important;
+    font-weight: 400 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a.active {
+    color: #C6FF34 !important;
+    background: rgba(198, 255, 52, 0.08) !important;
+    font-weight: 400 !important;
+  }
+
+  #mainNav .nav-links a.active::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 6px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 3.5px !important;
+    height: 22px !important;
+    border-radius: 3px !important;
+  }
+
+  html[data-theme="light"] #mainNav .nav-links a.active::before {
+    background: #EC5E27 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #mainNav .nav-links a.active::before {
+    background: #C6FF34 !important;
+  }
+
+  /* 4. Sembunyikan Tombol Kembali ke Atas saat Menu Terbuka */
+  body.nav-open .back-to-top {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* 5. Label Keahlian Beranda: Mengalir Rapi di Bawah Kartu Foto */
+  #hero .hero-photo-col {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 16px 0 0 0 !important;
+    order: 0 !important;
+  }
+
+  #hero .hero-card-3d {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
+  #hero .hc-photo {
+    position: relative !important;
+    width: 240px !important;
+    height: 304px !important;
+    flex: 0 0 100% !important;
+    margin: 0 auto 16px !important;
+    inset: auto !important;
+    z-index: 2 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    transform: none !important;
+  }
+
+  #hero .hc-frame {
+    position: absolute !important;
+    width: 268px !important;
+    height: 332px !important;
+    top: -14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    inset: auto !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  #hero .hc-shadow {
+    position: absolute !important;
+    top: 290px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    pointer-events: none !important;
+  }
+
+  #hero .hc-dot {
+    display: none !important;
+  }
+
+  #hero .hc-chip,
+  #hero .hc-chip-1,
+  #hero .hc-chip-2,
+  #hero .hc-chip-3 {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+    border-radius: 999px !important;
+    flex: 0 0 auto !important;
+    z-index: 3 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mainNav .nav-links.open li {
+    animation: none !important;
+  }
+  #mainNav .nav-links {
+    transition: none !important;
+  }
+}
+
+/* ─────────────────────────────────
+   ≤ 640px  (Mobile Utilities)
+   ───────────────────────────────── */
+@media (max-width: 640px) {
+  #about { scroll-margin-top: 58px; }
+
+  /* Keep theme toggle accessible */
+  .theme-toggle { z-index: 102; }
 
   .hero-btns { flex-direction: column; width: 100%; }
   .btn-primary, .btn-outline { width: 100%; justify-content: center; }
 
   /* Timeline mobile */
   .timeline-wrap { padding: 0.5rem 0 0.5rem 1.5rem; }
-  .tl-dot { left: -2.3rem; width: 34px; height: 34px; font-size: 0.75rem; }
+  .tl-dot { left: -2.3rem; width: 32px; height: 32px; font-size: 0.72rem; }
 
   /* Sections */
-  section { padding: 4rem 1.25rem; }
-  .section-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  section { padding: 3.5rem 1.25rem; }
+  .section-title { font-size: clamp(1.65rem, 7vw, 2.1rem); }
 
   /* About */
-  .about-stats { gap: 0.75rem; }
-  .stat-card { padding: 1.1rem; }
-  .stat-num { font-size: 1.5rem; }
+  .about-stats { gap: 0.7rem; }
+  .stat-card { padding: 1.05rem; }
+  .stat-num  { font-size: 1.5rem; }
 
   /* Skills */
-  .skills-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
-  .skill-card { padding: 1.2rem 0.7rem; }
+  .skills-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 0.7rem; }
+  .skill-card  { padding: 1.1rem 0.65rem; }
 
   /* Contact */
-  .contact-card { padding: 1.5rem 1.25rem; }
+  .contact-card { padding: 1.4rem 1.1rem; }
   .form-group input,
   .form-group textarea { font-size: 16px; } /* Prevent iOS zoom */
 
-  /* Gallery Modal */
-  .gallery-modal-inner { width: 94%; }
-  .gallery-main-img { max-width: 300px; }
-  .gallery-close { top: -12px; right: -12px; }
+  /* Cards: stacked actions */
+  .project-card-actions,
+  .cert-actions { flex-direction: column; }
+  .btn-card-action,
+  .btn-cert-primary,
+  .btn-cert-secondary { width: 100%; justify-content: center; }
+
+  /* Modal */
+  .custom-modal-card    { padding: 1.4rem; }
+  .modal-title          { font-size: 1.15rem; }
+  .modal-cred-box       { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+  .btn-copy-cred        { width: 100%; justify-content: center; }
+
+  /* Gallery modal */
+  .gallery-modal-inner  { width: 94%; }
+  .gallery-main-img     { max-width: 300px; }
+  .gallery-close        { top: -12px; right: -12px; }
 
   /* Back to top */
   .back-to-top { bottom: 1.25rem; right: 1.25rem; }
 
   /* Footer */
-  .footer-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 0.7rem; }
 }
+
+/* ─────────────────────────────────
+   ≤ 480px  (small mobile)
+   ───────────────────────────────── */
+@media (max-width: 480px) {
+  .about-photo-wrapper {
+    padding: 10px 16px 0;
+  }
+
+  #about .photo-scene {
+    width: min(260px, 100%);
+    max-width: 260px;
+  }
+
+  :is(html, html[data-theme="light"], [data-theme="dark"]) #about .photo-float {
+    font-size: 0.62rem;
+    padding: 0.32rem 0.62rem;
+    gap: 0.32rem;
+  }
+
+  :is(html, html[data-theme="light"], [data-theme="dark"]) #about .photo-float i {
+    font-size: 0.68rem;
+  }
+
+  #about .float-2 { top: 12px; right: -10px; }
+  #about .float-1 { bottom: 56px; right: -10px; }
+  #about .float-3 { bottom: 14px; left: -10px; }
+}
+

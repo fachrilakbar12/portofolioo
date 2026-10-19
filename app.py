@@ -23,7 +23,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    server_class = getattr(http.server, "ThreadingHTTPServer", socketserver.ThreadingTCPServer)
+    with server_class(("", PORT), Handler) as httpd:
         url = f"http://localhost:{PORT}"
         print(f"\n{'='*45}")
         print(f"  Portfolio Fachril Akbar — Dev Server")

@@ -7,11 +7,11 @@
 
 const TITLES = [
   'AI & Deep Learning Enthusiast',
-  'Computer Vision Researcher',
-  'Fresh Graduate · Angkatan 2024',
+  'Computer Vision',
+  'Fresh Graduate · Angkatan 2022',
   'Web Developer',
   'Problem Solver',
-  'Deepfake Detection Specialist',
+  
 ];
 
 const TYPING_SPEED  = 100;   // ms per karakter (mengetik)

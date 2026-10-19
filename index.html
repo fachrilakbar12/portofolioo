@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio | Fachril Akbar</title>
 
+  <!-- ── Favicons ── -->
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
   <!-- ── External: Icons & Fonts ── -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ── Tailwind (utilities only) ──
+       Preflight disabled so the existing hand-written CSS is not reset.
+       `dark:` variant follows the site's own html[data-theme="dark"] toggle. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
 
   <!-- ── Stylesheets ── -->
   <link rel="stylesheet" href="css/base.css" />
@@ -16,12 +34,17 @@
   <link rel="stylesheet" href="css/gallery.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/visual.css" />
+  <link rel="stylesheet" href="css/motion.css" />
 
   <!-- ── EmailJS SDK ── -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>(function () { emailjs.init({ publicKey: "s5tZpghc5ogH66tUq" }); })();</script>
 </head>
 <body>
+
+  <!-- ── Space astronomy background ── -->
+  <canvas id="spaceCanvas"></canvas>
 
   <!-- ── Canvas particles background ── -->
   <canvas id="bgCanvas"></canvas>
@@ -37,12 +60,11 @@
   <!-- ══════════════════════════════════
        NAVIGATION
        ══════════════════════════════════ -->
+  <div class="top-nav-fade" aria-hidden="true"></div>
   <nav id="mainNav">
-
-    <button class="nav-hamburger" id="navHamburger"
-            aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="#hero" class="nav-logo" aria-label="Beranda" title="Kembali ke Beranda">
+      <img src="assets/brand/logo-fachril.png" alt="Logo Fachril Akbar" width="32" height="32" decoding="async" class="nav-logo-img" />
+    </a>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#hero">Beranda</a></li>
@@ -50,19 +72,113 @@
       <li><a href="#timeline">Perjalanan</a></li>
       <li><a href="#organizations">Organisasi</a></li>
       <li><a href="#projects">Proyek</a></li>
+      <li><a href="#certificates">Sertifikat</a></li>
       <li><a href="#skills">Keahlian</a></li>
       <li><a href="#contact">Kontak</a></li>
     </ul>
+
+    <!-- Right-side controls: theme toggle + hamburger -->
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Ganti tema">
+        🌙
+      </button>
+      <button class="nav-hamburger" id="navHamburger"
+              aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <!-- ══════════════════════════════════
        HERO
        ══════════════════════════════════ -->
-  <section id="hero">
+  <section id="hero" class="relative overflow-hidden">
     <!-- Indikator gulir -->
     <div class="scroll-indicator">
       <div class="scroll-line"></div>
       <span class="scroll-text">SROLL</span>
+    </div>
+
+    <!-- ══ Antigravity 3D background (light mode only) ══
+         Layering inside #hero (isolated stacking context):
+           hero bg  <  grid (#hero::after, z -20)  <  this scene (z -10)  <  content (z 2)
+         `!absolute` / `!z-[-10]` are needed to beat layout.css `#hero > * { position:relative; z-index:2 }`. -->
+    <div class="ag3d-scene !absolute inset-0 !z-[-10] pointer-events-none select-none overflow-hidden dark:hidden" aria-hidden="true">
+
+      <!-- Ambient warm glow (corners) -->
+      <div class="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full bg-amber-400 opacity-20 blur-[120px]"></div>
+      <div class="absolute -bottom-52 -right-40 w-[640px] h-[640px] rounded-full bg-orange-500 opacity-[0.15] blur-[120px]"></div>
+      <div class="absolute top-[30%] left-[45%] w-[380px] h-[380px] rounded-full bg-yellow-200 opacity-[0.12] blur-[100px]"></div>
+
+      <!-- ── FAR layer: small + blurred (depth of field) ── -->
+      <div class="absolute top-[20%] left-[36%] w-7 h-7 blur-[2px] opacity-60 animate-[sway_18s_ease-in-out_infinite] [animation-delay:-6s]">
+        <div class="ag3d-sphere ag3d-sphere--gold w-full h-full"></div>
+      </div>
+      <div class="hidden md:block absolute bottom-[12%] left-[34%] w-16 h-16 blur-[3px] opacity-50 animate-[float_12s_ease-in-out_infinite] [animation-delay:-4s]">
+        <div class="ag3d-torus w-full h-full"></div>
+      </div>
+      <div class="absolute bottom-[9%] right-[30%] w-10 h-10 blur-[2.5px] opacity-60 animate-[sway_14s_ease-in-out_infinite] [animation-delay:-9s]">
+        <div class="ag3d-sphere ag3d-sphere--orange w-full h-full"></div>
+      </div>
+
+      <!-- ── MID layer ── -->
+      <!-- Twisted glossy ribbon -->
+      <div class="absolute -bottom-6 -right-24 w-[300px] h-[205px] md:w-[460px] md:h-[315px] opacity-95 blur-[0.5px] drop-shadow-[0_28px_36px_rgba(251,86,7,0.30)] animate-[sway_18s_ease-in-out_infinite] [animation-delay:-2s]">
+        <svg class="w-full h-full" viewBox="0 0 440 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- front face: cylindrical light falloff across the band -->
+            <linearGradient id="agRibFront" x1="0" y1="0" x2="0.25" y2="1">
+              <stop offset="0"    stop-color="#FFF7E3"/>
+              <stop offset="0.22" stop-color="#FFC76B"/>
+              <stop offset="0.55" stop-color="#FB5607"/>
+              <stop offset="1"    stop-color="#9A2E00"/>
+            </linearGradient>
+            <!-- back face: inverted shading so the twist reads -->
+            <linearGradient id="agRibBack" x1="0" y1="0" x2="0.2" y2="1">
+              <stop offset="0"    stop-color="#8A2900"/>
+              <stop offset="0.40" stop-color="#E04A00"/>
+              <stop offset="0.78" stop-color="#FFB547"/>
+              <stop offset="1"    stop-color="#FFF3D6"/>
+            </linearGradient>
+            <radialGradient id="agRibFold" cx="0.5" cy="0.62" r="0.18">
+              <stop offset="0" stop-color="#5A1A00" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#5A1A00" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="agRibSoft" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="2.2"/>
+            </filter>
+          </defs>
+          <!-- left lobe (front face) -->
+          <path d="M10 200 C 80 105, 170 145, 222 188 C 170 176, 92 172, 10 256 Z" fill="url(#agRibFront)"/>
+          <!-- right lobe (back face) -->
+          <path d="M222 188 C 272 214, 340 128, 434 34 L 438 92 C 352 168, 280 232, 222 188 Z" fill="url(#agRibBack)"/>
+          <!-- fold shadow at the twist -->
+          <ellipse cx="222" cy="188" rx="46" ry="26" fill="url(#agRibFold)"/>
+          <!-- specular streaks -->
+          <path d="M22 196 C 88 116, 168 150, 214 184" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" filter="url(#agRibSoft)"/>
+          <path d="M236 200 C 300 214, 360 140, 430 84" stroke="#FFF6E0" stroke-opacity="0.75" stroke-width="2.5" stroke-linecap="round" filter="url(#agRibSoft)"/>
+        </svg>
+      </div>
+
+      <!-- Glassmorphism sphere -->
+      <div class="hidden md:block absolute top-[22%] left-[50%] w-20 h-20 animate-[float_9s_ease-in-out_infinite] [animation-delay:-3s]">
+        <div class="ag3d-sphere ag3d-sphere--glass w-full h-full"></div>
+      </div>
+
+      <!-- ── NEAR layer: large + sharp ── -->
+      <!-- Glossy torus -->
+      <div class="absolute top-[9%] -left-14 w-36 h-36 md:w-56 md:h-56 drop-shadow-[0_30px_32px_rgba(251,86,7,0.35)] animate-[float_12s_ease-in-out_infinite] [animation-delay:-1s]">
+        <div class="ag3d-torus w-full h-full"></div>
+      </div>
+      <!-- Orange sphere -->
+      <div class="absolute bottom-[14%] left-[5%] w-16 h-16 md:w-24 md:h-24 animate-[float_7s_ease-in-out_infinite] [animation-delay:-2s]">
+        <div class="ag3d-sphere ag3d-sphere--orange w-full h-full"></div>
+      </div>
+      <!-- Gold sphere -->
+      <div class="absolute top-[11%] right-[7%] w-12 h-12 md:w-14 md:h-14 animate-[float_10s_ease-in-out_infinite] [animation-delay:-5s]">
+        <div class="ag3d-sphere ag3d-sphere--gold w-full h-full"></div>
+      </div>
     </div>
 
     <div class="hero-inner">
@@ -99,6 +215,9 @@
           <a href="#projects" class="btn-primary">
             <i class="fas fa-briefcase"></i> Lihat Proyek
           </a>
+          <a href="#certificates" class="btn-outline">
+            <i class="fas fa-award"></i> Lihat Sertifikat
+          </a>
           <a href="#contact" class="btn-outline">
             <i class="fas fa-envelope"></i> Hubungi Saya
           </a>
@@ -115,31 +234,50 @@
           <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener" class="hero-social-link" title="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="mailto:fachrilakbar@gmail.com" class="hero-social-link" title="Email">
+          <a href="mailto:fachrilakbar04@gmail.com" class="hero-social-link" title="Email">
             <i class="fas fa-envelope"></i>
           </a>
         </div>
       </div>
 
-      <!-- Right: profile photo -->
-      <div class="hero-photo-wrap reveal-right">
-        <div class="photo-scene" id="photoScene">
-          <div class="photo-ring">
-            <div class="photo-ring-border"></div>
-            <div class="photo-inner">
-              <img src="foto.jpg" alt="Fachril Akbar" id="profileImg" />
-            </div>
+      <!-- Kanan: foto profil hero dengan efek 3D -->
+      <div class="hero-photo-col">
+        <div class="hero-card-3d" id="heroCard3d">
+
+          <!-- Layer 0: shadow lantai -->
+          <div class="hc-shadow"></div>
+
+          <!-- Layer 1: bingkai organik (parallax paling lambat) -->
+          <div class="hc-frame">
+            <div class="hc-frame-ring"></div>
           </div>
-          <!-- Chip melayang -->
-          <div class="photo-float float-1">
-            <i class="fas fa-brain"></i> AI Researcher
+
+          <!-- Layer 2: foto utama -->
+          <div class="hc-photo">
+            <img src="Profil_Introduction.png" alt="Fachril Akbar" />
+            <!-- Reflection shimmer saat tilt -->
+            <div class="hc-glare"></div>
           </div>
-          <div class="photo-float float-2">
-            <i class="fas fa-shield-alt"></i> Deepfake Detection
+
+          <!-- Layer 3: chip melayang (parallax lebih cepat) -->
+          <div class="hc-chip hc-chip-1">
+            <i class="fas fa-brain"></i>
+            <span>Machine Learning</span>
           </div>
-          <div class="photo-float float-3">
-            <i class="fas fa-code"></i> Web Developer
+          <div class="hc-chip hc-chip-2">
+            <i class="fas fa-shield-alt"></i>
+            <span>Deepfake Detection</span>
           </div>
+          <div class="hc-chip hc-chip-3">
+            <i class="fas fa-code"></i>
+            <span>Web Developer</span>
+          </div>
+
+          <!-- Layer 4: accent dots dekoratif -->
+          <div class="hc-dot hc-dot-a"></div>
+          <div class="hc-dot hc-dot-b"></div>
+          <div class="hc-dot hc-dot-c"></div>
+
         </div>
       </div>
 
@@ -204,50 +342,59 @@
     <div class="section-container">
       <div class="about-grid">
 
-        <!-- Kiri: biografi -->
-        <div class="reveal-left">
+        <!-- Kiri: Kartu ID Lanyard interaktif & Quick CTA -->
+        <div class="about-photo-col">
+          <div class="lanyard-scene" id="lanyardScene">
+            <svg class="lanyard-svg" id="lanyardSvg" viewBox="0 0 360 640" aria-hidden="true">
+              <path class="lanyard-band" id="lanyardBand" d="M 180 -560 L 180 154" />
+              <path class="lanyard-stitch" id="lanyardStitch" d="M 180 -560 L 180 154" />
+            </svg>
+
+            <div
+              class="lanyard-card"
+              id="lanyardCard"
+              tabindex="0"
+              role="button"
+              aria-pressed="false"
+              aria-label="Kartu profil. Tekan untuk melihat foto berwarna"
+            >
+              <div class="lanyard-clip" aria-hidden="true">
+                <div class="lanyard-clip-body"></div>
+                <div class="lanyard-clip-ring"></div>
+              </div>
+              <div class="lanyard-card-sheen" aria-hidden="true"></div>
+              <div class="lanyard-slot" aria-hidden="true"></div>
+              <div class="lanyard-photo-wrap">
+                <img src="foto.jpg" alt="Fachril Akbar - Fresh Graduate Teknik Informatika" id="profileImg" draggable="false" />
+              </div>
+              <p class="lanyard-name">Fachril Akbar</p>
+              <div class="lanyard-accent-line" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="about-photo-actions">
+            <a href="#contact" class="btn-cv">
+              <i class="fas fa-download"></i> Minta CV Lengkap
+            </a>
+            <a href="https://www.linkedin.com/in/fachril-akbar-961789294" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm">
+              <i class="fab fa-linkedin"></i> Profil LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <!-- Kanan: biografi & detail informasi -->
+        <div class="about-content-col reveal-right">
           <p class="section-label">Tentang Saya</p>
           <h2 class="section-title">Siapa Saya</h2>
           <div class="section-divider"></div>
 
           <p class="about-p1">
-            Saya <strong class="accent-text">Fachril Akbar</strong>, lulusan Teknik Informatika 2026 dari Universitas Malikussaleh, Lhokseumawe, Aceh. Perjalanan akademis saya didorong oleh ketertarikan mendalam terhadap Kecerdasan Buatan, machine learning, dan computer vision — bidang yang saya yakini dapat memberi dampak nyata di kehidupan masyarakat.
+            Saya Fachril Akbar, lulusan Teknik Informatika 2026 dari Universitas Malikussaleh yang berfokus pada bidang Artificial Intelligence (computer vision) dan pengembangan web. Salah satu pencapaian utama saya adalah membangun sistem deteksi wajah deepfake berbasis arsitektur CNN dengan akurasi pengujian 90,10%, serta merancang aplikasi web melalui berbagai proyek dan pengalaman magang.
           </p>
           <p class="about-p2">
-            Penelitian skripsi saya berfokus pada pembangunan <strong class="accent-text">sistem deteksi deepfake</strong> menggunakan arsitektur CNN — berhasil meraih akurasi tinggi dalam mengidentifikasi manipulasi wajah digital. Sebagai fresh graduate, saya siap mengaplikasikan keahlian saya secara profesional dan berkembang bersama tim yang solid.
+            Di luar hal teknis, pengalaman saya sebagai Wakil Ketua Umum HIMATIF dan Staf Kominfo BEM UNIMAL telah membentuk cara saya berkomunikasi, memimpin, dan bekerja di dalam tim. Saat ini, saya siap mengaplikasikan keahlian teknis dan pengalaman kolaborasi saya untuk menciptakan solusi teknologi yang berdampak nyata.
           </p>
 
-          <!-- Statistik animasi -->
-          <div class="about-stats">
-            <div class="stat-card reveal">
-              <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
-              <div class="stat-num" data-target="3">0</div>
-              <div class="stat-suffix">+</div>
-              <div class="stat-label">Proyek Dibuat</div>
-            </div>
-            <div class="stat-card reveal" style="transition-delay:.1s">
-              <div class="stat-icon"><i class="fas fa-code"></i></div>
-              <div class="stat-num" data-target="5">0</div>
-              <div class="stat-suffix"></div>
-              <div class="stat-label">Tech Stack</div>
-            </div>
-            <div class="stat-card reveal" style="transition-delay:.2s">
-              <div class="stat-icon"><i class="fas fa-university"></i></div>
-              <div class="stat-num" data-target="4">0</div>
-              <div class="stat-suffix">thn</div>
-              <div class="stat-label">Tahun Studi</div>
-            </div>
-            <div class="stat-card reveal" style="transition-delay:.3s">
-              <div class="stat-icon"><i class="fas fa-rocket"></i></div>
-              <div class="stat-num" data-target="100">0</div>
-              <div class="stat-suffix">%</div>
-              <div class="stat-label">Komitmen</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Kanan: info detail -->
-        <div class="reveal-right">
           <div class="about-details">
             <div class="detail-item">
               <div class="detail-icon"><i class="fas fa-user"></i></div>
@@ -281,7 +428,7 @@
               <div class="detail-icon"><i class="fas fa-envelope"></i></div>
               <div class="detail-text">
                 <label>Email</label>
-                <span>fachrilakbar@gmail.com</span>
+                <span>fachrilakbar04@gmail.com</span>
               </div>
             </div>
             <div class="detail-item">
@@ -295,18 +442,49 @@
               <div class="detail-icon"><i class="fas fa-language"></i></div>
               <div class="detail-text">
                 <label>Bahasa</label>
-                <span>Indonesia (Ibu) · Inggris (Menengah)</span>
+                <span>Indonesia (Fasih) · Inggris (Pasif)</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="detail-text">
+                <label>Status</label>
+                <span>Terbuka untuk Peluang Kerja</span>
               </div>
             </div>
           </div>
-
-          <!-- Tombol unduh CV -->
-          <a href="#contact" class="btn-cv reveal" style="transition-delay:.3s">
-            <i class="fas fa-download"></i> Minta CV
-          </a>
         </div>
 
       </div>
+
+      <!-- Statistik animasi: 4 kartu penuh di bawah -->
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
+          <div class="stat-num" data-target="3">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Proyek Dibuat</div>
+        </div>
+        <div class="stat-card" style="transition-delay:.1s">
+          <div class="stat-icon"><i class="fas fa-award"></i></div>
+          <div class="stat-num" data-target="5">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Sertifikat &amp; Lisensi</div>
+        </div>
+        <div class="stat-card" style="transition-delay:.2s">
+          <div class="stat-icon"><i class="fas fa-university"></i></div>
+          <div class="stat-num" data-target="4">0</div>
+          <div class="stat-suffix">thn</div>
+          <div class="stat-label">Tahun Studi</div>
+        </div>
+        <div class="stat-card" style="transition-delay:.3s">
+          <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+          <div class="stat-num" data-target="100">0</div>
+          <div class="stat-suffix">%</div>
+          <div class="stat-label">Komitmen</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -399,78 +577,130 @@
         Keterlibatan saya dalam organisasi mahasiswa dan komunitas profesional.
       </p>
 
-      <div class="org-grid">
-        <!-- Tambahkan kartu organisasi di sini -->
-        <div class="org-card reveal">
-          <div class="org-card-header">
-            <div class="org-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <div class="org-meta">
-              <span class="org-period">2024 — 2025</span>
-              <span class="org-type">Organisasi Mahasiswa</span>
-            </div>
-          </div>
-          <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
-          <p class="org-role">Anggota Humas</p>
-          <p class="org-desc">
-            Aktif menjalin hubungan dengan organisasi internal kampus dan pihak eksternal, termasuk BEM, himpunan, serta PERMIKOMNAS Wilayah I Aceh-Sumatera Utara, sekaligus berkontribusi dalam berbagai kegiatan dan kepanitiaan HIMATIF.
-
-          </p>
-          <div class="org-tags">
-            <span class="tag">Komunikasi</span>
-            <span class="tag">Kerja Tim</span>
-          </div>
+      <!-- Tab filter organisasi -->
+      <div class="org-tabs-wrapper reveal">
+        <div class="org-tabs" role="tablist" aria-label="Kategori Pengalaman Organisasi">
+          <button type="button" class="org-tab active" id="tabOrgLeadership" role="tab" aria-selected="true" aria-controls="panelOrgLeadership" tabindex="0">
+            Kepengurusan
+          </button>
+          <button type="button" class="org-tab" id="tabOrgDocs" role="tab" aria-selected="false" aria-controls="panelOrgDocs" tabindex="-1">
+            Dokumentasi
+          </button>
         </div>
-
-        <div class="org-grid">
-        <!-- Tambahkan kartu organisasi di sini -->
-        <div class="org-card reveal">
-          <div class="org-card-header">
-            <div class="org-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <div class="org-meta">
-              <span class="org-period">2025 — 2026</span>
-              <span class="org-type">Organisasi Mahasiswa</span>
-            </div>
-          </div>
-          <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
-          <p class="org-role">Wakil Ketua Umum</p>
-          <p class="org-desc">
-           Berperan aktif sebagai Wakil Ketua Umum HIMATIF dalam mengoordinasikan kegiatan dan kebutuhan internal organisasi, serta menjaga komunikasi dengan Program Studi Teknik Informatika. Turut merancang dan melaksanakan kegiatan yang didukung oleh program studi serta mengawal berbagai program kerja himpunan untuk mendukung pengembangan mahasiswa.
-
-          <div class="org-tags">
-            <span class="tag">Kepemimpinan</span>
-            <span class="tag">Manajemen Tim</span>
-          </div>
-        </div>
-
-
-        <!-- Duplikasi .org-card di atas untuk menambah organisasi lain -->
-
       </div>
 
- <div class="org-grid">
-        <!-- Tambahkan kartu organisasi di sini -->
-        <div class="org-card reveal">
-          <div class="org-card-header">
-            <div class="org-icon">
-              <i class="fas fa-users"></i>
+      <!-- Panel 1: Kepengurusan -->
+      <div id="panelOrgLeadership" class="org-tabpanel active" role="tabpanel" aria-labelledby="tabOrgLeadership" tabindex="0">
+        <div class="org-grid">
+          <!-- Tambahkan kartu organisasi di sini -->
+          <div class="org-card reveal">
+            <div class="org-card-header">
+              <div class="org-icon">
+                <img src="logo-himatif.jpeg" alt="Logo HIMATIF" width="46" height="46" loading="lazy" decoding="async" />
+              </div>
+              <div class="org-meta">
+                <span class="org-period">2024 — 2025</span>
+                <span class="org-type">Organisasi Mahasiswa</span>
+              </div>
             </div>
-            <div class="org-meta">
-              <span class="org-period">2025 — 2026</span>
-              <span class="org-type">Organisasi Mahasiswa</span>
+            <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
+            <p class="org-role">Anggota Humas</p>
+            <p class="org-desc">
+              Aktif menjalin hubungan dengan organisasi internal kampus dan pihak eksternal, termasuk BEM, himpunan, serta PERMIKOMNAS Wilayah I Aceh-Sumatera Utara, sekaligus berkontribusi dalam berbagai kegiatan dan kepanitiaan HIMATIF.
+
+            </p>
+            <div class="org-tags">
+              <span class="tag">Komunikasi</span>
+              <span class="tag">Kerja Tim</span>
             </div>
           </div>
-          <h3 class="org-name">BEM UNIMAL</h3>
-          <p class="org-role">Anggota KOMINFO</p>
-          <p class="org-desc">
-           Berperan aktif sebagai anggota Kominfo BEM Universitas Malikussaleh dalam merancang dan mengembangkan desain untuk kebutuhan publikasi organisasi. Terlibat dalam menyusun konsep dan skema desain, bertukar ide, serta bekerja sama dalam tim untuk menghasilkan desain yang sesuai dengan kebutuhan kegiatan dan publikasi.
 
-          <div class="org-tags">
-            <span class="tag">Kepemimpinan</span>
-            <span class="tag">Manajemen Tim</span>
+          <div class="org-card reveal" style="transition-delay: 0.1s;">
+            <div class="org-card-header">
+              <div class="org-icon">
+                <img src="logo-himatif.jpeg" alt="Logo HIMATIF" width="46" height="46" loading="lazy" decoding="async" />
+              </div>
+              <div class="org-meta">
+                <span class="org-period">2025 — 2026</span>
+                <span class="org-type">Organisasi Mahasiswa</span>
+              </div>
+            </div>
+            <h3 class="org-name">Himpunan Mahasiswa Teknik Informatika (HIMATIF)</h3>
+            <p class="org-role">Wakil Ketua Umum</p>
+            <p class="org-desc">
+              Berperan aktif sebagai Wakil Ketua Umum HIMATIF dalam mengoordinasikan kegiatan dan kebutuhan internal organisasi, serta menjaga komunikasi dengan Program Studi Teknik Informatika. Turut merancang dan melaksanakan kegiatan yang didukung oleh program studi serta mengawal berbagai program kerja himpunan untuk mendukung pengembangan mahasiswa.
+            </p>
+            <div class="org-tags">
+              <span class="tag">Kepemimpinan</span>
+              <span class="tag">Manajemen Tim</span>
+            </div>
+          </div>
+
+          <div class="org-card reveal" style="transition-delay: 0.2s;">
+            <div class="org-card-header">
+              <div class="org-icon">
+                <img src="logo-bem-u.png" alt="Logo BEM UNIMAL" width="46" height="46" loading="lazy" decoding="async" />
+              </div>
+              <div class="org-meta">
+                <span class="org-period">2025 — 2026</span>
+                <span class="org-type">Organisasi Mahasiswa</span>
+              </div>
+            </div>
+            <h3 class="org-name">BEM UNIMAL</h3>
+            <p class="org-role">Anggota KOMINFO</p>
+            <p class="org-desc">
+              Berperan aktif sebagai anggota Kominfo BEM Universitas Malikussaleh dalam merancang dan mengembangkan desain untuk kebutuhan publikasi organisasi. Terlibat dalam menyusun konsep dan skema desain, bertukar ide, serta bekerja sama dalam tim untuk menghasilkan desain yang sesuai dengan kebutuhan kegiatan dan publikasi.
+            </p>
+            <div class="org-tags">
+              <span class="tag">Kepemimpinan</span>
+              <span class="tag">Desain Publikasi</span>
+              <span class="tag">Manajemen Tim</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Panel 2: Dokumentasi -->
+      <div id="panelOrgDocs" class="org-tabpanel" role="tabpanel" aria-labelledby="tabOrgDocs" tabindex="0" hidden>
+        <div class="org-grid">
+          <!-- Kartu 1: Anggota Humas -->
+          <div class="org-card org-doc-card reveal" role="button" tabindex="0" aria-label="Buka dokumentasi Anggota Humas Periode 2024 – 2025">
+            <div class="org-doc-thumb">
+              <img src="assets/organizations/anggota-humas.webp" alt="Dokumentasi Anggota Humas periode 2023–2025" class="org-doc-img" width="1200" height="900" loading="lazy" decoding="async" />
+              <span class="org-doc-zoom" aria-hidden="true"><i class="fas fa-search-plus"></i></span>
+            </div>
+            <div class="org-doc-body">
+              <h3 class="org-name">Anggota Humas</h3>
+              <p class="org-period">Periode 2024 – 2025</p>
+            </div>
+          </div>
+
+          <!-- Kartu 2: Wakil Ketua Himpunan -->
+          <div class="org-card org-doc-card reveal" role="button" tabindex="0" aria-label="Buka dokumentasi Wakil Ketua Himpunan Periode 2025 – 2026" style="transition-delay: 0.1s;">
+            <div class="org-doc-thumb">
+              <img src="assets/organizations/wakil-ketua-himpunan.webp" alt="Dokumentasi Wakil Ketua Himpunan periode 2025–2026" class="org-doc-img" width="1200" height="900" loading="lazy" decoding="async" />
+              <span class="org-doc-zoom" aria-hidden="true"><i class="fas fa-search-plus"></i></span>
+            </div>
+            <div class="org-doc-body">
+              <h3 class="org-name">Wakil Ketua Himpunan</h3>
+              <p class="org-period">Periode 2025 – 2026</p>
+            </div>
+          </div>
+
+          <!-- Kartu 3: Staff Kominfo BEM UNIMAL -->
+          <div class="org-card org-doc-card reveal" role="button" tabindex="0" aria-label="Buka dokumentasi Staff Kominfo BEM UNIMAL Periode 2025 – 2026" style="transition-delay: 0.2s;">
+            <div class="org-doc-thumb">
+              <img src="assets/organizations/staff-kominfo-bem.webp" alt="Dokumentasi Staff Kominfo BEM UNIMAL periode 2025–2026" class="org-doc-img" width="1200" height="900" loading="lazy" decoding="async" />
+              <span class="org-doc-zoom" aria-hidden="true"><i class="fas fa-search-plus"></i></span>
+            </div>
+            <div class="org-doc-body">
+              <h3 class="org-name">Staff Kominfo BEM UNIMAL</h3>
+              <p class="org-period">Periode 2025 – 2026</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -486,22 +716,30 @@
         Pilihan proyek yang mencerminkan kemampuan dan minat teknis saya.
       </p>
 
+      <!-- Tab filter kategori proyek -->
+      <div class="projects-tabs reveal">
+        <button class="project-tab active" data-filter="all">Semua Proyek</button>
+        <button class="project-tab" data-filter="ai">AI / Deep Learning</button>
+        <button class="project-tab" data-filter="web">Web Development</button>
+        <button class="project-tab" data-filter="desktop">Desktop App</button>
+      </div>
+
       <div class="projects-grid">
 
-        <!-- Proyek unggulan -->
-        <div class="project-card project-featured reveal">
+        <!-- Proyek unggulan: Deepfake -->
+        <div class="project-card project-featured reveal" data-category="ai">
           <div class="project-featured-badge">
             <i class="fas fa-star"></i> Proyek Unggulan
           </div>
           <div class="project-card-top">
             <div class="project-icon">&#129302;</div>
             <div class="project-links">
-              <a href="#" class="project-link" title="GitHub">
+              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
-              <a href="#" class="project-link" title="Demo">
+              <button class="project-link" onclick="openProjectModal('deepfake')" title="Detail">
                 <i class="fas fa-external-link-alt"></i>
-              </a>
+              </button>
             </div>
           </div>
           <h3 class="project-title">Sistem Deteksi Deepfake Wajah</h3>
@@ -515,15 +753,27 @@
             <span class="tag">TensorFlow</span>
             <span class="tag">CNN</span>
           </div>
+          <div class="project-card-actions">
+            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('deepfake')">
+              <i class="fas fa-circle-info"></i> Detail Proyek
+            </button>
+            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github"></i> Source Code
+            </a>
+          </div>
         </div>
 
-        <div class="project-card reveal" style="transition-delay: 0.1s;">
+        <!-- Proyek 2: Portofolio Web -->
+        <div class="project-card reveal" data-category="web" style="transition-delay: 0.1s;">
           <div class="project-card-top">
             <div class="project-icon">&#127760;</div>
             <div class="project-links">
-              <a href="#" class="project-link" title="GitHub">
+              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
+              <button class="project-link" onclick="openProjectModal('portfolio')" title="Detail">
+                <i class="fas fa-external-link-alt"></i>
+              </button>
             </div>
           </div>
           <h3 class="project-title">Website Portofolio Pribadi</h3>
@@ -535,15 +785,27 @@
             <span class="tag">CSS</span>
             <span class="tag">JavaScript</span>
           </div>
+          <div class="project-card-actions">
+            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('portfolio')">
+              <i class="fas fa-circle-info"></i> Detail Proyek
+            </button>
+            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github"></i> Repository
+            </a>
+          </div>
         </div>
 
-        <div class="project-card reveal" style="transition-delay: 0.2s;">
+        <!-- Proyek 3: Aplikasi Mahasiswa -->
+        <div class="project-card reveal" data-category="desktop" style="transition-delay: 0.2s;">
           <div class="project-card-top">
             <div class="project-icon">&#128202;</div>
             <div class="project-links">
-              <a href="#" class="project-link" title="GitHub">
+              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
+              <button class="project-link" onclick="openProjectModal('crud')" title="Detail">
+                <i class="fas fa-external-link-alt"></i>
+              </button>
             </div>
           </div>
           <h3 class="project-title">Aplikasi Manajemen Data Mahasiswa</h3>
@@ -556,15 +818,63 @@
             <span class="tag">OOP</span>
             <span class="tag">JDBC</span>
           </div>
+          <div class="project-card-actions">
+            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('crud')">
+              <i class="fas fa-circle-info"></i> Detail Proyek
+            </button>
+            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github"></i> Source Code
+            </a>
+          </div>
         </div>
 
       </div>
 
-      <!-- GitHub CTA -->
+      <!-- Action CTA Buttons -->
       <div class="projects-cta reveal">
-        <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener" class="btn-outline">
+        <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-outline">
           <i class="fab fa-github"></i> Lihat Semua di GitHub
         </a>
+        <a href="#certificates" class="btn-primary">
+          <i class="fas fa-award"></i> Lihat Sertifikat &amp; Lisensi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CERTIFICATES & LICENSES
+       ══════════════════════════════════ -->
+  <section id="certificates">
+    <div class="section-container">
+      <p class="section-label reveal">Kredensial &amp; Prestasi</p>
+      <h2 class="section-title reveal">Sertifikat &amp; Lisensi</h2>
+      <p class="section-sub reveal">
+        Pengakuan resmi atas kompetensi teknis di bidang Kecerdasan Buatan, Rekayasa Web, Pemrograman, serta Kepemimpinan Organisasi.
+      </p>
+
+      <!-- Tab filter sertifikat -->
+      <div class="cert-tabs reveal">
+        <button class="cert-tab active" data-filter="all">Semua</button>
+        <button class="cert-tab" data-filter="ai">AI / Machine Learning</button>
+        <button class="cert-tab" data-filter="web">Web &amp; Software</button>
+        <button class="cert-tab" data-filter="org">Organisasi</button>
+      </div>
+
+      <div class="certificates-grid" id="certificatesGrid" aria-live="polite">
+        <!-- Galeri sertifikat dimuat secara dinamis melalui js/projects-certs.js -->
+        <div class="cert-loading-state">
+          <div class="cert-loading-spinner" aria-hidden="true"></div>
+          <p>Memuat sertifikat...</p>
+        </div>
+      </div>
+
+      <!-- Tombol pagination jika sertifikat > 9 -->
+      <div class="cert-pagination-wrap" id="certPaginationWrap" style="display: none;">
+        <button type="button" class="cert-load-more-btn" id="certLoadMoreBtn" aria-label="Tampilkan lebih banyak sertifikat">
+          <span id="certLoadMoreText">Tampilkan Lebih Banyak</span>
+          <i class="fas fa-chevron-down" id="certLoadMoreIcon" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </section>
@@ -586,6 +896,8 @@
         <button class="skill-tab" data-tab="lang">Bahasa</button>
         <button class="skill-tab" data-tab="ai">AI / ML</button>
         <button class="skill-tab" data-tab="tools">Alat</button>
+        <button class="skill-tab" data-tab="office">Office</button>
+        <button class="skill-tab" data-tab="desain">Desain</button>
       </div>
 
       <div class="skills-grid">
@@ -743,6 +1055,56 @@
           </div>
         </div>
 
+        <!-- Office & Desain -->
+        <div class="skill-card reveal" data-category="office" style="transition-delay:.60s">
+          <div class="skill-icon">
+            <svg data-iconify="simple-icons:microsoftword" viewBox="0 0 24 24" role="img" aria-label="Logo Word">
+              <rect x="6.5" y="2.5" width="16.5" height="19" rx="0.5" fill="#FFFFFF"/>
+              <rect x="0.8" y="6.8" width="10.2" height="10.4" rx="0.5" fill="#FFFFFF"/>
+              <path fill="#2B579A" d="M23.004 1.5q.41 0 .703.293t.293.703v19.008q0 .41-.293.703t-.703.293H6.996q-.41 0-.703-.293T6 21.504V18H.996q-.41 0-.703-.293T0 17.004V6.996q0-.41.293-.703T.996 6H6V2.496q0-.41.293-.703t.703-.293zM6.035 11.203l1.442 4.735h1.64l1.57-7.876H9.036l-.937 4.653l-1.325-4.5H5.38l-1.406 4.523l-.938-4.675H1.312l1.57 7.874h1.641zM22.5 21v-3h-15v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3h-15v3Z"/>
+            </svg>
+          </div>
+          <span class="skill-name">Word</span>
+        </div>
+
+        <div class="skill-card reveal" data-category="office" style="transition-delay:.65s">
+          <div class="skill-icon">
+            <svg data-iconify="simple-icons:microsoftexcel" viewBox="0 0 24 24" role="img" aria-label="Logo Excel">
+              <rect x="6.5" y="2.5" width="16.5" height="19" rx="0.5" fill="#FFFFFF"/>
+              <rect x="0.8" y="6.8" width="10.2" height="10.4" rx="0.5" fill="#FFFFFF"/>
+              <path fill="#217346" d="M23 1.5q.41 0 .7.3q.3.29.3.7v19q0 .41-.3.7q-.29.3-.7.3H7q-.41 0-.7-.3q-.3-.29-.3-.7V18H1q-.41 0-.7-.3q-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h5V2.5q0-.41.3-.7q.29-.3.7-.3zM6 13.28l1.42 2.66h2.14l-2.38-3.87l2.34-3.8H7.46l-1.3 2.4l-.05.08l-.04.09l-.64-1.28l-.66-1.29H2.59l2.27 3.82l-2.48 3.85h2.16zM14.25 21v-3H7.5v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3H7.5v3zm8.25 15v-3h-6.75v3zm0-4.5v-3.75h-6.75v3.75zm0-5.25V7.5h-6.75v3.75zm0-5.25V3h-6.75v3Z"/>
+            </svg>
+          </div>
+          <span class="skill-name">Excel</span>
+        </div>
+
+        <div class="skill-card reveal" data-category="office" style="transition-delay:.70s">
+          <div class="skill-icon">
+            <svg data-iconify="simple-icons:microsoftpowerpoint" viewBox="0 0 24 24" role="img" aria-label="Logo PowerPoint">
+              <circle cx="13.5" cy="12" r="9.6" fill="#FFFFFF"/>
+              <rect x="0.8" y="6.8" width="10.2" height="10.4" rx="0.5" fill="#FFFFFF"/>
+              <path fill="#D24726" d="M13.5 1.5q1.453 0 2.795.375t2.508 1.06t2.12 1.641q.956.955 1.641 2.121q.686 1.166 1.061 2.508T24 12t-.375 2.795t-1.06 2.508q-.686 1.166-1.641 2.12q-.955.956-2.121 1.641q-1.166.686-2.508 1.061T13.5 22.5q-1.29 0-2.52-.305q-1.23-.304-2.337-.884T6.58 19.893Q5.625 19.055 4.887 18H.997q-.411 0-.704-.293T0 17.004V6.996q0-.41.293-.703T.996 6h3.89q.739-1.055 1.694-1.893q.955-.837 2.063-1.418q1.107-.58 2.337-.884T13.5 1.5m.75 1.535v8.215h8.215q-.14-1.64-.826-3.076t-1.782-2.531q-1.095-1.096-2.537-1.782t-3.07-.826m-5.262 7.57q0-.68-.228-1.166q-.229-.486-.627-.79q-.399-.305-.938-.446q-.539-.14-1.172-.14H2.848v7.863h1.84v-2.742H5.93q.574 0 1.119-.17t.978-.493q.434-.322.698-.802t.263-1.114M13.5 21q1.172 0 2.262-.287t2.056-.82t1.776-1.278q.808-.744 1.418-1.664t.984-1.986q.375-1.067.469-2.227h-9.703V3.035q-1.735.14-3.27.908T6.797 6h4.207q.41 0 .703.293t.293.703v10.008q0 .41-.293.703t-.703.293H6.797q.644.715 1.412 1.271q.768.557 1.623.944t1.781.586T13.5 21M5.812 9.598q.575 0 .915.228q.34.229.34.838q0 .27-.124.44q-.123.17-.31.275q-.188.105-.422.146t-.445.041H4.687V9.598Z"/>
+            </svg>
+          </div>
+          <span class="skill-name">PowerPoint</span>
+        </div>
+
+        <div class="skill-card reveal" data-category="desain" style="transition-delay:.75s">
+          <div class="skill-icon">
+            <svg data-iconify="simple-icons:canva" viewBox="0 0 24 24" role="img" aria-label="Logo Canva">
+              <defs>
+                <linearGradient id="canvaGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#00C4CC"/>
+                  <stop offset="100%" stop-color="#7D2AE8"/>
+                </linearGradient>
+              </defs>
+              <circle cx="12" cy="12" r="11.5" fill="#FFFFFF"/>
+              <path fill="url(#canvaGrad)" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12s12-5.373 12-12S18.627 0 12 0M6.962 7.68c.754 0 1.337.549 1.405 1.2c.069.583-.171 1.097-.822 1.406c-.343.171-.48.172-.549.069c-.034-.069 0-.137.069-.206c.617-.514.617-.926.548-1.508c-.034-.378-.308-.618-.583-.618c-1.2 0-2.914 2.674-2.674 4.629c.103.754.549 1.646 1.509 1.646c.308 0 .65-.103.96-.24c.5-.264.799-.47 1.097-.8c-.073-.885.704-2.046 1.851-2.046c.515 0 .926.205.96.583c.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378c-.035-.206-.24-.274-.446-.274c-.72 0-1.131.994-1.029 1.611c.035.275.172.549.447.549c.205 0 .514-.31.617-.755c.068-.308.343-.514.583-.514c.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651c0 .069.034.171.17.171c.092 0 .436-.18.777-.459c.117-.59.253-1.298.253-1.357c.034-.24.137-.48.617-.48c.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994c.172 0 .309.102.309.274c0 .103 0 .274-.069.446c-.137.377-.309.96-.412 1.474c0 .137.035.274.207.274s.685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202c0-.411.035-.754.104-.994c.068-.274.411-.514.617-.514c.103 0 .205.069.205.171c0 .035 0 .103-.034.137c-.137.446-.24.857-.24 1.269c0 .24.034.582.102.788c0 .034.035.069.07.069c.068 0 .548-.445.89-1.028c-.308-.206-.48-.549-.48-.96c0-.72.446-1.097.858-1.097c.343 0 .617.24.617.72c0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24a.3.3 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74c.48 0 .924.205.959.582c.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172s.309-.068.274-.376c-.034-.206-.24-.275-.446-.275c-.686 0-1.13.891-1.028 1.611c.034.275.171.583.445.583c.206 0 .515-.308.652-.754c.068-.274.343-.514.583-.514c.103 0 .17.034.205.171c0 .069 0 .206-.137.652c-.17.308-.171.48-.137.617c.034.274.171.48.309.583c.034.034.068.102.068.102c0 .069-.034.138-.137.138c-.034 0-.068 0-.103-.035c-.514-.205-.72-.548-.789-.891c-.205.24-.445.377-.72.377c-.445 0-.89-.411-.96-.926a1.6 1.6 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.9.9 0 0 1-.377.104c-.068 0-.171-.035-.205-.104c-.095-.152-.156-.392-.193-.667c-.481.527-1.145.805-1.453.805c-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515c-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508c-.308 0-.48-.172-.514-.412c-.206.274-.445.412-.754.412c-.352 0-.696-.24-.862-.593c-.244.275-.523.553-.852.764c-.48.309-1.028.549-1.68.549c-.582 0-1.097-.309-1.371-.583c-.412-.377-.651-.96-.686-1.509c-.205-1.68.823-3.84 2.4-4.8c.378-.205.755-.343 1.132-.343m9.77 3.291c-.104 0-.172.172-.172.343c0 .274.137.583.309.755a1.7 1.7 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z"/>
+            </svg>
+          </div>
+          <span class="skill-name">Canva</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -754,8 +1116,7 @@
     <div class="cta-banner-inner reveal">
       <div class="cta-banner-text">
         <div class="cta-quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p class="cta-banner-quote">Setiap ahli dulunya pernah jadi pemula. Perjalanan seribu baris kode dimulai dari satu commit.</p>
-        <p class="cta-banner-author">— Prinsip seorang fresh graduate</p>
+        <p class="cta-banner-quote">“Selalu ada ruang untuk belajar hal baru, menyempurnakan logika, dan membangun karya yang lebih berdampak.”</p>
       </div>
       <div class="cta-banner-glow"></div>
     </div>
@@ -782,7 +1143,7 @@
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
             <div class="contact-text">
               <label>Email</label>
-              <a href="mailto:fachrilakbar@gmail.com">fachrilakbar@gmail.com</a>
+              <a href="mailto:fachrilakbar04@gmail.com">fachrilakbar04@gmail.com</a>
             </div>
           </div>
 
@@ -880,8 +1241,11 @@
        ══════════════════════════════════ -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo">&lt;Fachril /&gt;</div>
-      <p class="footer-tagline">AI Researcher &amp; Web Developer</p>
+      <div class="footer-logo">
+        <img src="assets/brand/logo-fachril.png" alt="Logo Fachril Akbar" width="40" height="40" decoding="async" class="footer-logo-img" />
+        <span class="footer-logo-text">Fachril</span>
+      </div>
+      <p class="footer-tagline">Machine Learning &amp; Web Developer</p>
 
       <div class="footer-socials">
         <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
@@ -893,7 +1257,7 @@
         <a href="https://www.instagram.com/fachrilakbar_" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="mailto:fachrilakbar@gmail.com" class="social-btn" title="Email">
+        <a href="mailto:fachrilakbar04@gmail.com" class="social-btn" title="Email">
           <i class="fas fa-envelope"></i>
         </a>
       </div>
@@ -907,15 +1271,129 @@
         <span>·</span>
         <a href="#projects">Proyek</a>
         <span>·</span>
+        <a href="#certificates">Sertifikat</a>
+        <span>·</span>
         <a href="#contact">Kontak</a>
       </div>
 
       <p class="footer-copy">
-        Dibuat dengan <span>&#9829;</span> oleh <span>Fachril Akbar</span>
-        &nbsp;&middot;&nbsp; &copy; 2026
+        Dibuat dengan <span>&#9829;</span> oleh <span>Fachril Akbar</span> &middot; &copy; 2026
       </p>
     </div>
   </footer>
+
+  <!-- ══════════════════════════════════
+       PROJECT DETAIL MODAL
+       ══════════════════════════════════ -->
+  <div class="custom-modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-label="Detail Proyek">
+    <div class="custom-modal-card">
+      <button class="custom-modal-close" onclick="closeProjectModal()" aria-label="Tutup modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-header-badge" id="pmBadge">Proyek Unggulan</div>
+      <h3 class="modal-title" id="pmTitle">Judul Proyek</h3>
+      <p class="modal-sub" id="pmCategory">Kategori · Tahun</p>
+
+      <div class="modal-body">
+        <p class="modal-desc" id="pmDesc">Deskripsi proyek...</p>
+
+        <div>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Sorotan &amp; Fitur Utama:</h4>
+          <ul class="modal-highlights" id="pmHighlights"></ul>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Teknologi yang Digunakan:</h4>
+          <div class="project-tags" id="pmTech"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-primary" id="pmGithub" style="flex:1; justify-content:center;">
+          <i class="fab fa-github"></i> Kunjungi Repositori
+        </a>
+        <button class="btn-outline" onclick="closeProjectModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       CERTIFICATE LIGHTBOX
+       ══════════════════════════════════ -->
+  <div class="cert-lightbox" id="certLightbox" role="dialog" aria-modal="true" aria-label="Detail Sertifikat" aria-hidden="true">
+    <div class="cl-backdrop" id="clBackdrop"></div>
+    <div class="cl-container">
+      <div class="cl-header">
+        <span class="cl-counter" id="clCounter">1 / 18</span>
+        <button type="button" class="cl-close-btn" id="clCloseBtn" aria-label="Tutup pratinjau sertifikat">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <button type="button" class="cl-nav-btn cl-prev-btn" id="clPrevBtn" aria-label="Sertifikat sebelumnya">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="cl-content" id="clContent">
+        <div class="cl-spinner" id="clSpinner" aria-hidden="true">
+          <div class="cl-spinner-icon"></div>
+        </div>
+        <img class="cl-image" id="clImage" src="" alt="Sertifikat" />
+      </div>
+
+      <button type="button" class="cl-nav-btn cl-next-btn" id="clNextBtn" aria-label="Sertifikat berikutnya">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <div class="cl-footer">
+        <div class="cl-info">
+          <h3 class="cl-title" id="clTitle">Judul Sertifikat</h3>
+          <p class="cl-meta" id="clMeta">Penerbit &bull; Tahun</p>
+        </div>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="cl-open-btn" id="clOpenBtn">
+          <i class="fas fa-file-pdf" id="clOpenIcon" aria-hidden="true"></i>
+          <span id="clOpenText">Buka PDF</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       ORGANIZATION DOC LIGHTBOX
+       ══════════════════════════════════ -->
+  <div class="cert-lightbox org-lightbox" id="orgDocLightbox" role="dialog" aria-modal="true" aria-label="Detail Dokumentasi Organisasi" aria-hidden="true">
+    <div class="cl-backdrop" id="orgDocBackdrop"></div>
+    <div class="cl-container">
+      <div class="cl-header">
+        <span class="cl-counter" id="orgDocCounter">1 / 3</span>
+        <button type="button" class="cl-close-btn" id="orgDocCloseBtn" aria-label="Tutup pratinjau dokumentasi">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <button type="button" class="cl-nav-btn cl-prev-btn" id="orgDocPrevBtn" aria-label="Foto sebelumnya">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="cl-content" id="orgDocContent">
+        <div class="cl-spinner" id="orgDocSpinner" aria-hidden="true">
+          <div class="cl-spinner-icon"></div>
+        </div>
+        <img class="cl-image" id="orgDocImage" src="" alt="Dokumentasi Organisasi" />
+      </div>
+
+      <button type="button" class="cl-nav-btn cl-next-btn" id="orgDocNextBtn" aria-label="Foto berikutnya">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <div class="cl-footer">
+        <div class="cl-info">
+          <h3 class="cl-title" id="orgDocTitle">Judul Dokumentasi</h3>
+          <p class="cl-meta" id="orgDocMeta">Periode</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════
        GALLERY MODAL
@@ -955,8 +1433,15 @@
   <script src="js/nav.js"></script>
   <script src="js/typewriter.js"></script>
   <script src="js/gallery.js"></script>
+  <script src="js/projects-certs.js"></script>
+  <script src="js/org-docs.js"></script>
   <script src="js/contact.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/space.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/tilt3d.js"></script>
+  <script src="js/lanyard.js"></script>
+  <script defer src="js/motion.js"></script>
 
 </body>
 </html>

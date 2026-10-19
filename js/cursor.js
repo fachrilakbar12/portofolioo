@@ -40,12 +40,24 @@ if (!canvas) {
     }
   }, { passive: true });
 
-  const COLORS = [
-    'rgba(232,68,90,',
-    'rgba(255,112,85,',
-    'rgba(245,158,11,',
-    'rgba(139,92,246,',
+  const COLORS_DARK  = [
+    'rgba(198, 255, 52,',  /* Lime */
+    'rgba(127, 58, 237,',  /* Violet */
+    'rgba(198, 255, 52,',  /* Lime */
+    'rgba(127, 58, 237,',  /* Violet */
   ];
+
+  const COLORS_LIGHT = [
+    'rgba(251, 86, 7,',    /* Nitro Orange */
+    'rgba(224, 74, 0,',    /* Nitro Dark */
+    'rgba(251, 110, 40,',  /* Nitro Light */
+    'rgba(184, 59, 0,',    /* Nitro Accent */
+  ];
+
+  function getColors() {
+    return document.documentElement.getAttribute('data-theme') === 'dark'
+      ? COLORS_DARK : COLORS_LIGHT;
+  }
 
   const REPULSION_RADIUS = 110;
   const REPULSION_FORCE  = 1.0;
@@ -54,11 +66,14 @@ if (!canvas) {
 
   class Particle {
     constructor() {
-      this._color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const colors = getColors();
+      this._color = colors[Math.floor(Math.random() * colors.length)];
       this.reset(true);
     }
 
     reset(initial = false) {
+      const colors = getColors();
+      this._color = colors[Math.floor(Math.random() * colors.length)];
       this.x  = initial ? Math.random() * W : (Math.random() < 0.5 ? 0 : W);
       this.y  = initial ? Math.random() * H : Math.random() * H;
       this.vx = (Math.random() - 0.5) * 0.45;
@@ -104,6 +119,8 @@ if (!canvas) {
   const particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
 
   function drawConnections() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const strokeBase = isDark ? '198,255,52' : '251,86,7';
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const p1 = particles[i], p2 = particles[j];
@@ -113,8 +130,8 @@ if (!canvas) {
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(232,68,90,${t * 0.09})`;
-          ctx.lineWidth = t * 0.6;
+          ctx.strokeStyle = `rgba(${strokeBase},${t * 0.10})`;
+          ctx.lineWidth = t * 0.7;
           ctx.stroke();
         }
       }
@@ -129,4 +146,18 @@ if (!canvas) {
   }
 
   animate();
+
+  /* Re-sample particle colors when theme changes */
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      // Setelah theme.js mengubah data-theme, refresh warna partikel
+      setTimeout(() => {
+        particles.forEach(p => {
+          const colors = getColors();
+          p._color = colors[Math.floor(Math.random() * colors.length)];
+        });
+      }, 50);
+    });
+  }
 }
