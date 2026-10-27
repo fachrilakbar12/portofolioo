@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio | Fachril Akbar</title>
+
+  <!-- ── Anti-flash theme script ── -->
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('portfolio-theme');
+        var t = (s === 'dark' || s === 'light') ? s : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- ── Favicons ── -->
   <link rel="icon" href="favicon.ico" sizes="48x48" />
@@ -79,8 +90,8 @@
 
     <!-- Right-side controls: theme toggle + hamburger -->
     <div class="nav-controls">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Ganti tema">
-        🌙
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Mode Gelap">
+        ☀️
       </button>
       <button class="nav-hamburger" id="navHamburger"
               aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
@@ -461,13 +472,13 @@
       <div class="about-stats reveal">
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
-          <div class="stat-num" data-target="3">0</div>
+          <div class="stat-num" data-target="9">0</div>
           <div class="stat-suffix">+</div>
           <div class="stat-label">Proyek Dibuat</div>
         </div>
         <div class="stat-card" style="transition-delay:.1s">
           <div class="stat-icon"><i class="fas fa-award"></i></div>
-          <div class="stat-num" data-target="5">0</div>
+          <div class="stat-num" data-target="21">0</div>
           <div class="stat-suffix">+</div>
           <div class="stat-label">Sertifikat &amp; Lisensi</div>
         </div>
@@ -520,7 +531,7 @@
         <div class="tl-item reveal" style="transition-delay:.15s">
           <div class="tl-dot"><i class="fas fa-robot"></i></div>
           <div class="tl-content">
-            <div class="timeline-year">2023</div>
+            <div class="timeline-year">2025</div>
             <h3 class="timeline-title">Proyek Riset: Sistem Deteksi Deepfake</h3>
             <p class="timeline-place"><i class="fas fa-flask"></i> Lab Komputer, Unimal</p>
             <p class="timeline-desc">Membangun sistem deteksi deepfake menggunakan Convolutional Neural Networks (CNN) dan teknik computer vision. Berhasil mencapai akurasi tinggi dalam mengidentifikasi manipulasi wajah digital.</p>
@@ -535,7 +546,7 @@
         <div class="tl-item reveal" style="transition-delay:.3s">
           <div class="tl-dot"><i class="fas fa-laptop-code"></i></div>
           <div class="tl-content">
-            <div class="timeline-year">2023</div>
+            <div class="timeline-year">2024</div>
             <h3 class="timeline-title">Pengembangan Aplikasi Desktop Java</h3>
             <p class="timeline-place"><i class="fas fa-desktop"></i> Proyek Mandiri</p>
             <p class="timeline-desc">Membangun aplikasi manajemen data mahasiswa berbasis Java dengan fungsionalitas CRUD penuh dan integrasi MySQL. Menerapkan prinsip OOP dan arsitektur MVC terstruktur.</p>
@@ -717,16 +728,17 @@
       </p>
 
       <!-- Tab filter kategori proyek -->
-      <div class="projects-tabs reveal">
-        <button class="project-tab active" data-filter="all">Semua Proyek</button>
-        <button class="project-tab" data-filter="ai">AI / Deep Learning</button>
-        <button class="project-tab" data-filter="web">Web Development</button>
-        <button class="project-tab" data-filter="desktop">Desktop App</button>
+      <div class="projects-tabs reveal" role="group" aria-label="Filter kategori proyek">
+        <button type="button" class="project-tab active" data-filter="all" aria-pressed="true">Semua</button>
+        <button type="button" class="project-tab" data-filter="web" aria-pressed="false">Aplikasi Web</button>
+        <button type="button" class="project-tab" data-filter="analytics" aria-pressed="false">Analitik Data</button>
+        <button type="button" class="project-tab" data-filter="dashboard" aria-pressed="false">Dashboard &amp; Spreadsheet</button>
+        <button type="button" class="project-tab" data-filter="ai" aria-pressed="false">Riset &amp; AI</button>
       </div>
 
       <div class="projects-grid">
 
-        <!-- Proyek unggulan: Deepfake -->
+        <!-- Proyek 1: Snap Detector (Proyek Unggulan) -->
         <div class="project-card project-featured reveal" data-category="ai">
           <div class="project-featured-badge">
             <i class="fas fa-star"></i> Proyek Unggulan
@@ -734,51 +746,117 @@
           <div class="project-card-top">
             <div class="project-icon">&#129302;</div>
             <div class="project-links">
-              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
+              <a href="https://github.com/fachrilakbar12/Snap-Detector" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Repositori GitHub Snap Detector" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
-              <button class="project-link" onclick="openProjectModal('deepfake')" title="Detail">
+              <a href="https://fachrilakbar12.github.io/Snap-Detector/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Buka Snap Detector di tab baru" title="Buka Website">
                 <i class="fas fa-external-link-alt"></i>
-              </button>
+              </a>
             </div>
           </div>
-          <h3 class="project-title">Sistem Deteksi Deepfake Wajah</h3>
+          <a href="https://fachrilakbar12.github.io/Snap-Detector/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek Snap Detector">
+            <img src="assets/projects/snap-detector.webp" alt="Tampilan antarmuka aplikasi Snap Detector" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Snap Detector</h3>
           <p class="project-desc">
-            Sistem bertenaga AI untuk mendeteksi manipulasi wajah digital (deepfake) menggunakan deep learning dan computer vision. Menganalisis gambar dan video untuk memverifikasi keaslian wajah dengan akurasi tinggi menggunakan arsitektur CNN yang dioptimalkan.
+            Aplikasi desktop pendeteksi deepfake real-time berbasis Xception dan YOLO dengan antarmuka PyQt6. Mengklasifikasikan wajah REAL atau DEEPFAKE dari gambar, video, layar, dan kamera, dilengkapi visualisasi Grad-CAM dan riwayat pemindaian.
           </p>
           <div class="project-tags">
             <span class="tag">Python</span>
-            <span class="tag">Deep Learning</span>
-            <span class="tag">OpenCV</span>
+            <span class="tag">PyQt6</span>
             <span class="tag">TensorFlow</span>
-            <span class="tag">CNN</span>
+            <span class="tag">Xception</span>
+            <span class="tag">YOLO</span>
           </div>
           <div class="project-card-actions">
-            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('deepfake')">
+            <button type="button" class="btn-card-action btn-card-primary" onclick="openProjectModal('snapDetector')">
               <i class="fas fa-circle-info"></i> Detail Proyek
             </button>
-            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+            <a href="https://github.com/fachrilakbar12/Snap-Detector" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
               <i class="fab fa-github"></i> Source Code
             </a>
           </div>
         </div>
 
-        <!-- Proyek 2: Portofolio Web -->
+        <!-- Proyek 2: Nusantara Aceh -->
         <div class="project-card reveal" data-category="web" style="transition-delay: 0.1s;">
           <div class="project-card-top">
-            <div class="project-icon">&#127760;</div>
+            <div class="project-icon">🗺️</div>
             <div class="project-links">
-              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
+              <a href="https://github.com/fachrilakbar12/nusantara-aceh-gis" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Repositori GitHub Nusantara Aceh" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
-              <button class="project-link" onclick="openProjectModal('portfolio')" title="Detail">
+              <a href="https://nusantara-aceh-gis.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Buka Nusantara Aceh: 23 Negeri, Satu Tanah Rencong di tab baru" title="Buka Website">
                 <i class="fas fa-external-link-alt"></i>
-              </button>
+              </a>
             </div>
           </div>
-          <h3 class="project-title">Website Portofolio Pribadi</h3>
+          <a href="https://nusantara-aceh-gis.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek Nusantara Aceh: 23 Negeri, Satu Tanah Rencong">
+            <img src="assets/projects/nusantara-aceh.webp" alt="Tampilan peta 3D interaktif Nusantara Aceh" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Nusantara Aceh: 23 Negeri, Satu Tanah Rencong</h3>
           <p class="project-desc">
-            Website portofolio profesional dengan estetika dark modern, animasi halus, dan layout responsif penuh di semua perangkat dan ukuran layar.
+            Peta 3D interaktif yang mengangkat budaya, tari, musik, kuliner, dan sejarah dari 23 kabupaten dan kota di Provinsi Aceh, dirancang sebagai diorama kertas berlapis.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">WebGL</span>
+            <span class="tag">Next.js</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" onclick="openProjectModal('nusantaraAceh')">
+              <i class="fas fa-circle-info"></i> Detail Proyek
+            </button>
+            <a href="https://github.com/fachrilakbar12/nusantara-aceh-gis" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github"></i> Source Code
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 3: SIAKAD -->
+        <div class="project-card reveal" data-category="web" style="transition-delay: 0.2s;">
+          <div class="project-card-top">
+            <div class="project-icon">🎓</div>
+            <div class="project-links">
+              <a href="https://github.com/fachrilakbar12/manajemen-data-mahasiswa" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Repositori GitHub SIAKAD" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://fachrilakbar12.github.io/manajemen-data-mahasiswa/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Buka SIAKAD: Sistem Informasi Data Mahasiswa di tab baru" title="Buka Website">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <a href="https://fachrilakbar12.github.io/manajemen-data-mahasiswa/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek SIAKAD: Sistem Informasi Data Mahasiswa">
+            <img src="assets/projects/siakad.webp" alt="Tampilan antarmuka aplikasi SIAKAD" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">SIAKAD: Sistem Informasi Data Mahasiswa</h3>
+          <p class="project-desc">
+            Simulasi web dari aplikasi desktop Java untuk manajemen data mahasiswa dengan MySQL melalui JDBC, mencakup operasi CRUD, pencarian dan filter, ekspor CSV dan JSON, serta audit kueri.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Java</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">JDBC</span>
+            <span class="tag">MVC</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" onclick="openProjectModal('siakad')">
+              <i class="fas fa-circle-info"></i> Detail Proyek
+            </button>
+            <a href="https://github.com/fachrilakbar12/manajemen-data-mahasiswa" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github"></i> Source Code
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 4: Life Dashboard -->
+        <div class="project-card reveal" data-category="web">
+          <a href="https://fachrilakbar12.github.io/CodingCamp-5Oktober26-fachrilakbar/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek Life Dashboard">
+            <img src="assets/projects/life-dashboard.webp" alt="Tampilan halaman utama proyek Life Dashboard" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Life Dashboard</h3>
+          <p class="project-desc">
+            Dasbor produktivitas harian berisi sapaan dan jam, timer fokus 25 menit, tautan cepat, dan daftar tugas, lengkap dengan mode gelap.
           </p>
           <div class="project-tags">
             <span class="tag">HTML</span>
@@ -786,44 +864,121 @@
             <span class="tag">JavaScript</span>
           </div>
           <div class="project-card-actions">
-            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('portfolio')">
-              <i class="fas fa-circle-info"></i> Detail Proyek
-            </button>
-            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
-              <i class="fab fa-github"></i> Repository
+            <a href="https://fachrilakbar12.github.io/CodingCamp-5Oktober26-fachrilakbar/" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Demo
+            </a>
+            <a href="https://github.com/fachrilakbar12/CodingCamp-5Oktober26-fachrilakbar" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github" aria-hidden="true"></i> Kode
             </a>
           </div>
         </div>
 
-        <!-- Proyek 3: Aplikasi Mahasiswa -->
-        <div class="project-card reveal" data-category="desktop" style="transition-delay: 0.2s;">
-          <div class="project-card-top">
-            <div class="project-icon">&#128202;</div>
-            <div class="project-links">
-              <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <button class="project-link" onclick="openProjectModal('crud')" title="Detail">
-                <i class="fas fa-external-link-alt"></i>
-              </button>
-            </div>
-          </div>
-          <h3 class="project-title">Aplikasi Manajemen Data Mahasiswa</h3>
+        <!-- Proyek 5: FRUTIX.LAB -->
+        <div class="project-card reveal" data-category="web" style="transition-delay: 0.1s;">
+          <a href="https://fachrilakbar12.github.io/frutixlab-web/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek FRUTIX.LAB">
+            <img src="assets/projects/frutix-lab.webp" alt="Tampilan halaman utama proyek FRUTIX.LAB" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">FRUTIX.LAB</h3>
           <p class="project-desc">
-            Aplikasi desktop Java untuk manajemen data mahasiswa dengan operasi CRUD penuh, fitur pencarian, dan laporan. Terhubung ke MySQL untuk penyimpanan data persisten.
+            Situs edukasi sains nutrisi buah: katalog buah, perbandingan makan utuh dan jus, Fruit Fusion Lab, konsultasi buah, dan kalkulator porsi harian.
           </p>
           <div class="project-tags">
-            <span class="tag">Java</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">OOP</span>
-            <span class="tag">JDBC</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
           </div>
           <div class="project-card-actions">
-            <button class="btn-card-action btn-card-primary" onclick="openProjectModal('crud')">
-              <i class="fas fa-circle-info"></i> Detail Proyek
-            </button>
-            <a href="https://github.com/fachrilakbar12" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
-              <i class="fab fa-github"></i> Source Code
+            <a href="https://fachrilakbar12.github.io/frutixlab-web/" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Demo
+            </a>
+            <a href="https://github.com/fachrilakbar12/frutixlab-web" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github" aria-hidden="true"></i> Kode
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 6: NexaMart Customer Retention & RFM Churn Analytics -->
+        <div class="project-card reveal" data-category="analytics" style="transition-delay: 0.2s;">
+          <a href="https://fachrilakbar12.github.io/nexamart-retention-analytics/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek NexaMart Customer Retention &amp; RFM Churn Analytics">
+            <img src="assets/projects/nexamart-retention-analytics.webp" alt="Tampilan halaman utama proyek NexaMart Customer Retention &amp; RFM Churn Analytics" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">NexaMart Customer Retention &amp; RFM Churn Analytics</h3>
+          <p class="project-desc">
+            Dasbor analitik retensi pelanggan dengan matriks kohor, segmentasi RFM, dan simulator penyelamatan churn, dilengkapi kueri SQL dan skrip Python.
+          </p>
+          <div class="project-tags">
+            <span class="tag">SQL</span>
+            <span class="tag">Python</span>
+            <span class="tag">Chart.js</span>
+          </div>
+          <div class="project-card-actions">
+            <a href="https://fachrilakbar12.github.io/nexamart-retention-analytics/" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Demo
+            </a>
+            <a href="https://github.com/fachrilakbar12/nexamart-retention-analytics" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github" aria-hidden="true"></i> Kode
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 7: NexaLogix Supply: Inventory Control & Stockout Forecasting -->
+        <div class="project-card reveal" data-category="analytics">
+          <a href="https://fachrilakbar12.github.io/inventory-control-stockout-forecasting/" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka demo proyek NexaLogix Supply: Inventory Control &amp; Stockout Forecasting">
+            <img src="assets/projects/nexalogix-inventory-forecasting.webp" alt="Tampilan halaman utama proyek NexaLogix Supply: Inventory Control &amp; Stockout Forecasting" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">NexaLogix Supply: Inventory Control &amp; Stockout Forecasting</h3>
+          <p class="project-desc">
+            Dasbor pengendalian persediaan dengan klasifikasi ABC-XYZ, kalkulator reorder point dan safety stock, serta simulator service level.
+          </p>
+          <div class="project-tags">
+            <span class="tag">SQL</span>
+            <span class="tag">Python</span>
+            <span class="tag">Chart.js</span>
+          </div>
+          <div class="project-card-actions">
+            <a href="https://fachrilakbar12.github.io/inventory-control-stockout-forecasting/" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Demo
+            </a>
+            <a href="https://github.com/fachrilakbar12/inventory-control-stockout-forecasting" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fab fa-github" aria-hidden="true"></i> Kode
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 8: Dashboard Kinerja Penjualan Kopi Senja (Q1 2024) -->
+        <div class="project-card reveal" data-category="dashboard" style="transition-delay: 0.1s;">
+          <a href="https://lookerstudio.google.com/reporting/b7b85cb0-4e8d-4e87-9bc4-8f11769e08d8" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Lihat Dashboard Kinerja Penjualan Kopi Senja (Q1 2024)">
+            <img src="assets/projects/proyek-looker-kopi-senja.webp" alt="Dashboard Looker Studio Dashboard Kinerja Penjualan Kopi Senja (Q1 2024)" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Dashboard Kinerja Penjualan Kopi Senja (Q1 2024)</h3>
+          <p class="project-desc">
+            Dashboard Looker Studio yang merangkum kinerja penjualan Kopi Senja pada kuartal pertama 2024.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Looker Studio</span>
+          </div>
+          <div class="project-card-actions">
+            <a href="https://lookerstudio.google.com/reporting/b7b85cb0-4e8d-4e87-9bc4-8f11769e08d8" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Lihat Dashboard
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 9: Laporan Penjualan Barang Pecah Belah 2025 -->
+        <div class="project-card reveal" data-category="dashboard" style="transition-delay: 0.2s;">
+          <a href="https://docs.google.com/spreadsheets/d/1suxmDFy_FXggFfPgBBUK_Ug3RIFgLvAn68iy6uyjSqM/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka Spreadsheet Laporan Penjualan Barang Pecah Belah 2025">
+            <img src="assets/projects/proyek-sheets-pecah-belah.webp" alt="Lembar dashboard Google Sheets Laporan Penjualan Barang Pecah Belah 2025" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Laporan Penjualan Barang Pecah Belah 2025</h3>
+          <p class="project-desc">
+            Laporan penjualan 2025 untuk peralatan makan dan minum (cangkir, piring, mangkuk, gelas) berisi data transaksi dan satu lembar dashboard.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Google Sheets</span>
+          </div>
+          <div class="project-card-actions">
+            <a href="https://docs.google.com/spreadsheets/d/1suxmDFy_FXggFfPgBBUK_Ug3RIFgLvAn68iy6uyjSqM/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Buka Spreadsheet
             </a>
           </div>
         </div>

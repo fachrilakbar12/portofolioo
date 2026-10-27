@@ -15,11 +15,11 @@
 
   // Determine initial theme:
   // 1. Use saved preference, or
-  // 2. Use system preference (prefers-color-scheme)
+  // 2. Default to 'light' (mode terang sebagai tampilan pertama pengunjung)
   function getInitialTheme() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'dark' || saved === 'light') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'light';
   }
 
   function applyTheme(theme) {
@@ -37,7 +37,7 @@
     applyTheme(current === 'dark' ? 'light' : 'dark');
   }
 
-  // Apply on load (no flash — HTML already has data-theme="dark" as default)
+  // Apply on load (no flash — HTML already has data-theme="light" as default)
   applyTheme(getInitialTheme());
 
   // Wire up button

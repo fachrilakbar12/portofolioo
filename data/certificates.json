@@ -1,5 +1,40 @@
 [
   {
+    "id": "dibimbing-fullstack-web-development",
+    "title": "Event Online: Fullstack Web Development",
+    "issuer": "Dibimbing.id",
+    "year": "2026",
+    "category": "web",
+    "thumb": "assets/certificates/thumbs/sertifikat-fullstack-web-development-dibimbing.webp",
+    "image": "assets/certificates/large/sertifikat-fullstack-web-development-dibimbing.webp",
+    "file": "css/sertifikat-for-fortolio/Sertifikat-Fullstack-Web-Development-Dibimbing.pdf",
+    "type": "pdf"
+  },
+  {
+    "id": "yec-data-analyst-persiapan-bnsp",
+    "title": "Data Analyst untuk Persiapan Sertifikasi BNSP",
+    "issuer": "YEC.CO.ID",
+    "year": "2026",
+    "category": "web",
+    "thumb": "assets/certificates/thumbs/fachril-akbar-data-analyst-untuk-persiapan-sertifikasi-bnsp.webp",
+    "image": "assets/certificates/large/fachril-akbar-data-analyst-untuk-persiapan-sertifikasi-bnsp.webp",
+    "file": "css/sertifikat-for-fortolio/Fachril Akbar - Data Analyst untuk Persiapan Sertifikasi BNSP.pdf",
+    "type": "pdf",
+    "credentialId": "00174779"
+  },
+  {
+    "id": "kemnaker-canva-ai-otomatisasi",
+    "title": "Meningkatkan Produktivitas Pembuatan Konten dengan Canva, AI, dan Otomatisasi",
+    "issuer": "Kementerian Ketenagakerjaan RI (BBPKK)",
+    "year": "2026",
+    "category": "ai",
+    "thumb": "assets/certificates/thumbs/sertifikat-produktivitas-canva-ai-otomatisasi-bbpkk.webp",
+    "image": "assets/certificates/large/sertifikat-produktivitas-canva-ai-otomatisasi-bbpkk.webp",
+    "file": "css/sertifikat-for-fortolio/Sertifikat-Produktivitas-Canva-AI-Otomatisasi-BBPKK.pdf",
+    "type": "pdf",
+    "credentialId": "DS-2026-10-21-008"
+  },
+  {
     "id": "specialskill-machine-learning",
     "title": "Machine Learning",
     "issuer": "SpecialSkill Indonesia",
@@ -217,4 +252,3 @@
     "credentialId": "MS-20261005-8Qz3ab6Y6REybm5fMmWC"
   }
 ]
-

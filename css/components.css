@@ -912,6 +912,47 @@ html[data-theme="light"] #about .lanyard-card:focus-visible {
   margin-bottom: 1rem;
 }
 
+.project-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-lt);
+  background: var(--bg2);
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+html[data-theme="light"] #projects .project-thumb {
+  background: var(--milk-2);
+  border: 1px solid var(--hairline);
+  transition: border-color 0.25s ease;
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-thumb {
+  border-color: rgba(253, 253, 241, 0.20);
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-thumb {
+  background: var(--dk-s2);
+  border: 1px solid var(--dk-line);
+}
+
+.project-card[hidden],
+.project-card[style*="display: none"] {
+  display: none !important;
+}
+
 .project-icon {
   width: 46px; height: 46px;
   border-radius: var(--radius-md);
@@ -1388,7 +1429,7 @@ html[data-theme="light"] #about .lanyard-card:focus-visible {
   bottom: 2rem; right: 2rem;
   width: 42px; height: 42px;
   border-radius: var(--radius-md);
-  background: var(--grad);
+  background: var(--orange, #EC5E27);
   border: none;
   color: #fff;
   font-size: 0.95rem;
@@ -1396,7 +1437,7 @@ html[data-theme="light"] #about .lanyard-card:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 18px rgba(196,53,43,0.36);
+  box-shadow: 0 4px 18px rgba(236, 94, 39, 0.36);
   transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   opacity: 0;
   pointer-events: none;
@@ -1412,7 +1453,8 @@ html[data-theme="light"] #about .lanyard-card:focus-visible {
 
 .back-to-top:hover {
   transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 8px 26px rgba(196,53,43,0.50);
+  background: var(--orange-dark, #C94A18);
+  box-shadow: 0 8px 26px rgba(236, 94, 39, 0.50);
 }
 
 /* ══════════════════════════

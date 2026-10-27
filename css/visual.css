@@ -407,16 +407,29 @@ nav {
    BACK TO TOP — dark glow
    ══════════════════════════════════════════════ */
 [data-theme="dark"] .back-to-top {
-  background: var(--dk-lime);
-  color: #000000;
-  border: 1px solid var(--dk-lime);
-  box-shadow: none;
+  background: #000000;
+  color: var(--dk-lime);
+  border: 2px solid var(--dk-lime);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
 }
 
-[data-theme="dark"] .back-to-top:hover {
-  background: var(--dk-lime-hover);
-  border-color: var(--dk-lime-hover);
-  box-shadow: none;
+[data-theme="dark"] .back-to-top i {
+  color: var(--dk-lime);
+}
+
+[data-theme="dark"] .back-to-top:hover,
+[data-theme="dark"] .back-to-top:focus,
+[data-theme="dark"] .back-to-top:focus-visible {
+  background: var(--dk-lime);
+  color: #000000;
+  border-color: var(--dk-lime);
+  box-shadow: 0 6px 24px rgba(198, 255, 52, 0.35);
+}
+
+[data-theme="dark"] .back-to-top:hover i,
+[data-theme="dark"] .back-to-top:focus i,
+[data-theme="dark"] .back-to-top:focus-visible i {
+  color: #000000;
 }
 
 
@@ -1059,7 +1072,9 @@ html[data-theme="light"] .hero-badge {
   font-size: 0.70rem;
   font-weight: 600;
   letter-spacing: 0;
-  /* Warna & border biarkan warisan dari components.css agar badge hijau tetap hijau */
+  background: rgba(34, 197, 94, 0.12) !important;
+  border: 1px solid rgba(34, 197, 94, 0.32) !important;
+  color: #16a34a !important;
 }
 /* Pastikan titik hijau di dalam badge tidak disentuh */
 html[data-theme="light"] .hero-badge span {
@@ -4447,6 +4462,16 @@ html[data-theme="light"] #hero button:focus-visible {
 
 :is(.dark, [data-theme="dark"]) #about .stat-num,
 :is(.dark, [data-theme="dark"]) #about .stat-suffix,
+:is(.dark, [data-theme="dark"]) .stat-num,
+:is(.dark, [data-theme="dark"]) .stat-suffix,
+:is(.dark, [data-theme="dark"]) .text-grad {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: var(--dk-lime) !important;
+  color: var(--dk-lime) !important;
+}
+
 :is(.dark, [data-theme="dark"]) #about .stat-icon i {
   color: var(--dk-lime) !important;
 }
@@ -4539,9 +4564,9 @@ html[data-theme="light"] #hero button:focus-visible {
   line-height: 1.3 !important;
   white-space: nowrap !important;
   letter-spacing: 0 !important;
-  background: var(--dk-violet-soft) !important;
-  border: 1px solid var(--dk-violet) !important;
-  color: var(--dk-text) !important;
+  background: #15151B !important;
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  color: var(--dk-lime) !important;
   margin-bottom: 0.55rem !important;
 }
 
@@ -4768,13 +4793,13 @@ html[data-theme="light"] #hero button:focus-visible {
 }
 
 :is(.dark, [data-theme="dark"]) #projects .project-icon {
-  background: var(--dk-lime-soft) !important;
-  border: 1px solid var(--dk-lime-border) !important;
-  color: var(--dk-lime) !important;
+  background: var(--dk-violet) !important;
+  border: 1px solid var(--dk-violet) !important;
+  color: #FFFFFF !important;
 }
 
 :is(.dark, [data-theme="dark"]) #projects .project-icon i {
-  color: var(--dk-lime) !important;
+  color: #FFFFFF !important;
 }
 
 /* Project Cards */
@@ -4788,9 +4813,19 @@ html[data-theme="light"] #hero button:focus-visible {
   background: var(--dk-s2) !important;
 }
 
-:is(.dark, [data-theme="dark"]) #projects .project-card-top:not(:has(img)),
+:is(.dark, [data-theme="dark"]) #projects .project-card-top {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-thumb {
+  background: #15151B !important;
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+}
+
 :is(.dark, [data-theme="dark"]) #projects .project-thumb:not(:has(img)) {
-  background: var(--dk-violet) !important;
+  background: #15151B !important;
 }
 
 :is(.dark, [data-theme="dark"]) #projects .project-title {
@@ -5334,19 +5369,65 @@ html[data-theme="light"] #hero button:focus-visible {
 }
 
 /* ── 11. Global Back-to-Top Button ── */
-:is(.dark, [data-theme="dark"]) .back-to-top {
-  background: var(--dk-lime) !important;
-  color: #000000 !important;
-  border: 1px solid var(--dk-lime) !important;
-  box-shadow: none !important;
+html[data-theme="light"] .back-to-top,
+html:not([data-theme="dark"]) .back-to-top {
+  background: var(--orange, #EC5E27) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 18px rgba(236, 94, 39, 0.36) !important;
 }
 
-:is(.dark, [data-theme="dark"]) .back-to-top:hover {
-  background: var(--dk-lime-hover) !important;
-  color: #000000 !important;
+html[data-theme="light"] .back-to-top i,
+html:not([data-theme="dark"]) .back-to-top i {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .back-to-top:hover,
+html[data-theme="light"] .back-to-top:focus,
+html[data-theme="light"] .back-to-top:focus-visible,
+html:not([data-theme="dark"]) .back-to-top:hover,
+html:not([data-theme="dark"]) .back-to-top:focus,
+html:not([data-theme="dark"]) .back-to-top:focus-visible {
+  background: var(--orange-dark, #C94A18) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 26px rgba(236, 94, 39, 0.50) !important;
+}
+
+html[data-theme="light"] .back-to-top:hover i,
+html[data-theme="light"] .back-to-top:focus i,
+html[data-theme="light"] .back-to-top:focus-visible i,
+html:not([data-theme="dark"]) .back-to-top:hover i,
+html:not([data-theme="dark"]) .back-to-top:focus i,
+html:not([data-theme="dark"]) .back-to-top:focus-visible i {
+  color: #FFFFFF !important;
+}
+
+:is(.dark, [data-theme="dark"]) .back-to-top {
+  background: #000000 !important;
+  color: var(--dk-lime) !important;
+  border: 2px solid var(--dk-lime) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
 }
 
 :is(.dark, [data-theme="dark"]) .back-to-top i {
+  color: var(--dk-lime) !important;
+  transition: color 0.25s ease;
+}
+
+:is(.dark, [data-theme="dark"]) .back-to-top:hover,
+:is(.dark, [data-theme="dark"]) .back-to-top:focus,
+:is(.dark, [data-theme="dark"]) .back-to-top:focus-visible {
+  background: var(--dk-lime) !important;
+  color: #000000 !important;
+  border-color: var(--dk-lime) !important;
+  box-shadow: 0 6px 24px rgba(198, 255, 52, 0.35) !important;
+}
+
+:is(.dark, [data-theme="dark"]) .back-to-top:hover i,
+:is(.dark, [data-theme="dark"]) .back-to-top:focus i,
+:is(.dark, [data-theme="dark"]) .back-to-top:focus-visible i {
   color: #000000 !important;
 }
 
