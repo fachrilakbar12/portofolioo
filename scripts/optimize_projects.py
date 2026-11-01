@@ -69,6 +69,11 @@ PROJECTS_MAP = [
         "src": "proyek-sheets-pecah-belah.png",
         "dest": "proyek-sheets-pecah-belah.webp",
     },
+    {
+        "title": "Dashboard Data SDM",
+        "src": "proyek-sheets-dashboard-sdm.png",
+        "dest": "proyek-sheets-dashboard-sdm.webp",
+    },
 ]
 
 

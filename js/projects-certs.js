@@ -173,6 +173,175 @@ const PROJECTS_DATA = {
     tech: ['Google Sheets'],
     link: 'https://docs.google.com/spreadsheets/d/1suxmDFy_FXggFfPgBBUK_Ug3RIFgLvAn68iy6uyjSqM/edit?usp=sharing',
     image: 'assets/projects/proyek-sheets-pecah-belah.webp'
+  },
+  dashboardSdmSheets: {
+    showModalImage: true,
+    title: 'Dashboard Data SDM (PT Contoh Nusantara)',
+    category: 'Dashboard & Spreadsheet · HR Analytics',
+    period: 'November 2026',
+    badge: 'Dashboard & Spreadsheet',
+    summary: 'Sistem informasi dan dashboard analitik Sumber Daya Manusia (SDM) terintegrasi berbasis Google Sheets untuk memantau 80 karyawan aktif lintas 5 divisi operasional (Keuangan, Operasional, Pemasaran, SDM, dan Teknologi Informasi). Dirancang dalam lima lembar kerja saling terhubung yang mencakup basis data master karyawan, pusat analisis & pivot kepegawaian, dashboard visual interaktif, laporan eksekutif manajemen, hingga standar operasional prosedur (SOP) tata kelola arsip.',
+    approachLabel: 'Arsitektur 5 Lembar Kerja Terintegrasi:',
+    approach: 'Mengintegrasikan pencatatan operasional HR dengan pelaporan eksekutif secara otomatis menggunakan formula dinamis, fitur pencarian cepat ID karyawan, validasi data (dropdown chip), peringatan dini masa berakhir kontrak (<60 hari), serta kontrol filter (slicer) interaktif berdasarkan divisi dan status kepegawaian.',
+    highlightsLabel: 'Rincian Isi & Fitur Utama:',
+    highlights: [
+      'Kartu Indikator Kinerja Utama (KPI SDM): Memantau secara real-time Total Karyawan (80 orang), Kontrak Segera Berakhir (14 orang dengan indikator peringatan merah), Rata-Rata Masa Kerja (2,9 tahun), dan Total Sisa Cuti (643 hari).',
+      'Visualisasi Grafik & Slicer Interaktif (Tab Dashboard SDM): Menampilkan Grafik Batang Distribusi Karyawan per Divisi (Teknologi Informasi 22, Operasional 20, Keuangan 14, Pemasaran 14, SDM 10), Grafik Donat Komposisi Status Kepegawaian (Tetap 60%, Kontrak 27,5%, Magang 12,5%), dan Grafik Garis Tren Rekrutmen Tahunan (2019–2026), dilengkapi kontrol Filter Divisi dan Filter Status Kepegawaian.',
+      'Basis Data Master & Pencarian Cepat (Tab Data Karyawan): Memuat 80 data personel (KRY-001 s.d. KRY-080) lengkap dengan fitur Cari ID Karyawan instan serta kalkulasi otomatis masa kerja, sisa hak cuti tahunan, dan status peringatan kontrak (Aman / Segera Berakhir).',
+      'Pusat Analisis & Pivot Kepegawaian (Tab Analisis & Pivot): Menyajikan tabel rekapitulasi jumlah karyawan per divisi, proporsi status kepegawaian (48 Tetap, 22 Kontrak, 10 Magang), serta tren pertumbuhan rekrutmen dari tahun 2019 hingga 2026.',
+      'Laporan Eksekutif & Tata Kelola Arsip (Tab Laporan Eksekutif & Petunjuk): Menyediakan ringkasan eksekutif, temuan kunci, rekomendasi strategis manajemen (evaluasi 14 kontrak yang segera berakhir dan penjadwalan cuti bergilir), serta SOP struktur direktori dan standar penamaan berkas SDM.'
+    ],
+    tech: ['Google Sheets', 'HR Analytics', 'Pivot Table & Slicer', 'Dynamic Formulas', 'Executive Reporting'],
+    link: 'https://docs.google.com/spreadsheets/d/1jYpdDnrPZSEBT9Aj5tU071HDcmwUVgBmTtVh9iOcGkw/edit?usp=sharing',
+    image: 'assets/projects/proyek-sheets-dashboard-sdm.webp'
+  },
+  desainKepemerintahan: {
+    isDesign: true,
+    title: 'Desain Media Pemerintahan: Penguatan Kepercayaan Publik (Kemenkominfo RI)',
+    category: 'Desain & Publikasi · Kehumasan Instansi',
+    period: '2026',
+    badge: 'Humas & Komunikasi Pemerintah',
+    image: 'assets/projects/desain/desain-kepemerintahan.jpg',
+    summary: 'Rancangan materi publisitas strategis bertajuk "Boost Public Trust with Government Media Designs" yang merepresentasikan wajah komunikasi digital Kementerian Komunikasi dan Informatika RI. Dalam fungsi kehumasan pemerintah (Government Public Relations), keseragaman identitas visual dan kualitas penyampaian informasi di media sosial menjadi instrumen utama untuk merawat kepercayaan publik (public trust) serta menjembatani kebijakan negara dengan masyarakat luas.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Mengemas empat isu prioritas pemerintah ke dalam format feed Instagram (4:5) yang informatif, transparan, dan mudah dipahami publik. Menggunakan visualisasi mockup perangkat seluler yang menampilkan profil resmi Kementerian Komunikasi dan Informatika (1.822 unggahan, 2,5 juta pengikut) dengan empat kartu konten tematik yang melayang keluar dari layar sebagai simbol keterbukaan informasi publik.',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Tajuk Utama Persuasif: "BOOST PUBLIC TRUST WITH GOVERNMENT MEDIA DESIGNS" dengan tipografi bold sans-serif putih di atas latar biru institusional yang memancarkan kewibawaan dan kredibilitas.',
+      'Pilar Publikasi 1 — Spirit Pembangunan: Visualisasi pidato kepemimpinan nasional dengan bendera Merah Putih dan podium Garuda untuk mengomunikasikan arah pembangunan nasional.',
+      'Pilar Publikasi 2 — Indonesia Sehat: Edukasi layanan kesehatan masyarakat bersama figur tenaga medis profesional dan simbol palang kesehatan hijau.',
+      'Pilar Publikasi 3 — Infrastruktur Untuk Negeri: Publikasi transparansi pembangunan jalan layang/tol nasional bersama insinyur lapangan dan cetak biru (blueprint) konstruksi.',
+      'Pilar Publikasi 4 — Peduli Pajak: Kampanye literasi dan kepatuhan pajak digital melalui ilustrasi aplikasi pembayaran, koin, dan kalender jatuh tempo.',
+      'Atribut Resmi & Saluran Pengaduan Publik: Dilengkapi logo resmi Kementerian Komunikasi dan Informatika, alamat kantor (Jl. Medan Merdeka Barat No. 9, Jakarta Pusat), QR Code akses cepat, serta kontak layanan masyarakat via WhatsApp (+62 811-1234-567) dan telepon (+62 811-9876-543).'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Menggunakan komposisi simetris 3D perspective showcase pada rasio feed Instagram 4:5 (1080×1350 piksel) dengan palet warna Institutional Royal Blue yang mencerminkan integritas, stabilitas, dan profesionalisme birokrasi.',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Humas Pemerintah', 'Komunikasi Publik', 'Social Media Branding', 'Visual Storytelling', 'Canva / Photoshop'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi masyarakat umum, warganet, dan pemangku kepentingan guna memperkuat citra lembaga pemerintah yang terbuka, komunikatif, serta responsif terhadap kebutuhan informasi warga.'
+  },
+  dokumentasiRapat: {
+    isDesign: true,
+    title: 'Publikasi Dokumentasi Sidang Paripurna DPR RI',
+    category: 'Desain & Publikasi · Humas Kelembagaan',
+    period: '12 November 2026',
+    badge: 'Dokumentasi & Humas Parlemen',
+    image: 'assets/projects/desain/dokumentasi-rapat.jpg',
+    summary: 'Karya publikasi visual kehumasan untuk peliputan dan dokumentasi kelembagaan negara bertajuk "Dokumentasi Sidang Paripurna — 12 November 2026". Dalam tugas kehumasan dan keprotokolan parlemen, publikasi dokumentasi persidangan merupakan bentuk akuntabilitas serta keterbukaan informasi kepada rakyat terkait jalannya fungsi legislasi, anggaran, dan pengawasan.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Mengemas foto dokumentasi persidangan yang bersifat formal menjadi konten media sosial bergaya editorial yang menarik perhatian publik (thumb-stopping visual). Metafora dua layar televisi klasik digunakan untuk membingkai dua sudut pandang peliputan humas: fokus pada diskusi substantif anggota dewan di meja sidang (layar atas) serta suasana menyeluruh ruang Sidang Paripurna (layar bawah).',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Atribut Kelembagaan Negara: Menyematkan lambang Garuda Pancasila dan logo resmi DPR RI di puncak komposisi sebagai penanda otoritas informasi lembaga legislatif.',
+      'Tipografi Kontras & Penanda Kronologis: Perpaduan huruf serif putih tegas pada kata "Dokumentasi" dan aksen script emas pada "Sidang Paripurna", dilengkapi label tanggal aktual "12 November 2026".',
+      'Layar Dokumentasi Atas (Fokus Substansi): Menampilkan potret jarak menengah jajaran pimpinan dan anggota dewan yang sedang menyimak berkas serta membahas agenda rapat secara saksama.',
+      'Layar Dokumentasi Bawah (Sudut Lebar Paripurna): Menampilkan potret wide-angle suasana ruang Sidang Paripurna DPR RI lengkap dengan mimbar pimpinan berlatar bendera Merah Putih dan kehadiran anggota dewan.',
+      'Integrasi Kanal Media Sosial Humas: Mencantumkan identitas akun resmi @dpr_ri (Instagram, YouTube, TikTok) dan @humas_dpr di bagian bawah poster untuk mengarahkan masyarakat ke liputan lengkap.'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Memadukan latar Deep Crimson Red yang berwibawa dengan teknik foreground framing berupa tumpukan naskah RUU dan buku-buku hukum yang dibuat buram (depth of field), menciptakan kesan kedalaman ruang yang sinematik pada format 4:5.',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Humas Parlemen', 'Dokumentasi Protokoler', 'Jurnalistik Visual', 'Manajemen Media Sosial', 'Photo Compositing'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi masyarakat luas, insan pers, akademisi, dan konstituen untuk meningkatkan literasi parlemen serta transparansi kinerja lembaga perwakilan rakyat.'
+  },
+  finallyLolosMaganghub: {
+    isDesign: true,
+    title: 'Kampanye Selebrasi & Engagement: "Akhirnya Lolos MagangHub"',
+    category: 'Desain & Publikasi · Kampanye Komunitas',
+    period: '2026',
+    badge: 'Publisitas & Engagement Publik',
+    image: 'assets/projects/desain/finally-lolos-maganghub.jpg',
+    summary: 'Materi publisitas kreatif bertajuk "Akhirnya Lolos MagangHub" yang dirancang sebagai konten selebrasi pasca-pengumuman seleksi (post-announcement engagement). Dalam strategi komunikasi program kepemudaan dan karier, konten human-interest yang merayakan keberhasilan peserta sangat efektif untuk membangun ikatan emosional (emotional resonance) dan kebanggaan komunitas.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Menggunakan pendekatan storytelling awal perjalanan karier (the beginning of a new journey) yang divisualisasikan melalui rombongan peserta magang berseragam kemeja putih yang berangkat bersama menggunakan camper van klasik membawa koper. Kutipan perjuangan di bagian bawah memperkuat pesan resiliensi dan mengundang interaksi organik (repost, komentar, dan berbagi pengalaman) dari para peserta.',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Tipografi Selebrasi yang Segar: Kombinasi huruf script putih pada kata "Akhirnya" dan huruf tebal berdimensi biru langit pada "Lolos MagangHub" yang selaras dengan suasana langit cerah.',
+      'Visualisasi Antusiasme & Solidaritas: Potret sekelompok peserta magang yang tersenyum gembira dan melambaikan tangan dari dalam maupun atap mobil VW Combi biru-krem lengkap dengan koper perjalanan.',
+      'Latar Kawasan Institusional: Berlatar jalan perkotaan yang asri dengan gedung berkubah di kejauhan, menyimbolkan kesiapan peserta memasuki dunia kerja dan instansi tempat magang.',
+      'Kutipan Motivasi Perjuangan: Kalimat "Tidak ada kata menyerah sebelum akhir perang" di sudut kiri bawah memberikan apresiasi atas ketekunan peserta melewati proses seleksi.'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Menerapkan komposisi rule of thirds pada kanvas vertikal 4:5 dengan pencahayaan alami yang cerah (Sky Blue & Daylight Cream), memberikan ruang langit yang lega bagi tipografi utama serta ruang bawah untuk kutipan motivasi.',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Audience Engagement', 'Youth Public Relations', 'Campaign Storytelling', 'Copywriting Motivasi', 'Visual Content Design'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi mahasiswa, fresh graduate, dan peserta seleksi MagangHub; mendorong tingkat keterbagian (shareability) yang tinggi di Instagram serta memperkuat citra positif program magang.'
+  },
+  gerakanPeduli: {
+    isDesign: true,
+    title: 'Kampanye Sosial: Gerakan Bakti Sosial Aceh Peduli Lingkungan',
+    category: 'Desain & Publikasi · Kampanye Sosial',
+    period: '2026',
+    badge: 'Kampanye Sosial & Komunitas',
+    image: 'assets/projects/desain/gerakan-peduli.jpg',
+    summary: 'Desain publisitas kampanye sosial dan hubungan masyarakat (community relations) untuk kegiatan "Gerakan Bakti Sosial — Aceh Peduli Lingkungan" dengan tema "Peduli Sesama, Berbagi Harapan". Poster ini dirancang untuk mengetuk empati publik, mengedukasi pentingnya kepedulian sosial-lingkungan, serta mengajak masyarakat berpartisipasi sebagai relawan maupun donatur.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Menerapkan struktur pesan persuasif tiga lapis khas kampanye kehumasan sosial: (1) Identitas & Tema Utama (Gerakan Bakti Sosial: Peduli Sesama, Berbagi Harapan), (2) Pesan Empati untuk menggugah kepedulian, serta (3) Ajakan Bertindak (Call-to-Action) untuk bergabung. Gestur subjek utama yang tersenyum sambil mengulurkan tangan ke arah audiens menciptakan komunikasi dua arah yang hangat, ramah, dan inklusif.',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Co-Branding & Identitas Daerah: Menampilkan logo "The Light of Aceh" dengan simbol daun dan bumi hijau di puncak poster, diikuti sub-tajuk "ACEH PEDULI LINGKUNGAN".',
+      'Tajuk Kampanye Humanis: Tipografi "Gerakan Bakti Sosial" berdimensi hangat yang diperkuat slogan "Peduli Sesama, Berbagi Harapan".',
+      'Dua Kotak Pesan Persuasif: Sisi kiri memuat ajakan empati ("Mari berbagi, ringankan beban, ciptakan senyuman, untuk sesama") dan sisi kanan memuat ajakan bergabung ("Ayo Bergabung Bersama Aceh Peduli Lingkungan").',
+      'Ilustrasi Bantuan & Aksi Lapangan: Menampilkan kotak donasi berlabel tangan-hati berisi sembako, buku, dan kebutuhan pokok di sisi kiri, serta siluet aksi gotong royong para relawan di latar belakang.',
+      'Saluran Resmi & Tagar Kampanye: Mencantumkan akun Instagram dan TikTok @aceh_pedulilingkungan serta tagar #AcehPeduliLingkungan dan #TheLightOfAceh pada pita informasi bawah.'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Mengusung palet warna Warm Golden Orange & Earthy Cream pada rasio 4:5 yang memancarkan kehangatan, semangat kemanusiaan, energi positif, dan solidaritas sosial.',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Community Relations', 'Kampanye Sosial & CSR', 'Persuasive Copywriting', 'Publisitas Kegiatan', 'Branding Komunitas'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi generasi muda, mahasiswa, komunitas relawan, dan masyarakat Aceh guna meningkatkan partisipasi aksi bakti sosial serta memperluas jangkauan pesan kepedulian lingkungan.'
+  },
+  jagaKesehatan: {
+    isDesign: true,
+    title: 'Iklan Layanan Masyarakat (ILM): Imbauan Darurat "Jaga Kesehatan"',
+    category: 'Desain & Publikasi · Layanan Masyarakat',
+    period: '2026',
+    badge: 'Komunikasi Krisis & ILM',
+    image: 'assets/projects/desain/jaga-kesehatan.jpg',
+    summary: 'Materi Iklan Layanan Masyarakat (ILM) dan komunikasi risiko kesehatan publik bertajuk "Jaga Kesehatan — Tetap Selalu Jaga Kesehatan Dimanapun dan Kapanpun". Dalam kehumasan publik dan manajemen komunikasi krisis, visual dengan daya gugah tinggi sangat dibutuhkan agar masyarakat segera menyadari ancaman kesehatan (seperti kabut asap karhutla atau polusi udara) dan menerapkan langkah perlindungan diri.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Mengedepankan pendekatan direct protective appeal melalui gestur tangan tokoh nasional yang menyerahkan kartu hologram masker medis tepat ke arah mata pembaca. Kontras antara latar situasi darurat berapi/berasap dengan simbol palang kesehatan hijau menegaskan bahwa menjaga kesehatan diri adalah prioritas mendesak di mana pun dan kapan pun.',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Atribut Kebangsaan Resmi: Menyertakan elemen bendera berkibar "Merah Putih" di kiri atas dan lambang negara Garuda Pancasila di kanan atas sebagai penegas bobot imbauan nasional.',
+      'Focal Point Kartu Masker & Simbol Peringatan: Kartu transparan di tengah komposisi menampilkan ilustrasi masker medis beserta ikon peringatan bahaya kesehatan (biohazard & tanda seru merah).',
+      'Simbol Medis di Tengah Situasi Krisis: Ikon-ikon palang kesehatan hijau (green health cross) melayang di sekitar subjek di tengah latar kabut asap, merepresentasikan upaya perlindungan medis.',
+      'Pesan Imbauan Singkat & Tegas: Tajuk besar "Jaga Kesehatan" diikuti sub-pesan "Tetap Selalu Jaga Kesehatan Dimanapun dan Kapanpun" agar mudah diingat masyarakat dalam sekali pandang.'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Menggunakan pencahayaan dramatis (cinematic lighting) dan efek shallow depth-of-field pada kanvas 4:5, mempertemukan warna hangat latar krisis (Fiery Amber) dengan aksen dingin keselamatan medis (Emerald Green & Clean White).',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Iklan Layanan Masyarakat', 'Komunikasi Krisis', 'Edukasi Kesehatan Publik', 'Visual Impact Direction', 'Digital Imaging'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi masyarakat luas, khususnya warga di wilayah terdampak penurunan kualitas udara atau kabut asap, guna meningkatkan kepatuhan penggunaan masker dan kewaspadaan kesehatan.'
+  },
+  lolosGoogleMaganghub: {
+    isDesign: true,
+    title: 'Pengumuman Publik: Cek Status Seleksi MagangHub Batch 3 (Kemnaker RI)',
+    category: 'Desain & Publikasi · Informasi Publik',
+    period: '2026',
+    badge: 'Pengumuman & Informasi Publik',
+    image: 'assets/projects/desain/lolos-google-maganghub.jpg',
+    summary: 'Materi publisitas pengumuman resmi bertajuk "Cari Status Magang, Cek Lolos Seleksi — MagangHub Batch 3" untuk program MagangHub Kementerian Ketenagakerjaan RI (Kemnaker). Dalam standar kehumasan pemerintah, konten pengumuman seleksi nasional harus menyajikan instruksi yang jelas, mencegah disinformasi atau tautan palsu, serta mengarahkan peserta langsung ke portal resmi.',
+    approachLabel: 'Strategi Komunikasi & Kehumasan:',
+    approach: 'Menggunakan pendekatan familiar UI simulation (simulasi kartu pencarian Google) untuk memandu peserta secara visual mengenai cara mengakses portal resmi https://maganghub.kemnaker.go.id. Tampilan judul hasil pencarian "Selamat! Anda Dinyatakan LOLOS Seleksi MagangHub Batch 3" dirancang sebagai pemicu tindakan segera (call-to-action trigger) agar peserta langsung memeriksa akun dashboard masing-masing.',
+    highlightsLabel: 'Bedah Isi & Pesan Utama Visual:',
+    highlights: [
+      'Co-Branding Resmi Kemnaker & MagangHub: Menampilkan logo Kementerian Ketenagakerjaan RI (KEMNAKER) berdampingan dengan logo "Maganghub oleh Kemnaker" di sudut kiri atas.',
+      'Headline Pengumuman & Pita Aksen Kuning: Tajuk "CARI STATUS MAGANG CEK LOLOS SELEKSI" dipertegas dengan pita kuning kontras bertuliskan "KINI TERSEDIA! CEK STATUS SELEKSI MAGANGHUB BATCH 3 SEKARANG!".',
+      'Simulasi Pencarian Google yang Edukatif: Menampilkan kata kunci pencarian "maganghub", hasil tautan domain resmi https://maganghub.kemnaker.go.id, serta petunjuk pengecekan nama pada dashboard resmi Kemnaker RI.',
+      'Atribut Portal Resmi & Ekosistem SIAPkerja: Mencantumkan alamat maganghub.kemnaker.go.id di kiri bawah serta identitas SIAPkerja dan tagar #LolosMagangHub di kanan bawah.'
+    ],
+    architectureLabel: 'Direksi Kreatif & Tata Letak (Feed 4:5):',
+    architecture: 'Menggunakan latar Corporate Deep Navy Blue dengan kontras kartu pencarian putih bersih dan pita aksen Attention Yellow pada proporsi 4:5 sehingga hierarki informasi terbaca sangat jelas di layar perangkat seluler.',
+    techLabel: 'Kompetensi Kehumasan & Tools:',
+    tech: ['Informasi Publik Pemerintah', 'Humas Kemnaker', 'Digital Campaign CTA', 'UI Mockup Storytelling', 'Brand Guideline'],
+    noteLabel: 'Sasaran Audiens & Dampak Publikasi:',
+    note: 'Ditujukan bagi seluruh pendaftar program MagangHub Batch 3 di seluruh Indonesia untuk mempercepat penyebaran informasi kelulusan secara akurat dan aman menuju portal resmi Kemnaker RI.'
   }
 };
 
@@ -181,13 +350,14 @@ const projectModalBackdrop = document.getElementById('projectModal');
 
 function openProjectModal(key) {
   const data = PROJECTS_DATA[key];
-  if (!data || !projectModalBackdrop) return;
+  const modalBackdrop = projectModalBackdrop || document.getElementById('projectModal');
+  if (!data || !modalBackdrop) return;
 
   const titleEl      = document.getElementById('pmTitle');
   const catEl        = document.getElementById('pmCategory');
   const badgeEl      = document.getElementById('pmBadge');
   const githubEl     = document.getElementById('pmGithub');
-  const modalBody    = projectModalBackdrop.querySelector('.modal-body');
+  const modalBody    = modalBackdrop.querySelector('.modal-body');
 
   if (titleEl) titleEl.textContent = data.title;
   if (catEl) catEl.textContent = `${data.category || ''} · ${data.period || ''}`;
@@ -204,27 +374,50 @@ function openProjectModal(key) {
   if (modalBody) {
     let bodyHtml = '';
 
+    // 0. Pratinjau Visual 4:5 (khusus proyek Desain & Publikasi)
+    if (data.isDesign && data.image) {
+      bodyHtml += `
+        <div class="modal-design-preview-wrap">
+          <div class="modal-design-preview">
+            <img src="${escapeHtml(data.image)}" alt="${escapeHtml(data.title)}" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <span class="modal-design-caption"><i class="fab fa-instagram" aria-hidden="true"></i> Format Feed Instagram 4:5 (1080 × 1350 px)</span>
+        </div>
+      `;
+    } else if (data.showModalImage && data.image) {
+      bodyHtml += `
+        <div class="modal-design-preview-wrap">
+          <div class="modal-sheet-preview">
+            <img src="${escapeHtml(data.image)}" alt="${escapeHtml(data.title)}" width="1200" height="750" loading="lazy" decoding="async" />
+          </div>
+          <span class="modal-design-caption"><i class="fas fa-table" aria-hidden="true"></i> Pratinjau Lembar Kerja Dashboard SDM (Google Sheets)</span>
+        </div>
+      `;
+    }
+
     // 1. Ringkasan
     const summaryText = data.summary || data.description;
     if (summaryText) {
       bodyHtml += `<p class="modal-desc" id="pmDesc">${escapeHtml(summaryText)}</p>`;
     }
 
-    // 2. Pendekatan (hanya jika ada)
+    // 2. Pendekatan / Strategi Komunikasi & Kehumasan (hanya jika ada)
     if (data.approach) {
+      const approachHeading = data.approachLabel || 'Pendekatan:';
       bodyHtml += `
         <div>
-          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Pendekatan:</h4>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">${escapeHtml(approachHeading)}</h4>
           <p class="modal-desc" style="line-height:1.65;">${escapeHtml(data.approach)}</p>
         </div>
       `;
     }
 
-    // 3. Fitur Utama (hanya jika ada)
+    // 3. Fitur Utama / Bedah Isi & Pesan Utama Visual (hanya jika ada)
     if (data.highlights && data.highlights.length > 0) {
+      const highlightsHeading = data.highlightsLabel || 'Fitur Utama:';
       bodyHtml += `
         <div>
-          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Fitur Utama:</h4>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">${escapeHtml(highlightsHeading)}</h4>
           <ul class="modal-highlights" id="pmHighlights">
             ${data.highlights.map(h => `<li><i class="fas fa-check-circle" aria-hidden="true"></i> <span>${escapeHtml(h)}</span></li>`).join('')}
           </ul>
@@ -232,21 +425,23 @@ function openProjectModal(key) {
       `;
     }
 
-    // 4. Arsitektur (hanya jika ada)
+    // 4. Arsitektur / Direksi Kreatif & Tata Letak (hanya jika ada)
     if (data.architecture) {
+      const archHeading = data.architectureLabel || 'Arsitektur:';
       bodyHtml += `
         <div>
-          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Arsitektur:</h4>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">${escapeHtml(archHeading)}</h4>
           <p class="modal-desc" style="line-height:1.65;">${escapeHtml(data.architecture)}</p>
         </div>
       `;
     }
 
-    // 5. Teknologi yang Digunakan (hanya jika ada)
+    // 5. Teknologi yang Digunakan / Kompetensi Kehumasan (hanya jika ada)
     if (data.tech && data.tech.length > 0) {
+      const techHeading = data.techLabel || 'Teknologi yang Digunakan:';
       bodyHtml += `
         <div>
-          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Teknologi yang Digunakan:</h4>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">${escapeHtml(techHeading)}</h4>
           <div class="project-tags" id="pmTech">
             ${data.tech.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}
           </div>
@@ -254,11 +449,12 @@ function openProjectModal(key) {
       `;
     }
 
-    // 6. Catatan (hanya jika ada)
+    // 6. Catatan / Sasaran Audiens & Dampak Publikasi (hanya jika ada)
     if (data.note) {
+      const noteHeading = data.noteLabel || 'Catatan:';
       bodyHtml += `
         <div>
-          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">Catatan:</h4>
+          <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-bright);">${escapeHtml(noteHeading)}</h4>
           <p class="modal-desc" style="font-size:0.85rem; opacity:0.9; line-height:1.6;">${escapeHtml(data.note)}</p>
         </div>
       `;
@@ -269,37 +465,71 @@ function openProjectModal(key) {
 
   // Footer Button
   if (githubEl) {
-    if (data.github || data.repo) {
+    if (data.isDesign && data.image) {
+      githubEl.href = data.image;
+      githubEl.innerHTML = '<i class="fas fa-expand"></i> Lihat Desain Ukuran Penuh';
+      githubEl.style.display = 'inline-flex';
+    } else if (data.github || data.repo) {
       githubEl.href = data.github || data.repo;
       githubEl.innerHTML = '<i class="fab fa-github"></i> Kunjungi Repositori';
       githubEl.style.display = 'inline-flex';
     } else if (data.demo || data.link) {
-      githubEl.href = data.demo || data.link;
-      githubEl.innerHTML = '<i class="fas fa-external-link-alt"></i> Kunjungi Web';
+      const targetUrl = data.demo || data.link;
+      githubEl.href = targetUrl;
+      if (targetUrl.includes('docs.google.com/spreadsheets')) {
+        githubEl.innerHTML = '<i class="fas fa-table"></i> Buka Google Sheets';
+      } else {
+        githubEl.innerHTML = '<i class="fas fa-external-link-alt"></i> Kunjungi Web';
+      }
       githubEl.style.display = 'inline-flex';
     } else {
       githubEl.style.display = 'none';
     }
   }
 
-  projectModalBackdrop.classList.add('open');
+  modalBackdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeProjectModal() {
-  if (projectModalBackdrop) {
-    projectModalBackdrop.classList.remove('open');
+  const modalBackdrop = projectModalBackdrop || document.getElementById('projectModal');
+  if (modalBackdrop) {
+    modalBackdrop.classList.remove('open');
     if (!document.getElementById('certLightbox')?.classList.contains('open')) {
       document.body.style.overflow = '';
     }
   }
 }
 
+window.openProjectModal = openProjectModal;
+window.closeProjectModal = closeProjectModal;
+
 if (projectModalBackdrop) {
   projectModalBackdrop.addEventListener('click', (e) => {
     if (e.target === projectModalBackdrop) closeProjectModal();
   });
 }
+
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-project-modal]');
+  if (trigger) {
+    const key = trigger.getAttribute('data-project-modal');
+    if (key && PROJECTS_DATA[key]) {
+      openProjectModal(key);
+    }
+  }
+});
+
+document.querySelectorAll('.project-thumb-4x5[role="button"]').forEach((thumb) => {
+  thumb.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const key = thumb.getAttribute('data-project-modal');
+      if (key) openProjectModal(key);
+      else thumb.click();
+    }
+  });
+});
 
 /* ── Project Filter Tabs ── */
 const projectTabs  = document.querySelectorAll('.project-tab');

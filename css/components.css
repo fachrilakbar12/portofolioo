@@ -933,6 +933,123 @@ html[data-theme="light"] #about .lanyard-card:focus-visible {
   display: block;
 }
 
+/* ── Kartu Proyek Desain & Publikasi (Rasio Feed Instagram 4:5) ── */
+.project-design-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.project-design-top .project-featured-badge {
+  margin-bottom: 0;
+}
+
+.project-design-ratio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.22rem 0.62rem;
+  border-radius: 999px;
+  color: var(--muted-lt);
+  background: var(--bg2);
+  border: 1px solid var(--border-lt);
+  flex-shrink: 0;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+html[data-theme="light"] #projects .project-card:hover .project-design-ratio-pill {
+  background: rgba(253, 253, 241, 0.14);
+  color: var(--milk);
+  border-color: rgba(253, 253, 241, 0.22);
+}
+
+:is(.dark, [data-theme="dark"]) #projects .project-design-ratio-pill {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--dk-muted);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+#projects .project-card-design .project-thumb,
+#projects .project-thumb.project-thumb-4x5 {
+  aspect-ratio: 4 / 5 !important;
+  position: relative;
+  cursor: pointer;
+}
+
+#projects .project-card-design .project-thumb img,
+#projects .project-thumb.project-thumb-4x5 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#projects .project-card-design:hover .project-thumb img {
+  transform: scale(1.025);
+}
+
+.modal-design-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.modal-design-preview {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-lt);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  background: var(--bg2);
+}
+
+.modal-design-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.modal-sheet-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-lt);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  background: var(--bg2);
+}
+
+.modal-sheet-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.modal-design-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-lt);
+}
+
 html[data-theme="light"] #projects .project-thumb {
   background: var(--milk-2);
   border: 1px solid var(--hairline);
@@ -2009,7 +2126,7 @@ html[data-theme="light"] #projects .project-card:hover .project-thumb {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 998;
+  z-index: 99999 !important;
   background: rgba(10,10,18,0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -2018,7 +2135,7 @@ html[data-theme="light"] #projects .project-card:hover .project-thumb {
   padding: 1.5rem;
 }
 
-.custom-modal-backdrop.open { display: flex; }
+.custom-modal-backdrop.open { display: flex !important; }
 
 .custom-modal-card {
   background: var(--card2);

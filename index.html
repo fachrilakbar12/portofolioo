@@ -39,14 +39,14 @@
   </script>
 
   <!-- ── Stylesheets ── -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/gallery.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/visual.css" />
-  <link rel="stylesheet" href="css/motion.css" />
+  <link rel="stylesheet" href="css/base.css?v=20261101e" />
+  <link rel="stylesheet" href="css/layout.css?v=20261101e" />
+  <link rel="stylesheet" href="css/components.css?v=20261101e" />
+  <link rel="stylesheet" href="css/gallery.css?v=20261101e" />
+  <link rel="stylesheet" href="css/animations.css?v=20261101e" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261101e" />
+  <link rel="stylesheet" href="css/visual.css?v=20261101e" />
+  <link rel="stylesheet" href="css/motion.css?v=20261101e" />
 
   <!-- ── EmailJS SDK ── -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -400,10 +400,10 @@
           <div class="section-divider"></div>
 
           <p class="about-p1">
-            Saya Fachril Akbar, lulusan Teknik Informatika 2026 dari Universitas Malikussaleh yang berfokus pada bidang Artificial Intelligence (computer vision) dan pengembangan web. Salah satu pencapaian utama saya adalah membangun sistem deteksi wajah deepfake berbasis arsitektur CNN dengan akurasi pengujian 90,10%, serta merancang aplikasi web melalui berbagai proyek dan pengalaman magang.
+            Saya Fachril Akbar, lulusan Teknik Informatika 2026 dari Universitas Malikussaleh yang berfokus pada bidang Artificial Intelligence (computer vision) dan pengembangan web. Salah satu pencapaian utama saya adalah membangun sistem deteksi wajah deepfake dengan YOLOv11 dan arsitektur Xception yang mencapai akurasi pengujian 90,10% dan dipublikasikan di Journal of Applied Informatics and Computing (JAIC), serta merancang aplikasi web melalui berbagai proyek dan pengalaman magang.
           </p>
           <p class="about-p2">
-            Di luar hal teknis, pengalaman saya sebagai Wakil Ketua Umum HIMATIF dan Staf Kominfo BEM UNIMAL telah membentuk cara saya berkomunikasi, memimpin, dan bekerja di dalam tim. Saat ini, saya siap mengaplikasikan keahlian teknis dan pengalaman kolaborasi saya untuk menciptakan solusi teknologi yang berdampak nyata.
+            Di luar hal teknis, pengalaman saya sebagai Wakil Ketua Umum HIMATIF dan anggota Divisi Kominfo BEM Universitas Malikussaleh telah membentuk cara saya berkomunikasi, memimpin, dan bekerja dalam tim. Saya juga terbiasa mengolah data dan menyusun dokumen dengan Microsoft Excel dan Word, serta membuat desain visual dengan Canva. Saat ini, saya siap menerapkan keahlian teknis dan kemampuan kolaborasi saya untuk membantu tim menghasilkan solusi yang berdampak nyata.
           </p>
 
           <div class="about-details">
@@ -472,7 +472,7 @@
       <div class="about-stats reveal">
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
-          <div class="stat-num" data-target="9">0</div>
+          <div class="stat-num" data-target="16">0</div>
           <div class="stat-suffix">+</div>
           <div class="stat-label">Proyek Dibuat</div>
         </div>
@@ -734,6 +734,7 @@
         <button type="button" class="project-tab" data-filter="analytics" aria-pressed="false">Analitik Data</button>
         <button type="button" class="project-tab" data-filter="dashboard" aria-pressed="false">Dashboard &amp; Spreadsheet</button>
         <button type="button" class="project-tab" data-filter="ai" aria-pressed="false">Riset &amp; AI</button>
+        <button type="button" class="project-tab" data-filter="design" aria-pressed="false">Desain &amp; Publikasi</button>
       </div>
 
       <div class="projects-grid">
@@ -979,6 +980,209 @@
           <div class="project-card-actions">
             <a href="https://docs.google.com/spreadsheets/d/1suxmDFy_FXggFfPgBBUK_Ug3RIFgLvAn68iy6uyjSqM/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary">
               <i class="fas fa-external-link-alt" aria-hidden="true"></i> Buka Spreadsheet
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek 10: Dashboard Data SDM -->
+        <div class="project-card reveal" data-category="dashboard">
+          <a href="https://docs.google.com/spreadsheets/d/1jYpdDnrPZSEBT9Aj5tU071HDcmwUVgBmTtVh9iOcGkw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="project-thumb" aria-label="Buka Spreadsheet Dashboard Data SDM">
+            <img src="assets/projects/proyek-sheets-dashboard-sdm.webp" alt="Lembar dashboard Google Sheets Dashboard Data SDM PT Contoh Nusantara" width="1200" height="750" loading="lazy" decoding="async" />
+          </a>
+          <h3 class="project-title">Dashboard Data SDM</h3>
+          <p class="project-desc">
+            Dashboard dan basis data kepegawaian untuk 80 karyawan lintas 5 divisi yang memuat KPI masa kerja, peringatan kontrak berakhir, sisa cuti, analisis pivot, serta laporan eksekutif.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Google Sheets</span>
+            <span class="tag">HR Analytics</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="dashboardSdmSheets" onclick="openProjectModal('dashboardSdmSheets')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Detail Proyek
+            </button>
+            <a href="https://docs.google.com/spreadsheets/d/1jYpdDnrPZSEBT9Aj5tU071HDcmwUVgBmTtVh9iOcGkw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i> Buka Spreadsheet
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 1: Desain Media Pemerintahan (Kemenkominfo) -->
+        <div class="project-card project-card-design reveal" data-category="design">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-bullhorn" aria-hidden="true"></i> Humas Pemerintah
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="desainKepemerintahan" onclick="openProjectModal('desainKepemerintahan')" aria-label="Lihat informasi dan detail kehumasan Desain Media Pemerintahan Kemenkominfo">
+            <img src="assets/projects/desain/desain-kepemerintahan.jpg" alt="Desain Media Pemerintahan: Boost Public Trust with Government Media Designs - Kementerian Komunikasi dan Informatika" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Desain Media Pemerintahan: Penguatan Kepercayaan Publik</h3>
+          <p class="project-desc">
+            Rancangan publisitas media sosial Kementerian Komunikasi dan Informatika RI yang menyajikan empat pilar informasi publik (Spirit Pembangunan, Indonesia Sehat, Infrastruktur Untuk Negeri, dan Peduli Pajak) guna memperkuat kepercayaan masyarakat.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Humas Pemerintah</span>
+            <span class="tag">Komunikasi Publik</span>
+            <span class="tag">Social Media Branding</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="desainKepemerintahan" onclick="openProjectModal('desainKepemerintahan')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/desain-kepemerintahan.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Desain Media Pemerintahan">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 2: Dokumentasi Sidang Paripurna DPR RI -->
+        <div class="project-card project-card-design reveal" data-category="design" style="transition-delay: 0.1s;">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-camera-retro" aria-hidden="true"></i> Humas Parlemen
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="dokumentasiRapat" onclick="openProjectModal('dokumentasiRapat')" aria-label="Lihat informasi dan detail kehumasan Dokumentasi Sidang Paripurna DPR RI">
+            <img src="assets/projects/desain/dokumentasi-rapat.jpg" alt="Publikasi Dokumentasi Sidang Paripurna DPR RI 12 November 2026" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Publikasi Dokumentasi Sidang Paripurna DPR RI</h3>
+          <p class="project-desc">
+            Visualisasi peliputan dan dokumentasi kehumasan Sidang Paripurna DPR RI (12 November 2026) yang mengemas suasana jalannya rapat kerja serta persidangan parlemen ke dalam bingkai visual sinematik sebagai wujud keterbukaan informasi publik.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Dokumentasi Parlemen</span>
+            <span class="tag">Publikasi Humas</span>
+            <span class="tag">Jurnalistik Visual</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="dokumentasiRapat" onclick="openProjectModal('dokumentasiRapat')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/dokumentasi-rapat.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Dokumentasi Sidang Paripurna DPR RI">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 3: Akhirnya Lolos MagangHub -->
+        <div class="project-card project-card-design reveal" data-category="design" style="transition-delay: 0.2s;">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-users" aria-hidden="true"></i> Publisitas &amp; Engagement
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="finallyLolosMaganghub" onclick="openProjectModal('finallyLolosMaganghub')" aria-label="Lihat informasi dan detail kehumasan Konten Selebrasi Akhirnya Lolos MagangHub">
+            <img src="assets/projects/desain/finally-lolos-maganghub.jpg" alt="Desain Publikasi Akhirnya Lolos MagangHub: Tidak ada kata menyerah sebelum akhir perang" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Kampanye Selebrasi &amp; Engagement: "Akhirnya Lolos MagangHub"</h3>
+          <p class="project-desc">
+            Konten human-interest pasca-pengumuman kelulusan program MagangHub yang memadukan visualisasi awal perjalanan peserta magang dengan pesan motivasi perjuangan guna membangun kebanggaan komunitas dan interaksi organik.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Audience Engagement</span>
+            <span class="tag">Visual Storytelling</span>
+            <span class="tag">Employer Branding</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="finallyLolosMaganghub" onclick="openProjectModal('finallyLolosMaganghub')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/finally-lolos-maganghub.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Akhirnya Lolos MagangHub">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 4: Gerakan Bakti Sosial Aceh Peduli Lingkungan -->
+        <div class="project-card project-card-design reveal" data-category="design">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Kampanye Sosial
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="gerakanPeduli" onclick="openProjectModal('gerakanPeduli')" aria-label="Lihat informasi dan detail kehumasan Gerakan Bakti Sosial Aceh Peduli Lingkungan">
+            <img src="assets/projects/desain/gerakan-peduli.jpg" alt="Poster Kampanye Gerakan Bakti Sosial: Peduli Sesama, Berbagi Harapan - Aceh Peduli Lingkungan" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Kampanye Sosial: Gerakan Bakti Sosial Aceh Peduli Lingkungan</h3>
+          <p class="project-desc">
+            Poster publisitas dan mobilisasi komunitas bertema "Peduli Sesama, Berbagi Harapan" bersama The Light of Aceh &amp; Aceh Peduli Lingkungan untuk menggerakkan aksi solidaritas, donasi logistik, serta partisipasi relawan.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Community Relations</span>
+            <span class="tag">Kampanye Sosial</span>
+            <span class="tag">Persuasive Copywriting</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="gerakanPeduli" onclick="openProjectModal('gerakanPeduli')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/gerakan-peduli.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Gerakan Bakti Sosial Aceh Peduli Lingkungan">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 5: Iklan Layanan Masyarakat (ILM) Jaga Kesehatan -->
+        <div class="project-card project-card-design reveal" data-category="design" style="transition-delay: 0.1s;">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-shield-heart" aria-hidden="true"></i> Komunikasi Krisis &amp; ILM
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="jagaKesehatan" onclick="openProjectModal('jagaKesehatan')" aria-label="Lihat informasi dan detail kehumasan Iklan Layanan Masyarakat Jaga Kesehatan">
+            <img src="assets/projects/desain/jaga-kesehatan.jpg" alt="Poster Iklan Layanan Masyarakat Jaga Kesehatan: Tetap Selalu Jaga Kesehatan Dimanapun dan Kapanpun" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Iklan Layanan Masyarakat (ILM): Imbauan "Jaga Kesehatan"</h3>
+          <p class="project-desc">
+            Poster komunikasi krisis dan layanan masyarakat yang menyampaikan pesan kesiapsiagaan perlindungan diri serta imbauan pemakaian masker medis di tengah ancaman polusi udara dan bencana kabut asap.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Layanan Masyarakat</span>
+            <span class="tag">Komunikasi Krisis</span>
+            <span class="tag">Edukasi Publik</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="jagaKesehatan" onclick="openProjectModal('jagaKesehatan')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/jaga-kesehatan.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Iklan Layanan Masyarakat Jaga Kesehatan">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
+            </a>
+          </div>
+        </div>
+
+        <!-- Proyek Desain 6: Pengumuman Seleksi MagangHub Batch 3 (Kemnaker RI) -->
+        <div class="project-card project-card-design reveal" data-category="design" style="transition-delay: 0.2s;">
+          <div class="project-design-top">
+            <div class="project-featured-badge project-design-badge">
+              <i class="fas fa-bullhorn" aria-hidden="true"></i> Informasi Publik
+            </div>
+            <span class="project-design-ratio-pill" title="Ukuran Feed Instagram 4:5"><i class="fab fa-instagram" aria-hidden="true"></i> 4:5</span>
+          </div>
+          <div class="project-thumb project-thumb-4x5" role="button" tabindex="0" data-project-modal="lolosGoogleMaganghub" onclick="openProjectModal('lolosGoogleMaganghub')" aria-label="Lihat informasi dan detail kehumasan Pengumuman Seleksi MagangHub Batch 3 Kemnaker RI">
+            <img src="assets/projects/desain/lolos-google-maganghub.jpg" alt="Poster Pengumuman Cari Status Magang Cek Lolos Seleksi MagangHub Batch 3 Kemnaker RI" width="1080" height="1350" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="project-title">Pengumuman Publik: Cek Status Seleksi MagangHub Batch 3</h3>
+          <p class="project-desc">
+            Desain pengumuman resmi dan panduan akses informasi publik untuk pengecekan hasil seleksi MagangHub Batch 3 Kementerian Ketenagakerjaan RI melalui portal resmi maganghub.kemnaker.go.id pada ekosistem SIAPkerja.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Informasi Publik</span>
+            <span class="tag">Humas Kemnaker</span>
+            <span class="tag">Digital Campaign CTA</span>
+          </div>
+          <div class="project-card-actions">
+            <button type="button" class="btn-card-action btn-card-primary" data-project-modal="lolosGoogleMaganghub" onclick="openProjectModal('lolosGoogleMaganghub')">
+              <i class="fas fa-circle-info" aria-hidden="true"></i> Informasi &amp; Detail
+            </button>
+            <a href="assets/projects/desain/lolos-google-maganghub.jpg" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" aria-label="Buka gambar penuh Pengumuman Seleksi MagangHub Batch 3">
+              <i class="fas fa-expand" aria-hidden="true"></i> Lihat Desain
             </a>
           </div>
         </div>
@@ -1584,19 +1788,19 @@
   <!-- ══════════════════════════════════
        SCRIPTS
        ══════════════════════════════════ -->
-  <script src="js/main.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/typewriter.js"></script>
-  <script src="js/gallery.js"></script>
-  <script src="js/projects-certs.js"></script>
-  <script src="js/org-docs.js"></script>
-  <script src="js/contact.js"></script>
-  <script src="js/cursor.js"></script>
-  <script src="js/space.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/tilt3d.js"></script>
-  <script src="js/lanyard.js"></script>
-  <script defer src="js/motion.js"></script>
+  <script src="js/main.js?v=20261101e"></script>
+  <script src="js/nav.js?v=20261101e"></script>
+  <script src="js/typewriter.js?v=20261101e"></script>
+  <script src="js/gallery.js?v=20261101e"></script>
+  <script src="js/projects-certs.js?v=20261101e"></script>
+  <script src="js/org-docs.js?v=20261101e"></script>
+  <script src="js/contact.js?v=20261101e"></script>
+  <script src="js/cursor.js?v=20261101e"></script>
+  <script src="js/space.js?v=20261101e"></script>
+  <script src="js/theme.js?v=20261101e"></script>
+  <script src="js/tilt3d.js?v=20261101e"></script>
+  <script src="js/lanyard.js?v=20261101e"></script>
+  <script defer src="js/motion.js?v=20261101e"></script>
 
 </body>
 </html>
