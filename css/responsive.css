@@ -452,28 +452,20 @@
   }
 
   #hero .hero-card-3d {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: auto !important;
-    min-height: auto !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px !important;
+    width: 240px !important;
+    height: 304px !important;
     margin: 0 auto !important;
     position: relative !important;
+    display: block !important;
     transform: none !important;
-    transform-style: flat !important;
   }
 
   #hero .hc-photo {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 240px !important;
     height: 304px !important;
-    flex: 0 0 100% !important;
-    margin: 0 auto 16px !important;
-    inset: auto !important;
+    margin: 0 !important;
     z-index: 2 !important;
     border-radius: 28px !important;
     overflow: hidden !important;
@@ -504,25 +496,43 @@
     display: none !important;
   }
 
-  #hero .hc-chip,
-  #hero .hc-chip-1,
-  #hero .hc-chip-2,
-  #hero .hc-chip-3 {
-    position: static !important;
+  #hero .hc-chip {
+    position: absolute !important;
     inset: auto !important;
-    transform: none !important;
-    margin: 0 !important;
-    width: auto !important;
-    max-width: 100% !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
-    font-size: 12px !important;
-    padding: 8px 14px !important;
+    font-size: 11px !important;
+    padding: 7px 12px !important;
     border-radius: 999px !important;
-    flex: 0 0 auto !important;
-    z-index: 3 !important;
+    z-index: 4 !important;
+    white-space: nowrap !important;
+    pointer-events: none !important;
+  }
+
+  #hero .hc-chip-1 {
+    bottom: 24px !important;
+    top: auto !important;
+    left: -20px !important;
+    right: auto !important;
+    animation: chipFloat1 4.4s ease-in-out infinite !important;
+  }
+
+  #hero .hc-chip-2 {
+    top: 18px !important;
+    bottom: auto !important;
+    right: -24px !important;
+    left: auto !important;
+    animation: chipFloat2 5.0s ease-in-out infinite 0.7s !important;
+  }
+
+  #hero .hc-chip-3 {
+    top: 48% !important;
+    bottom: auto !important;
+    left: -24px !important;
+    right: auto !important;
+    animation: chipFloat3 4.7s ease-in-out infinite 1.4s !important;
   }
 }
 

@@ -3029,7 +3029,7 @@ html[data-theme="light"] #hero .hc-chip i {
   flex-shrink: 0 !important;
 }
 
-/* 1. "Deepfake Detection" (.hc-chip-2): top-right (~12% from top, ~35% of pill width protruding right) */
+/* 1. "Web Developer" (.hc-chip-2): top-right (~12% from top, ~35% of pill width protruding right) */
 html[data-theme="light"] #hero .hc-chip-2 {
   top: 12% !important;
   right: -18% !important;
@@ -3037,7 +3037,7 @@ html[data-theme="light"] #hero .hc-chip-2 {
   bottom: auto !important;
 }
 
-/* 2. "Web Developer" (.hc-chip-3): mid-left (~48% from top, ~35% of pill width protruding left) */
+/* 2. "Visual Content Design" (.hc-chip-3): mid-left (~48% from top, ~35% of pill width protruding left) */
 html[data-theme="light"] #hero .hc-chip-3 {
   top: 48% !important;
   left: -16% !important;
@@ -3315,19 +3315,12 @@ html[data-theme="light"] #hero button:focus-visible {
   }
 
   html[data-theme="light"] #hero .hero-card-3d {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: auto !important;
-    min-height: 0 !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transform: none !important;
-    transform-style: flat !important;
+    width: 240px !important;
+    height: 304px !important;
     margin: 0 auto !important;
     position: relative !important;
+    display: block !important;
+    transform: none !important;
   }
 
   html[data-theme="light"] #hero .hc-frame {
@@ -3343,39 +3336,52 @@ html[data-theme="light"] #hero button:focus-visible {
   }
 
   html[data-theme="light"] #hero .hc-photo {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 240px !important;
     height: 304px !important;
-    flex: 0 0 100% !important;
-    margin: 0 auto 16px !important;
-    inset: auto !important;
-    transform: none !important;
+    margin: 0 !important;
     z-index: 2 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    transform: none !important;
   }
 
-  /* Single wrapped row of small pills centered directly below the card */
-  html[data-theme="light"] #hero .hc-chip,
-  html[data-theme="light"] #hero .hc-chip-1,
-  html[data-theme="light"] #hero .hc-chip-2,
-  html[data-theme="light"] #hero .hc-chip-3 {
-    position: static !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    width: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    font-size: 12px !important;
-    padding: 8px 14px !important;
+  /* Three floating skill pills around the card on mobile */
+  html[data-theme="light"] #hero .hc-chip {
+    position: absolute !important;
+    font-size: 11px !important;
+    padding: 7px 12px !important;
     background-color: var(--hero-milk) !important;
     border: 1px solid var(--hero-hairline) !important;
     border-radius: 999px !important;
     box-shadow: 0 8px 16px -12px rgba(38, 40, 42, 0.28) !important;
-    flex: 0 0 auto !important;
-    z-index: 3 !important;
+    white-space: nowrap !important;
+    z-index: 4 !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-1 {
+    bottom: 24px !important;
+    top: auto !important;
+    left: -20px !important;
+    right: auto !important;
+    animation: chipFloat1 4.4s ease-in-out infinite !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-2 {
+    top: 18px !important;
+    bottom: auto !important;
+    right: -24px !important;
+    left: auto !important;
+    animation: chipFloat2 5.0s ease-in-out infinite 0.7s !important;
+  }
+
+  html[data-theme="light"] #hero .hc-chip-3 {
+    top: 48% !important;
+    bottom: auto !important;
+    left: -24px !important;
+    right: auto !important;
+    animation: chipFloat3 4.7s ease-in-out infinite 1.4s !important;
   }
 }
 
@@ -3404,13 +3410,6 @@ html[data-theme="light"] #hero button:focus-visible {
     font-size: 13px !important;
   }
 
-  html[data-theme="light"] #hero .hc-chip,
-  html[data-theme="light"] #hero .hc-chip-1,
-  html[data-theme="light"] #hero .hc-chip-2,
-  html[data-theme="light"] #hero .hc-chip-3 {
-    font-size: 12px !important;
-    padding: 8px 14px !important;
-  }
 }
 
 /* ── 11. Reduced Motion ── */
@@ -4214,22 +4213,22 @@ html[data-theme="light"] #hero button:focus-visible {
   color: var(--dk-text) !important;
 }
 
-/* 1. "Deepfake Detection" (.hc-chip-2) */
+/* 1. "Web Developer" (.hc-chip-2) */
 :is(.dark, [data-theme="dark"]) #hero .hc-chip-2 {
   top: 12% !important;
   right: -18% !important;
   left: auto !important;
   bottom: auto !important;
-  animation: none !important;
+  animation: chipFloat2 5.0s ease-in-out infinite 0.7s !important;
 }
 
-/* 2. "Web Developer" (.hc-chip-3) */
+/* 2. "Visual Content Design" (.hc-chip-3) */
 :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
   top: 48% !important;
   left: -16% !important;
   right: auto !important;
   bottom: auto !important;
-  animation: none !important;
+  animation: chipFloat3 4.7s ease-in-out infinite 1.4s !important;
 }
 
 /* 3. "Machine Learning" (.hc-chip-1) */
@@ -4238,7 +4237,7 @@ html[data-theme="light"] #hero button:focus-visible {
   left: -17% !important;
   right: auto !important;
   bottom: auto !important;
-  animation: none !important;
+  animation: chipFloat1 4.4s ease-in-out infinite !important;
 }
 
 :is(.dark, [data-theme="dark"]) #hero .hc-dot,
@@ -4319,19 +4318,12 @@ html[data-theme="light"] #hero button:focus-visible {
   }
 
   :is(.dark, [data-theme="dark"]) #hero .hero-card-3d {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: auto !important;
-    min-height: 0 !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transform: none !important;
-    transform-style: flat !important;
+    width: 240px !important;
+    height: 304px !important;
     margin: 0 auto !important;
     position: relative !important;
+    display: block !important;
+    transform: none !important;
   }
 
   :is(.dark, [data-theme="dark"]) #hero .hc-frame {
@@ -4347,39 +4339,53 @@ html[data-theme="light"] #hero button:focus-visible {
   }
 
   :is(.dark, [data-theme="dark"]) #hero .hc-photo {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 240px !important;
     height: 304px !important;
-    flex: 0 0 100% !important;
-    margin: 0 auto 16px !important;
-    inset: auto !important;
-    transform: none !important;
+    margin: 0 !important;
     z-index: 2 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    transform: none !important;
   }
 
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
-    position: static !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    width: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    font-size: 12px !important;
-    padding: 8px 14px !important;
+  /* Three floating skill pills around the card on mobile */
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip {
+    position: absolute !important;
+    font-size: 11px !important;
+    padding: 7px 12px !important;
     background: #11151c !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 999px !important;
     box-shadow: 0 8px 16px -12px rgba(0, 0, 0, 0.5) !important;
     color: #f0f6fc !important;
-    flex: 0 0 auto !important;
-    z-index: 3 !important;
+    white-space: nowrap !important;
+    z-index: 4 !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1 {
+    bottom: 24px !important;
+    top: auto !important;
+    left: -20px !important;
+    right: auto !important;
+    animation: chipFloat1 4.4s ease-in-out infinite !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2 {
+    top: 18px !important;
+    bottom: auto !important;
+    right: -24px !important;
+    left: auto !important;
+    animation: chipFloat2 5.0s ease-in-out infinite 0.7s !important;
+  }
+
+  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
+    top: 48% !important;
+    bottom: auto !important;
+    left: -24px !important;
+    right: auto !important;
+    animation: chipFloat3 4.7s ease-in-out infinite 1.4s !important;
   }
 }
 
@@ -4407,14 +4413,7 @@ html[data-theme="light"] #hero button:focus-visible {
     font-size: 13px !important;
   }
 
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-1,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-2,
-  :is(.dark, [data-theme="dark"]) #hero .hc-chip-3 {
-    font-size: 12px !important;
-    padding: 8px 14px !important;
   }
-}
 
 /* ── 4. Tentang (#about) ── */
 :is(.dark, [data-theme="dark"]) #about {
