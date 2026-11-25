@@ -4,9 +4,8 @@
  *  1. Scroll-reveal (IntersectionObserver)
  *  2. Hero text staggered entrance
  *  3. Stat counter animation
- *  4. Skill bar animation
- *  5. Skill tab filtering
- *  6. Back-to-top button
+ *  4. Skill tab filtering
+ *  5. Back-to-top button
  */
 
 'use strict';
@@ -76,25 +75,7 @@ const statObserver = new IntersectionObserver(
 );
 document.querySelectorAll('.stat-card').forEach((el) => statObserver.observe(el));
 
-/* ── 4. Skill Bar Animation ── */
-const skillBarObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const bar = entry.target.querySelector('.skill-bar');
-        if (bar) {
-          const level = bar.dataset.level || '0';
-          setTimeout(() => { bar.style.width = level + '%'; }, 100);
-        }
-        skillBarObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
-document.querySelectorAll('.skill-card').forEach((el) => skillBarObserver.observe(el));
-
-/* ── 5. Skill Tab Filtering ── */
+/* ── 4. Skill Tab Filtering ── */
 const tabs = document.querySelectorAll('.skill-tab');
 const skillCards = document.querySelectorAll('.skill-card');
 

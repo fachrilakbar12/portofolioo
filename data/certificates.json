@@ -1,5 +1,17 @@
 [
   {
+    "id": "hacktiv8-maju-bareng-ai-google",
+    "title": "AI for Work & Career Readiness with Google AI Products",
+    "issuer": "Hacktiv8 Indonesia (Maju Bareng AI)",
+    "year": "2026",
+    "category": "ai",
+    "thumb": "assets/certificates/thumbs/sertifikat-ai-for-work-career-readiness-hacktiv8.webp",
+    "image": "assets/certificates/large/sertifikat-ai-for-work-career-readiness-hacktiv8.webp",
+    "file": "css/sertifikat-for-fortolio/Sertifikat-AI-for-Work-Career-Readiness-Hacktiv8.pdf",
+    "type": "pdf",
+    "credentialId": "12913/H8/CSR/MBA2/X/2026"
+  },
+  {
     "id": "dibimbing-fullstack-web-development",
     "title": "Event Online: Fullstack Web Development",
     "issuer": "Dibimbing.id",

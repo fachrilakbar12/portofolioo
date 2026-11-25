@@ -2415,23 +2415,7 @@ html[data-theme="light"] #skills .skill-icon svg {
   display: block;
 }
 
-/* Bilah progres: trek rgba(38,40,42,0.12), isi --orange solid */
-html[data-theme="light"] #skills .skill-level {
-  background: rgba(38, 40, 42, 0.12);
-  height: 3px;
-  border-radius: 3px;
-}
-
-html[data-theme="light"] #skills .skill-card:not(:has(.skill-level))::after {
-  height: 3px;
-}
-
-html[data-theme="light"] #skills .skill-bar {
-  background: var(--orange);
-  border-radius: 3px;
-}
-
-/* Hover / aktif kartu teknologi: latar --ink, nama --milk, trek rgba(253,253,241,0.25), isi --orange */
+/* Hover / aktif kartu teknologi: latar --ink, nama --milk */
 html[data-theme="light"] #skills .skill-card:hover,
 html[data-theme="light"] #skills .skill-card.active {
   background: var(--ink);
@@ -2443,16 +2427,6 @@ html[data-theme="light"] #skills .skill-card.active {
 html[data-theme="light"] #skills .skill-card:hover .skill-name,
 html[data-theme="light"] #skills .skill-card.active .skill-name {
   color: var(--milk);
-}
-
-html[data-theme="light"] #skills .skill-card:hover .skill-level,
-html[data-theme="light"] #skills .skill-card.active .skill-level {
-  background: rgba(253, 253, 241, 0.25);
-}
-
-html[data-theme="light"] #skills .skill-card:hover .skill-bar,
-html[data-theme="light"] #skills .skill-card.active .skill-bar {
-  background: var(--orange);
 }
 
 html[data-theme="light"] #skills .skill-card:hover .skill-icon,
@@ -5201,18 +5175,6 @@ html[data-theme="light"] #hero button:focus-visible {
   background: linear-gradient(135deg, #4078c8, #1a1e27) !important;
 }
 
-:is(.dark, [data-theme="dark"]) #skills .skill-bar {
-  background: rgba(255, 255, 255, 0.12) !important;
-}
-
-:is(.dark, [data-theme="dark"]) #skills .skill-fill {
-  background: var(--dk-lime) !important;
-}
-
-:is(.dark, [data-theme="dark"]) #skills .skill-level {
-  color: var(--dk-muted) !important;
-}
-
 /* Hover / Active */
 :is(.dark, [data-theme="dark"]) #skills .skill-card:hover,
 :is(.dark, [data-theme="dark"]) #skills .skill-card.active {
@@ -5222,21 +5184,6 @@ html[data-theme="light"] #hero button:focus-visible {
 :is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-name,
 :is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-name {
   color: #FFFFFF !important;
-}
-
-:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-bar,
-:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-bar {
-  background: rgba(255, 255, 255, 0.30) !important;
-}
-
-:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-fill,
-:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-fill {
-  background: var(--dk-lime) !important;
-}
-
-:is(.dark, [data-theme="dark"]) #skills .skill-card:hover .skill-level,
-:is(.dark, [data-theme="dark"]) #skills .skill-card.active .skill-level {
-  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 /* Kontras ikon SVG Office & Desain */
